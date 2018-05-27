@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/yueguoyu.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/yueguoyu.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/yueguoyu.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/yueguoyu.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/yueguoyu.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/yueguoyu.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mybatis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一：一对一   用association 一   建表    course 课程与score 课程成绩表是一对一关系  course课程表  score课程成绩表 连接数据库dbconf.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;&amp;lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Con">
+<meta name="keywords" content="mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis  一对一级联  一对多">
+<meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/2018/05/27/mybats级联/index.html">
+<meta property="og:site_name" content="YgY">
+<meta property="og:description" content="一：一对一   用association 一   建表    course 课程与score 课程成绩表是一对一关系  course课程表  score课程成绩表 连接数据库dbconf.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;&amp;lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Con">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/05/27/5b0aaea7dab99.png">
+<meta property="og:image" content="https://i.loli.net/2018/05/27/5b0aaea7dabee.png">
+<meta property="og:image" content="https://i.loli.net/2018/05/27/5b0aaea7da9f0.png">
+<meta property="og:image" content="https://i.loli.net/2018/05/27/5b0aaea7e92f8.png">
+<meta property="og:updated_time" content="2018-05-27T13:14:08.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis  一对一级联  一对多">
+<meta name="twitter:description" content="一：一对一   用association 一   建表    course 课程与score 课程成绩表是一对一关系  course课程表  score课程成绩表 连接数据库dbconf.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;&amp;lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Con">
+<meta name="twitter:image" content="https://i.loli.net/2018/05/27/5b0aaea7dab99.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/yueguoyu.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/yueguoyu/yueguoyu.github.io/2018/05/27/mybats级联/"/>
+
+
+
+
+
+  <title>mybatis  一对一级联  一对多 | YgY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/yueguoyu.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YgY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活就是这样</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/yueguoyu.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/yueguoyu.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/27/mybats级联/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/yueguoyu.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mybatis  一对一级联  一对多</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T16:03:52+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一：一对一   用association</p>
+<p>一   建表</p>
+<p>   course 课程与score 课程成绩表是一对一关系</p>
+<p> course课程表<br> <img src="https://i.loli.net/2018/05/27/5b0aaea7dab99.png" alt="mybatis2.png"></p>
+<p>score课程成绩表<br><img src="https://i.loli.net/2018/05/27/5b0aaea7dabee.png" alt="1mybatis.png"></p>
+<p>连接数据库dbconf.xml<br><img src="https://i.loli.net/2018/05/27/5b0aaea7da9f0.png" alt="mybatis3.png"></p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Config 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
+<p><configuration><br>   <properties resource="db.properties"></properties><br>    <environments default="development"><br>        <environment id="development"><br>            <transactionmanager type="JDBC"><br>            <!-- 配置数据库连接信息 --><br>            <datasource type="POOLED"><br>                <property name="driver" value="${jdbc.driver}"><br>                <property name="url" value="${jdbc.url}"><br>                <property name="username" value="${jdbc.username}"><br>                <property name="password" value="${jdbc.password}"><br>            </property></property></property></property></datasource><br>        </transactionmanager></environment><br>    </environments></configuration></p>
+<p><mappers><br>    <!--<mapper resource="StfMapper.xml"/>--><br>    <!--<mapper resource="KcMapper.xml"/>--><br>    <mapper resource="StudMapper.xml"><br>    <mapper resource="ScoreMapper.xml"><br>    <mapper resource="CourseMapper.xml"><br></mapper></mapper></mapper></mappers><br><br>写一个db.properties文件<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://localhost:3306/myba<br>jdbc.username=root<br>jdbc.password=×××</p>
+<p> 二 使用mybatis插件自动生成相对应表的配置文件</p>
+<p>   CourseMapper.xml</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
+<mapper namespace="com.ygy.mapper.CourseMapper"><br>  <resultmap id="course" type="com.ygy.model.Course"><br>    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Fri Oct 27 12:25:54 CST 2017.
+    --><br>    <id column="coid" property="coid" jdbctype="INTEGER"><br>    <result column="coname" property="coname" jdbctype="VARCHAR"><br>  </result></id></resultmap><br> <select id="selectcou" resultmap="course" parametertype="int"><br>   SELECT myba.course.* from myba.course WHERE coid=#{coid}<br> </select><br></mapper>
+
+<p>CourseMapper接口<br>*CourseMapper.xml是对接口的实现 所以 select 的id与接口中方法名相同<br>package com.ygy.mapper;</p>
+<p>import com.ygy.model.Course;<br>import com.ygy.model.CourseExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
+<p>public interface CourseMapper {<br>    public Course selectcou(int id);<br>}</p>
+<p>ScoreMapper.xml<br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
+<mapper namespace="com.ygy.mapper.ScoreMapper"><br>  <resultmap id="score" type="com.ygy.model.Score"><br>    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Fri Oct 27 12:25:54 CST 2017.
+    --><br>    <id column="scid" property="scid" jdbctype="INTEGER"><br>    <result column="scsid" property="scsid" jdbctype="INTEGER"><br>    <result column="sckcid" property="sckcid" jdbctype="INTEGER"><br>    <result column="mark" property="mark" jdbctype="VARCHAR"><br>    <association property="course" column="sckcid" select="com.ygy.mapper.CourseMapper.selectcou"><br>  </association></result></result></result></id></resultmap><br>  <select id="selectscore" parametertype="int" resultmap="score"><br>    select myba.score.<em> from myba.score WHERE myba.score.scsid=#{id}<br>  </em></select><br></mapper><br>ScoreMapper接口<br>package com.ygy.mapper;<br><br>import com.ygy.model.Score;<br>import com.ygy.model.ScoreExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;<br><br>public interface ScoreMapper {<br>  public Score selectscore(int id);<br>}<br>在score的model中加上<br>private Course course;<br>//get set方法<br><br>三 测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;<br><br>      try {<br>          inputStream= Resources.getResourceAsStream(“dbconf.xml”);<br>          sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);<br>          sqlSession=sqlSessionFactory.openSession()；<br>          //SCORC和course一对一<br>            ScoreMapper scoreMapper=sqlSession.getMapper(ScoreMapper.class);<br>            Score score=scoreMapper.selectscore(1);<br>          System.out.println(score.getCourse().getConame());<br><br>      } catch (IOException e) {<br>          e.printStackTrace();<br>      }finally {<br>          sqlSession.close();<br>      }<br>二：一对多   collection<br>加入学生表<br>stud<br><br>插件生成对应的接口什么的<br><br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;<br><mapper namespace="com.ygy.mapper.StudMapper"><br>  <resultmap id="stud" type="com.ygy.model.Stud"><br>    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      This element was generated on Thu Oct 26 15:09:44 CST 2017.
+    --><br>    <id column="sid" property="sid" jdbctype="INTEGER"><br>    <result column="sname" property="sname" jdbctype="VARCHAR"><br>    <!--<association property="kc" column="sid" select="com.ygy.mapper.KcMapper.select"/>--><br>    <collection property="scoreList" column="sid" select="com.ygy.mapper.ScoreMapper.selectscore"><br>   <!--collection 将column的数据传到select对应的接口   property映射到列结果的字段或属性--><br>  </collection></result></id></resultmap><br><select id="selectsud" parametertype="int" resultmap="stud"><br>  SELECT myba.stud. FROM  myba.stud WHERE myba.stud.sid=#{id}<br></select><br></mapper>
+
+<p>接口<br>package com.ygy.mapper;</p>
+<p>import com.ygy.model.Stud;<br>import com.ygy.model.StudExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
+<p>public interface StudMapper {<br>   public Stud selectsud(int id);<br>}</p>
+<p>测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;</p>
+<pre><code>try {
+    inputStream= Resources.getResourceAsStream(&quot;dbconf.xml&quot;);
+    sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
+    sqlSession=sqlSessionFactory.openSession();
+   　　　　 StudMapper studMapper=sqlSession.getMapper(StudMapper.class);
+   　　　　 Stud stud=studMapper.selectsud(1);
+    　　　　System.out.println(stud.getScoreList().get(1).getMark());
+　　　　  } catch (IOException e) {
+  　　　　  e.printStackTrace();
+ 　　　　 }finally {
+   　　　　 sqlSession.close();
+ 　　　　 }
+</code></pre><p>结果：<br><img src="https://i.loli.net/2018/05/27/5b0aaea7e92f8.png" alt="mybatis4.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/yueguoyu.github.io/tags/mybatis/" rel="tag"># mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/05/23/mybatis自动生成代码插件/" rel="next" title="mybatis自动生成代码插件">
+                <i class="fa fa-chevron-left"></i> mybatis自动生成代码插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/05/27/java反射/" rel="prev" title="java反射">
+                java反射 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">越狱</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/yueguoyu.github.io/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">越狱</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/yueguoyu.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
