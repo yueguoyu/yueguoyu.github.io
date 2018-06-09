@@ -249,6 +249,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/08/Stomp面向简单文本的消息传递协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/08/Stomp面向简单文本的消息传递协议/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T11:36:27+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##Stomp面向简单文本的消息传递协议</p>
+<p>####是什么：</p>
+<p>STOMP是简单（或流式）文本定向消息协议。</p>
+<p>STOMP提供可互操作的线路格式，以便STOMP客户端可以与任何STOMP消息代理进行通信，以便在多种语言，平台和代理之间提供简单和广泛的消息互操作性。</p>
+<p>####设计：</p>
+<p> STOMP是一个非常简单易用的协议，来自HTTP设计学院; 服务器端可能很难实现，但编写客户端以便连接起来非常容易。例如，您可以使用Telnet登录到任何STOMP代理并与其交互！ </p>
+<p>##WebSocket是一种在单个Tcp连接上进行全双工通讯的协议</p>
+<p>在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。</p>
+<p>####背景： </p>
+<p>WebSocket协议是由HTML5定义的，它能更好的节省服务器资源和带宽，并且能够更实时地进行通讯。 </p>
+<p>Websocket使用ws或wss的<a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6" target="_blank" rel="noopener">统一资源标志符</a>，类似于<a href="https://zh.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener">HTTPS</a>，其中wss表示在TLS之上的Websocket。</p>
+<p>Websocket使用和 HTTP 相同的 TCP 端口，可以绕过大多数防火墙的限制。默认情况下，Websocket协议使用80端口；运行在TLS之上时，默认使用443端口。 </p>
+<p>####优点：</p>
+<p>1.较少的控制开销。 在连接创建后，服务器和客户端之间交换数据时，用于协议控制的数据包头部相对较小。在不包含扩展的情况下，对于服务器到客户端的内容，此头部大小只有2至10字节（和数据包长度有关）；对于客户端到服务器的内容，此头部还需要加上额外的4字节的掩码。相对于HTTP请求每次都要携带完整的头部，此项开销显著减少了。<br>2.更强的实时性。由于协议是全双工的，所以服务器可以随时主动给客户端下发数据。相对于HTTP请求需要等待客户端发起请求服务端才能响应，延迟明显更少；即使是和Comet等类似的长轮询比较，其也能在短时间内更多次地传递数据。<br>3.保持连接状态。与HTTP不同的是，Websocket需要先创建连接，这就使得其成为一种有状态的协议，之后通信时可以省略部分状态信息。而HTTP请求可能需要在每个请求都携带状态信息（如身份认证等）。<br>4.更好的二进制支持。Websocket定义了二进制帧，相对HTTP，可以更轻松地处理二进制内容。<br>5.可以支持扩展。Websocket定义了扩展，用户可以扩展协议、实现部分自定义的子协议。如部分浏览器支持压缩等。<br>6.更好的压缩效果。相对于HTTP压缩，Websocket在适当的扩展支持下，可以沿用之前内容的上下文，在传递类似的数据时，可以显著地提高压缩率。</p>
+<p>####握手协议：</p>
+<p>WebSocket 是独立的、创建在 TCP 上的协议。<br>Websocket 通过 HTTP/1.1 协议的101状态码进行握手。<br>为了创建Websocket连接，需要通过浏览器发出请求，之后服务器进行回应，这个过程通常称为“握手”（handshaking）。</p>
+<p>####例子:</p>
+<p>一个典型的Websocket握手请求如下：<br>客户端请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Upgrade: websocket    //表示希望升级到Websocket协议。</span><br><span class="line">Connection: Upgrade    //表示客户端希望连接升级</span><br><span class="line">Host: example.com    </span><br><span class="line">Origin: http://example.com</span><br><span class="line">Sec-WebSocket-Key: sN9cRrP/n9NdMgdcy2VJFQ==   //Sec-WebSocket-Key是随机的字符串，服务器端会用这些数据来构造出一个SHA-1的信息摘要。把“Sec-WebSocket-Key”加上一个特殊字符串“258EAFA5-E914-47DA-95CA-C5AB0DC85B11”，然后计算SHA-1摘要，之后进行BASE-64编码，将结果做为“Sec-WebSocket-Accept”头的值，返回给客户端。如此操作，可以尽量避免普通HTTP请求被误认为Websocket协议。</span><br><span class="line">Sec-WebSocket-Version: 13   //表示支持的Websocket版本。</span><br></pre></td></tr></table></figure></p>
+<p>服务器回应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: fFBooB7FAkLlXgRSz0BT3v4hq5s=</span><br><span class="line">Sec-WebSocket-Location: ws://example.com/</span><br></pre></td></tr></table></figure></p>
+<p>##HTTPS<br>超文本传输安全协议（英语：Hypertext Transfer Protocol Secure，缩写：HTTPS，常称为HTTP over TLS，HTTP over SSL或HTTP Secure）是一种通过电脑网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。这个协议由网景公司（Netscape）在1994年首次提出，随后扩展到互联网上。</p>
+<p>####主要思想<br>HTTPS的主要思想是在不安全的网络上创建一安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护。</p>
+<p>HTTPS的信任继承基于预先安装在浏览器中的证书颁发机构（如Symantec、Comodo、GoDaddy和GlobalSign等）（意即“我信任证书颁发机构告诉我应该信任的”）。因此，一个到某网站的HTTPS连接可被信任，当且仅当：</p>
+<p>用户相信他们的浏览器正确实现了HTTPS且安装了正确的证书颁发机构；<br>用户相信证书颁发机构仅信任合法的网站；<br>被访问的网站提供了一个有效的证书，意即，它是由一个被信任的证书颁发机构签发的（大部分浏览器会对无效的证书发出警告）；<br>该证书正确地验证了被访问的网站（如，访问<a href="https://example.com时收到了给example.com而不是其它组织的证书）；" target="_blank" rel="noopener">https://example.com时收到了给example.com而不是其它组织的证书）；</a><br>或者互联网上相关的节点是值得信任的，或者用户相信本协议的加密层（TLS或SSL）不能被窃听者破坏。<br>HTTPS不应与在 RFC 2660 中定义的安全超文本传输协议（S-HTTP）相混淆。</p>
+<p>####与HTTP差别<br>与HTTP的URL由“http://”起始且默认使用端口80不同，HTTPS的URL由“https://”起始且默认使用端口443。</p>
+<p>HTTP是不安全的，且攻击者通过监听和中间人攻击等手段，可以获取网站帐户和敏感信息等。HTTPS被设计为可防止前述攻击，并在正确配置时被认为是安全的。</p>
+<p>##HTTP<br>超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议[1]。HTTP是万维网的数据通信的基础。</p>
+<p>设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。通过HTTP或者HTTPS协议请求的资源由统一资源标识符（Uniform Resource Identifiers，URI）来标识。</p>
+<p>####协议概述<br>HTTP是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。在用户代理和源服务器中间可能存在多个“中间层”，比如代理服务器、网关或者隧道（tunnel）。</p>
+<p>尽管TCP/IP协议是互联网上最流行的应用，HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。</p>
+<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP/1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/买卖股票的最佳时机 II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,6 +472,150 @@
             <h2 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="买卖股票的最佳时机 II"></a>买卖股票的最佳时机 II</h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。<br>示例 1:<br>输入: [7,1,5,3,6,4]输出: 7解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。<br>示例 2:<br>输入: [1,2,3,4,5]输出: 4解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。<br>     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。<br>示例 3:<br>输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
 <h3 id="思路：因为要获取最大利润，所以只要后面比前面的大就获利"><a href="#思路：因为要获取最大利润，所以只要后面比前面的大就获利" class="headerlink" title="思路：因为要获取最大利润，所以只要后面比前面的大就获利"></a>思路：因为要获取最大利润，所以只要后面比前面的大就获利</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">java版本:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (prices==<span class="keyword">null</span> || prices.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min=prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (prices[i]&gt;min)&#123;</span><br><span class="line"></span><br><span class="line">               sum+=prices[i]-min;</span><br><span class="line"></span><br><span class="line">               min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span>版本:</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(a)==<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	min := a[<span class="number">0</span>]</span><br><span class="line">	sum :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(a) ;i++  &#123;</span><br><span class="line">		<span class="keyword">if</span> min&lt;a[i] &#123;</span><br><span class="line">			sum+=(a[i]-min)</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/31/HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/31/HashMap/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T21:36:07+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##HashMap</p>
+<blockquote>
+<blockquote>
+<p>：带符号右移。正数右移高位补0，负数右移高位补1。比如：</p>
+</blockquote>
+</blockquote>
+<p>4 &gt;&gt; 1，结果是2；-4 &gt;&gt; 1，结果是-2。-2 &gt;&gt; 1，结果是-1。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>：无符号右移。无论是正数还是负数，高位通通补0。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>对于正数而言，&gt;&gt;和&gt;&gt;&gt;没区别。</p>
+<p>##简介<br>1.HashMap基于哈希的map接口实现。<br>2.HashMap 类大致相当于 Hashtable ，只是它是非同步的并且允许为空值。<br>3.HashMap根据键的hashCode值存储数据，一般直接可以定位到它的值，但他遍历顺序是不确定的。HashMap只允许key中只有一个null，而value可以是多个，HashMap是非线程安全的。如果要满足线程安全，可以用Collection的synchronizedMap方法使的HashMap具有线程安全的能力，或使用ConcurrentHashMap。</p>
+<p>##内部实现<br>从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下如所示。<br><img src="https://i.loli.net/2018/06/01/5b10be1cb1a8b.png" alt="hashMap内存结构图.png"></p>
+<p>####1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。<br><figure class="highlight plain"><figcaption><span>HashMap的内部类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">            this.hash = hash;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final K getKey()        &#123; return key; &#125;</span><br><span class="line">        public final V getValue()      &#123; return value; &#125;</span><br><span class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">        public final int hashCode() &#123;</span><br><span class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final V setValue(V newValue) &#123;</span><br><span class="line">            V oldValue = value;</span><br><span class="line">            value = newValue;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final boolean equals(Object o) &#123;</span><br><span class="line">            if (o == this)</span><br><span class="line">                return true;</span><br><span class="line">            if (o instanceof Map.Entry) &#123;</span><br><span class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                    Objects.equals(value, e.getValue()))</span><br><span class="line">                    return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.HashMap构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*使用指定的初始容量和指定加载因子构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor)&#123;...&#125;</span><br><span class="line">/*</span><br><span class="line">*使用指定的初始容量和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line"> public HashMap(int initialCapacity)&#123;...&#125;</span><br><span class="line"> /*</span><br><span class="line"> *使用默认的初始容量（16）和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line"> */</span><br><span class="line">  public HashMap() &#123;...&#125;</span><br><span class="line">  /*</span><br><span class="line">  *使用与指定的&lt;tt&gt; Map &lt;/ tt&gt;相同的映射构造一个新的HashMapHashMap用默认加载因子   *（0.75）和一个初始容量来创建，该容量足以将映射保存在指定的Map</span><br><span class="line">  */</span><br><span class="line">   public HashMap(Map&lt;? extends K, ? extends V&gt; m)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.jdk1.8 HashMap的put方法源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        HashMap.Node&lt;K,V&gt;[] tab; HashMap.Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">//        判断table是否为空，创建默认大小</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">//        计算index，并对null做处理 （有点懵）</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            HashMap.Node&lt;K,V&gt; e; K k;</span><br><span class="line">            //节点key存在，直接覆盖value</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            //判断是否是红黑树</span><br><span class="line">            else if (p instanceof HashMap.TreeNode)</span><br><span class="line">                e = ((HashMap.TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                //该链为链表</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        //链表长度大于8转换为红黑树进行处理</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //key存在就覆盖value</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        //超过阈值就扩容</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.HashMap 扩容<br>扩容(resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组。</p>
+<p>（1）.jdk1.7的扩容是当容量大于阈值时，使用大的数组代替小的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> void resize(int newCapacity) &#123;   //传入新的容量</span><br><span class="line">      Entry[] oldTable = table;    //引用扩容前的Entry数组</span><br><span class="line">      int oldCapacity = oldTable.length;         </span><br><span class="line">      if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</span><br><span class="line">          threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">   </span><br><span class="line">      Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</span><br><span class="line">     transfer(newTable);                         //！！将数据转移到新的Entry数组里</span><br><span class="line">     table = newTable;                           //HashMap的table属性引用新的Entry数组</span><br><span class="line">     threshold = (int)(newCapacity * loadFactor);//修改阈值</span><br><span class="line"> &#125;</span><br><span class="line"> //用于将原来的数组中的数据拷贝到新的数组</span><br><span class="line"> void transfer(Entry[] newTable) &#123;</span><br><span class="line">      Entry[] src = table;                   //src引用了旧的Entry数组</span><br><span class="line">      int newCapacity = newTable.length;</span><br><span class="line">      for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</span><br><span class="line">          Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</span><br><span class="line">          if (e != null) &#123;</span><br><span class="line">              src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</span><br><span class="line">              do &#123;</span><br><span class="line">                  Entry&lt;K,V&gt; next = e.next;</span><br><span class="line">                 int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</span><br><span class="line">                 e.next = newTable[i]; //标记[1]</span><br><span class="line">                 newTable[i] = e;      //将元素放在数组上</span><br><span class="line">                 e = next;             //访问下一个Entry链上的元素</span><br><span class="line">             &#125; while (e != null);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>####jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。<br>（2）.jdk1.8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">final HashMap.Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">       int oldCap = (oldTab == null) ? 0 : oldTab.length;</span><br><span class="line">       int oldThr = threshold;</span><br><span class="line">       int newCap, newThr = 0;</span><br><span class="line">       if (oldCap &gt; 0) &#123;</span><br><span class="line">           //判断是否大于最大容量</span><br><span class="line">           if (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">               threshold = Integer.MAX_VALUE;</span><br><span class="line">               return oldTab;</span><br><span class="line">           &#125;</span><br><span class="line">           //当小于最大容量时，扩充为原来的2倍</span><br><span class="line">           else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                   oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">               newThr = oldThr &lt;&lt; 1; // double threshold</span><br><span class="line">       &#125;</span><br><span class="line">       else if (oldThr &gt; 0) // initial capacity was placed in threshold</span><br><span class="line">           newCap = oldThr;</span><br><span class="line">       else &#123;               // zero initial threshold signifies using defaults</span><br><span class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">           newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">       &#125;</span><br><span class="line">       if (newThr == 0) &#123;</span><br><span class="line">           float ft = (float)newCap * loadFactor;</span><br><span class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?</span><br><span class="line">                   (int)ft : Integer.MAX_VALUE);</span><br><span class="line">       &#125;</span><br><span class="line">       threshold = newThr;</span><br><span class="line">       @SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] newTab = (HashMap.Node&lt;K,V&gt;[])new HashMap.Node[newCap];</span><br><span class="line">       table = newTab;</span><br><span class="line">       if (oldTab != null) &#123;</span><br><span class="line">           // 把每个bucket都移动到新的buckets中</span><br><span class="line">           for (int j = 0; j &lt; oldCap; ++j) &#123;</span><br><span class="line">               HashMap.Node&lt;K,V&gt; e;</span><br><span class="line">               //遍历老数组，并释放它</span><br><span class="line">               if ((e = oldTab[j]) != null) &#123;</span><br><span class="line">                   oldTab[j] = null;</span><br><span class="line">                   if (e.next == null)</span><br><span class="line">                       //e的哈希和新的容量-1做与运算 得出在新数组的位置</span><br><span class="line">                       newTab[e.hash &amp; (newCap - 1)] = e;</span><br><span class="line">                   else if (e instanceof HashMap.TreeNode)//判断它是红黑树</span><br><span class="line">                       ((HashMap.TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);</span><br><span class="line">                   else &#123;  // 链表优化重hash的代码块</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; loHead = null, loTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; hiHead = null, hiTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; next;</span><br><span class="line">                       do &#123;</span><br><span class="line">                           next = e.next;</span><br><span class="line">                           // 原索引</span><br><span class="line">                           if ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">                               if (loTail == null)</span><br><span class="line">                                   loHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   loTail.next = e;</span><br><span class="line">                               loTail = e;</span><br><span class="line">                           &#125; // 原索引+oldCap</span><br><span class="line">                           else &#123;</span><br><span class="line">                               if (hiTail == null)</span><br><span class="line">                                   hiHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   hiTail.next = e;</span><br><span class="line">                               hiTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125; while ((e = next) != null);</span><br><span class="line">                       // 原索引放到bucket里</span><br><span class="line">                       if (loTail != null) &#123;</span><br><span class="line">                           loTail.next = null;</span><br><span class="line">                           newTab[j] = loHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                       // 原索引+oldCap放到bucket里</span><br><span class="line">                       if (hiTail != null) &#123;</span><br><span class="line">                           hiTail.next = null;</span><br><span class="line">                           newTab[j + oldCap] = hiHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return newTab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>###线程安全性<br>HashMap是非线程安全的，线程安全的ConcurrentHashMap。在多线程情况下HashMap会产生死循环</p>
+
           
         
       
@@ -1410,7 +1703,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
