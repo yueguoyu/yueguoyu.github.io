@@ -560,6 +560,266 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/数组加一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/03/数组加一/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T23:08:41+08:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title:数组加一<br>date:2018-6-03 23:09:25<br>tags:leetcode</p>
+<h2 id="categories-算法"><a href="#categories-算法" class="headerlink" title="categories:算法"></a>categories:算法</h2><p>加一</p>
+<p>给定一个<strong>非负整数</strong>组成的<strong>非空</strong>数组，在该数的基础上加一，返回一个新的数组。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2,4]</span><br><span class="line">解释: 输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,3,2,1]</span><br><span class="line">输出: [4,3,2,2]</span><br><span class="line">解释: 输入数组表示数字 4321。</span><br></pre></td></tr></table></figure>
+<p>#####Java：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] plusOne(<span class="keyword">int</span>[] digits) &#123;</span><br><span class="line">   <span class="keyword">int</span> creay=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i=digits.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">       <span class="keyword">if</span> (creay==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">int</span> tmp=digits[i]+creay;</span><br><span class="line">       creay=tmp/<span class="number">10</span>;</span><br><span class="line">       digits[i]=tmp%<span class="number">10</span>;</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="keyword">if</span> (creay!=<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> [] re=<span class="keyword">new</span> <span class="keyword">int</span>[digits.length+<span class="number">1</span>];</span><br><span class="line">        re[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> digits;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#####go:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusOne</span><span class="params">(a [] <span class="keyword">int</span>)</span> [] <span class="title">int</span></span>&#123;</span><br><span class="line">	crray:=<span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="built_in">len</span>(a)<span class="number">-1</span>;i&gt;=<span class="number">0</span> ; i-- &#123;</span><br><span class="line">		<span class="keyword">if</span> crray==<span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> a</span><br><span class="line">		&#125;</span><br><span class="line">		tmp:=a[i]+crray</span><br><span class="line">		crray=tmp/<span class="number">10</span></span><br><span class="line">		a[i]=tmp%<span class="number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> crray!=<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> newa [] <span class="keyword">int</span>=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="built_in">len</span>(a)+<span class="number">1</span>)</span><br><span class="line">		newa[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> newa</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/java-并发编程实战-读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/03/java-并发编程实战-读书笔记/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T16:01:30+08:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title:java 并发编程实战 读书笔记<br>date:2018-6-03 15:34:25<br>tags:线程</p>
+<h2 id="categories-读书笔记"><a href="#categories-读书笔记" class="headerlink" title="categories:读书笔记"></a>categories:读书笔记</h2><h3 id="对象的共享"><a href="#对象的共享" class="headerlink" title="对象的共享"></a>对象的共享</h3><h5 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h5><p>已知同步方法和同步代码块，可以以原子性的方式执行。同步还可以通过内存可见性实现。当多个线程对一个公共的数据进行set和get ，如果set和get方法不用synchronized修饰是非线程安全的。<br>为了确保多个线程之间对内存写入操作的可见性，必须使用同步机制。</p>
+<h4 id="失效数据"><a href="#失效数据" class="headerlink" title="失效数据"></a>失效数据</h4><p>多个线程调用一个数据时，一个线程获取的数据不是最新的，而是一个过期的数据。<br>失效问题：一个线程set后另一个线程get的数据可能不是最新的获知可能获取不到。</p>
+<h4 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h4><p>非volatile类型double，long变量，jvm在对64位的double或long变量的读操作或写操作是分为高位32和低位32位进行操作的，在进行操作时可能是取一个数的高32位而取另一个数的低32位。所以在多线程情况下要使用volatile关键字对double，long变量进行修饰。</p>
+<h4 id="volatile变量"><a href="#volatile变量" class="headerlink" title="volatile变量"></a>volatile变量</h4><p>volatile变量是一种稍微的同步机制。volatile变量不会存在寄存器或者对其他处理器不可见的地方，因此每次读取的数据都是最新的。volatile是一种比synchronization稍微弱的同步机制。<br>访问volatile变量时不需要加锁操作，因此也就不会使执行线程阻塞的。<br><strong>正确使用方法：</strong><br>确保它们自身状态的可见性，确保它们所引用对象的状态的可见性，以及标识一些重要的程序生命周期事件的发生（例如，初始化或关闭）<br><strong>局限性：</strong><br>volatile变量通常用做某个操作完成，发生中断或者状态的标志。</p>
+<p>####### 加锁机制能可以确保原子性和可见性，而volatile只能确保可见性。<br><strong>使用volatile前提：</strong><br>1.对变量的写入操作不依赖变量的当前值；<br>2.该变量不会与其他状态变量一起纳入不变性条件中。<br>3.在访问时不需要加锁。</p>
+<h5 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h5><p>一种避免使用同步的方法就是不共享数据。线程封闭是实现线程安全性的最简单的方式之一。<br><strong>Ad-hoc线程封闭</strong><br>Ad-hoc线程封闭是指，维护线程封闭性的职责完全由程序实现来承担，它是非常脆弱的，因为没有任何一种语言特性，能将对象封闭到目标线程上。一般不使用。<br><strong>栈封闭</strong><br>在栈封闭中，只能通过局部变量才能访问对象。局部变量封闭在执行线程中，它们位于执行线程的栈中，其他线程无法访问这个栈。栈封闭也被称为线程内部使用或线程局部使用。比Ad-hoc更加易于维护，更加健壮。<br><strong>ThreadLocal类</strong><br>ThreadLocal类能使线程中的某个值与保存值的对象关联起来。<br>ThreadLocal 为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。<br>ThreadLoacl类中使用map存储数据，key为线程而value为变量副本。<br>ThreadLocal类中有一个ThreadLocalMap内部类，用来存储副本key为线程，而value为变量的副本。</p>
+<h2 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h2><p><strong>什么是不变性</strong><br>不变性指对象的状态不改变。<br>不变性对象一定是线程安全的。<br><strong>满足条件</strong><br>1.对象创建后其状态不再改变<br>2.对象的所有域都是final类型的<br>3.对象是正确创建的（在对象创建之间，this引用没有逸出）</p>
+<h4 id="Final域"><a href="#Final域" class="headerlink" title="Final域"></a>Final域</h4><p>final域能确保初始化过程中的安全性，从而可以不受限制的访问不可变对象，并在共享这些对象的时无须同步。</p>
+<h3 id="除非需要更高的可见性，否则应将所有的域都声明为私有域"><a href="#除非需要更高的可见性，否则应将所有的域都声明为私有域" class="headerlink" title="除非需要更高的可见性，否则应将所有的域都声明为私有域"></a>除非需要更高的可见性，否则应将所有的域都声明为私有域</h3><h3 id="除非需要某个域是可变的，否则应将其声明为final域"><a href="#除非需要某个域是可变的，否则应将其声明为final域" class="headerlink" title="除非需要某个域是可变的，否则应将其声明为final域"></a>除非需要某个域是可变的，否则应将其声明为final域</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/买卖股票的最佳时机 II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -656,6 +916,151 @@
             <h2 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="买卖股票的最佳时机 II"></a>买卖股票的最佳时机 II</h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。<br>示例 1:<br>输入: [7,1,5,3,6,4]输出: 7解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。<br>示例 2:<br>输入: [1,2,3,4,5]输出: 4解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。<br>     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。<br>示例 3:<br>输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
 <h3 id="思路：因为要获取最大利润，所以只要后面比前面的大就获利"><a href="#思路：因为要获取最大利润，所以只要后面比前面的大就获利" class="headerlink" title="思路：因为要获取最大利润，所以只要后面比前面的大就获利"></a>思路：因为要获取最大利润，所以只要后面比前面的大就获利</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">java版本:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (prices==<span class="keyword">null</span> || prices.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min=prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (prices[i]&gt;min)&#123;</span><br><span class="line"></span><br><span class="line">               sum+=prices[i]-min;</span><br><span class="line"></span><br><span class="line">               min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span>版本:</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(a)==<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	min := a[<span class="number">0</span>]</span><br><span class="line">	sum :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(a) ;i++  &#123;</span><br><span class="line">		<span class="keyword">if</span> min&lt;a[i] &#123;</span><br><span class="line">			sum+=(a[i]-min)</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/31/HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/31/HashMap/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T21:36:07+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title:HashMap<br>date:2018-6-9 21:32:21<br>tags:java</p>
+<h2 id="categories-java基础"><a href="#categories-java基础" class="headerlink" title="categories:java基础"></a>categories:java基础</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><blockquote>
+<blockquote>
+<p>：带符号右移。正数右移高位补0，负数右移高位补1。比如：</p>
+</blockquote>
+</blockquote>
+<p>4 &gt;&gt; 1，结果是2；-4 &gt;&gt; 1，结果是-2。-2 &gt;&gt; 1，结果是-1。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>：无符号右移。无论是正数还是负数，高位通通补0。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>对于正数而言，&gt;&gt;和&gt;&gt;&gt;没区别。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>1.HashMap基于哈希的map接口实现。<br>2.HashMap 类大致相当于 Hashtable ，只是它是非同步的并且允许为空值。<br>3.HashMap根据键的hashCode值存储数据，一般直接可以定位到它的值，但他遍历顺序是不确定的。HashMap只允许key中只有一个null，而value可以是多个，HashMap是非线程安全的。如果要满足线程安全，可以用Collection的synchronizedMap方法使的HashMap具有线程安全的能力，或使用ConcurrentHashMap。</p>
+<h2 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h2><p>从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下如所示。<br><img src="https://i.loli.net/2018/06/01/5b10be1cb1a8b.png" alt="hashMap内存结构图.png"></p>
+<h4 id="1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。"><a href="#1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。" class="headerlink" title="1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。"></a>1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。</h4><figure class="highlight plain"><figcaption><span>HashMap的内部类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">            this.hash = hash;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final K getKey()        &#123; return key; &#125;</span><br><span class="line">        public final V getValue()      &#123; return value; &#125;</span><br><span class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">        public final int hashCode() &#123;</span><br><span class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final V setValue(V newValue) &#123;</span><br><span class="line">            V oldValue = value;</span><br><span class="line">            value = newValue;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final boolean equals(Object o) &#123;</span><br><span class="line">            if (o == this)</span><br><span class="line">                return true;</span><br><span class="line">            if (o instanceof Map.Entry) &#123;</span><br><span class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                    Objects.equals(value, e.getValue()))</span><br><span class="line">                    return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>2.HashMap构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*使用指定的初始容量和指定加载因子构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor)&#123;...&#125;</span><br><span class="line">/*</span><br><span class="line">*使用指定的初始容量和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line"> public HashMap(int initialCapacity)&#123;...&#125;</span><br><span class="line"> /*</span><br><span class="line"> *使用默认的初始容量（16）和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line"> */</span><br><span class="line">  public HashMap() &#123;...&#125;</span><br><span class="line">  /*</span><br><span class="line">  *使用与指定的&lt;tt&gt; Map &lt;/ tt&gt;相同的映射构造一个新的HashMapHashMap用默认加载因子   *（0.75）和一个初始容量来创建，该容量足以将映射保存在指定的Map</span><br><span class="line">  */</span><br><span class="line">   public HashMap(Map&lt;? extends K, ? extends V&gt; m)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.jdk1.8 HashMap的put方法源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        HashMap.Node&lt;K,V&gt;[] tab; HashMap.Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">//        判断table是否为空，创建默认大小</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">//        计算index，并对null做处理 （有点懵）</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            HashMap.Node&lt;K,V&gt; e; K k;</span><br><span class="line">            //节点key存在，直接覆盖value</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            //判断是否是红黑树</span><br><span class="line">            else if (p instanceof HashMap.TreeNode)</span><br><span class="line">                e = ((HashMap.TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                //该链为链表</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        //链表长度大于8转换为红黑树进行处理</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //key存在就覆盖value</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        //超过阈值就扩容</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.HashMap 扩容<br>扩容(resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组。</p>
+<p>（1）.jdk1.7的扩容是当容量大于阈值时，使用大的数组代替小的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> void resize(int newCapacity) &#123;   //传入新的容量</span><br><span class="line">      Entry[] oldTable = table;    //引用扩容前的Entry数组</span><br><span class="line">      int oldCapacity = oldTable.length;         </span><br><span class="line">      if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</span><br><span class="line">          threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">   </span><br><span class="line">      Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</span><br><span class="line">     transfer(newTable);                         //！！将数据转移到新的Entry数组里</span><br><span class="line">     table = newTable;                           //HashMap的table属性引用新的Entry数组</span><br><span class="line">     threshold = (int)(newCapacity * loadFactor);//修改阈值</span><br><span class="line"> &#125;</span><br><span class="line"> //用于将原来的数组中的数据拷贝到新的数组</span><br><span class="line"> void transfer(Entry[] newTable) &#123;</span><br><span class="line">      Entry[] src = table;                   //src引用了旧的Entry数组</span><br><span class="line">      int newCapacity = newTable.length;</span><br><span class="line">      for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</span><br><span class="line">          Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</span><br><span class="line">          if (e != null) &#123;</span><br><span class="line">              src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</span><br><span class="line">              do &#123;</span><br><span class="line">                  Entry&lt;K,V&gt; next = e.next;</span><br><span class="line">                 int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</span><br><span class="line">                 e.next = newTable[i]; //标记[1]</span><br><span class="line">                 newTable[i] = e;      //将元素放在数组上</span><br><span class="line">                 e = next;             //访问下一个Entry链上的元素</span><br><span class="line">             &#125; while (e != null);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"><a href="#jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。" class="headerlink" title="jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"></a>jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。</h4><p>（2）.jdk1.8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">final HashMap.Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">       int oldCap = (oldTab == null) ? 0 : oldTab.length;</span><br><span class="line">       int oldThr = threshold;</span><br><span class="line">       int newCap, newThr = 0;</span><br><span class="line">       if (oldCap &gt; 0) &#123;</span><br><span class="line">           //判断是否大于最大容量</span><br><span class="line">           if (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">               threshold = Integer.MAX_VALUE;</span><br><span class="line">               return oldTab;</span><br><span class="line">           &#125;</span><br><span class="line">           //当小于最大容量时，扩充为原来的2倍</span><br><span class="line">           else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                   oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">               newThr = oldThr &lt;&lt; 1; // double threshold</span><br><span class="line">       &#125;</span><br><span class="line">       else if (oldThr &gt; 0) // initial capacity was placed in threshold</span><br><span class="line">           newCap = oldThr;</span><br><span class="line">       else &#123;               // zero initial threshold signifies using defaults</span><br><span class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">           newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">       &#125;</span><br><span class="line">       if (newThr == 0) &#123;</span><br><span class="line">           float ft = (float)newCap * loadFactor;</span><br><span class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?</span><br><span class="line">                   (int)ft : Integer.MAX_VALUE);</span><br><span class="line">       &#125;</span><br><span class="line">       threshold = newThr;</span><br><span class="line">       @SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] newTab = (HashMap.Node&lt;K,V&gt;[])new HashMap.Node[newCap];</span><br><span class="line">       table = newTab;</span><br><span class="line">       if (oldTab != null) &#123;</span><br><span class="line">           // 把每个bucket都移动到新的buckets中</span><br><span class="line">           for (int j = 0; j &lt; oldCap; ++j) &#123;</span><br><span class="line">               HashMap.Node&lt;K,V&gt; e;</span><br><span class="line">               //遍历老数组，并释放它</span><br><span class="line">               if ((e = oldTab[j]) != null) &#123;</span><br><span class="line">                   oldTab[j] = null;</span><br><span class="line">                   if (e.next == null)</span><br><span class="line">                       //e的哈希和新的容量-1做与运算 得出在新数组的位置</span><br><span class="line">                       newTab[e.hash &amp; (newCap - 1)] = e;</span><br><span class="line">                   else if (e instanceof HashMap.TreeNode)//判断它是红黑树</span><br><span class="line">                       ((HashMap.TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);</span><br><span class="line">                   else &#123;  // 链表优化重hash的代码块</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; loHead = null, loTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; hiHead = null, hiTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; next;</span><br><span class="line">                       do &#123;</span><br><span class="line">                           next = e.next;</span><br><span class="line">                           // 原索引</span><br><span class="line">                           if ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">                               if (loTail == null)</span><br><span class="line">                                   loHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   loTail.next = e;</span><br><span class="line">                               loTail = e;</span><br><span class="line">                           &#125; // 原索引+oldCap</span><br><span class="line">                           else &#123;</span><br><span class="line">                               if (hiTail == null)</span><br><span class="line">                                   hiHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   hiTail.next = e;</span><br><span class="line">                               hiTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125; while ((e = next) != null);</span><br><span class="line">                       // 原索引放到bucket里</span><br><span class="line">                       if (loTail != null) &#123;</span><br><span class="line">                           loTail.next = null;</span><br><span class="line">                           newTab[j] = loHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                       // 原索引+oldCap放到bucket里</span><br><span class="line">                       if (hiTail != null) &#123;</span><br><span class="line">                           hiTail.next = null;</span><br><span class="line">                           newTab[j + oldCap] = hiHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return newTab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>HashMap是非线程安全的，线程安全的ConcurrentHashMap。在多线程情况下HashMap会产生死循环</p>
+
           
         
       
@@ -808,165 +1213,6 @@
 <p><strong>方法二：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-创建一个大小相同的数组</span><br><span class="line">-然后将原数组中的值写到新数组中，关键点（a[(i + k) % nums.length] = nums[i];）</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] rotate1(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">//关键点</span></span><br><span class="line">            a[(i + k) % nums.length] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>go:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func rotate1(nums [] int,k int)  []int&#123;</span><br><span class="line">	//go中切片 相当于动态数组 切片的长度不是固定的，在追加时可能使的容量增大</span><br><span class="line">	var a [] int=make([]int,len(nums))</span><br><span class="line">	for i:=0;i&lt;len(nums) ;i++  &#123;</span><br><span class="line">		a[(i+k)%len(nums)]=nums[i]</span><br><span class="line">	&#125;</span><br><span class="line">	return a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/" itemprop="url">String 和 StringBuffer 和 StringBuilder</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T20:54:43+08:00">
-                2018-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>三者不同点 </strong><br>1，string 类是不可变的，一旦创建了String对象，那她就无法改变<br>2，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。<br><strong> 线程安全</strong><br>StringBuffer是线程安全的，而StringBuilder是非线程安全的。<br><strong> 运行速度</strong><br>1.StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
-<p>2.StringBuffer 和 StringBuilder 长度可变</p>
-<p><strong>StringBuffer &amp;&amp; StringBuilder  &amp;&amp;  String</strong></p>
-<p>StringBuffer：一个线程安全的，可变的字符序列。字符串缓冲区就像一个String，但可以修改。在任何时候它都包含一些特定的字符序列，但是序列的长度和内容可以通过某些方法调用来改变。字符串缓冲区对于多线程来说是安全的。这些方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生，这与每个涉及的单个线程所进行的方法调用的顺序一致。</p>
-<p>上的主要操作StringBuffer是 append和insert方法，其被重载，以便接受任何类型的数据。每个函数都有效地将给定的数据转换为字符串，然后将该字符串的字符附加或插入到字符串缓冲区中。该 append方法总是将这些字符添加到缓冲区的末尾; 该insert方法在指定的点添加字符。</p>
-<p>如果sb指的是a的一个实例StringBuffer，那么sb.append(x)效果与之相同 sb.insert(sb.length(), x)。</p>
-<p>每个字符串缓冲区都有一个容量 只要包含在字符串缓冲区中的字符序列的长度不超过容量，就不需要分配新的内部缓冲区数组。如果内部缓冲区溢出，它会自动变大。从版本JDK 5开始，这个类已经补充了一个为单个线程设计的等价类StringBuilder。由于StringBuilder类支持所有相同的操作，所以通常会优先使用StringBuilder类，但速度更快，因为它不执行同步操作。</p>
-<p>StringBuilder：一个可变的字符序列。这个类提供了一个兼容的API StringBuffer，但不保证同步。这个类被设计成在StringBuffer单个线程正在使用字符串缓冲区的地方（如通常情况下）用作嵌入式替换 。在可能的情况下，建议优先使用此类， StringBuffer因为在大多数实现中它会更快。</p>
-<p>上的主要操作StringBuilder是 append和insert方法，其被重载，以便接受任何类型的数据。每个有效地将给定的数据转换为一个字符串，然后将该字符串的字符追加或插入到字符串生成器。该 append方法总是在构建器的最后添加这些字符; 该insert方法在指定的点添加字符。</p>
-<p>StringBuilder多线程使用的实例不安全。如果需要这种同步，则建议StringBuffer使用。</p>
-<p>String：String类代表字符串。Java程序中的所有字符串文字，例如”abc”，都被实现为这个类的实例。<br>字符串是不变的; 他们的价值创造后不能改变。字符串缓冲区支持可变字符串。因为String对象是不可变的，所以它们可以共享。</p>
-<p><strong>StringBuffer源码</strong><br>1.StringBuffer一个线程安全的，可变的字符序列。<br>2.StringBuffer就像一个String，但可以修改。在任何时间点，它都包含一些特定的字符列，但是序列的长度和内容可以通过某些方法调用来改变<br>3.字符串缓冲区对于多线程使用是安全的。 方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生一样，这与每个涉及的各个线程所进行的方法调用的顺序一致。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public final class StringBuffer</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence&#123;</span><br><span class="line">      /**</span><br><span class="line">     * 构造一个没有字符的字符串缓冲区，并且字符的初始容量为16个字符。</span><br><span class="line">     */</span><br><span class="line">    public StringBuffer() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个没有字符的字符串缓冲区，并且指定的初始容量</span><br><span class="line">    */</span><br><span class="line">    public StringBuffer(int capacity) &#123;</span><br><span class="line">        super(capacity);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个字符串缓冲区，初始化为*指定字符串的内容。, 字符串缓冲区的初始容量是16加上字符串参数      *的长度。</span><br><span class="line">    */</span><br><span class="line">     public StringBuffer(String str) &#123;</span><br><span class="line">        super(str.length() + 16);</span><br><span class="line">        append(str);</span><br><span class="line">    &#125;</span><br><span class="line">     /**</span><br><span class="line">     * 构造一个字符串缓冲区，其中包含与指定CharSequence相同的字符字符串缓冲区的初始      *容量是 16加上CharSequence参数的长度。</span><br><span class="line">     * @param seq</span><br><span class="line">     */</span><br><span class="line">     public StringBuffer(CharSequence seq) &#123;</span><br><span class="line">        this(seq.length() + 16);</span><br><span class="line">        append(seq);</span><br><span class="line">    &#125;</span><br><span class="line">    //最常用的append 将sb加到该序列  synchronized修饰线程安全的</span><br><span class="line">     public synchronized StringBuffer append(StringBuffer sb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">     @Override</span><br><span class="line">    public synchronized StringBuffer append(CharSequence s) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(s);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    synchronized StringBuffer append(AbstractStringBuilder asb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(asb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>####StringBufer类final修饰说明这个类是“终态的”,不能被继承。类中的方法默认是final所以不能被覆盖。final方法 方法将不能被覆盖</p>
-<p>#####StringBuilder</p>
-<p>一个可变的字符序列，该类提供一个api与stringCuffer兼容，但不是同步的。这个类被设计在单个线程使用字符串缓存的地方用作（StringBuffer）的嵌入替代品，在大多数实现中它更快。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*StringBuilder和stringBuffer 继承和实现的接口相同</span><br><span class="line">*/</span><br><span class="line">public final class StringBuilder</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence</span><br><span class="line">&#123;</span><br><span class="line">/*</span><br><span class="line">*构造方法和StringBuffer相同</span><br><span class="line">*/</span><br><span class="line">  public StringBuilder() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *不同就是append方法  StringBuffer的append方法被synchronized修饰所以是线程安     *全的</span><br><span class="line">    */</span><br><span class="line">     public StringBuilder append(StringBuffer sb) &#123;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>#####String是不可变的，他们的值创建后无法改变</p>
 
           
         
@@ -1216,6 +1462,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/" itemprop="url">String 和 StringBuffer 和 StringBuilder</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T20:54:43+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>三者不同点 </strong><br>1，string 类是不可变的，一旦创建了String对象，那她就无法改变<br>2，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。<br><strong> 线程安全</strong><br>StringBuffer是线程安全的，而StringBuilder是非线程安全的。<br><strong> 运行速度</strong><br>1.StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
+<p>2.StringBuffer 和 StringBuilder 长度可变</p>
+<p><strong>StringBuffer &amp;&amp; StringBuilder  &amp;&amp;  String</strong></p>
+<p>StringBuffer：一个线程安全的，可变的字符序列。字符串缓冲区就像一个String，但可以修改。在任何时候它都包含一些特定的字符序列，但是序列的长度和内容可以通过某些方法调用来改变。字符串缓冲区对于多线程来说是安全的。这些方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生，这与每个涉及的单个线程所进行的方法调用的顺序一致。</p>
+<p>上的主要操作StringBuffer是 append和insert方法，其被重载，以便接受任何类型的数据。每个函数都有效地将给定的数据转换为字符串，然后将该字符串的字符附加或插入到字符串缓冲区中。该 append方法总是将这些字符添加到缓冲区的末尾; 该insert方法在指定的点添加字符。</p>
+<p>如果sb指的是a的一个实例StringBuffer，那么sb.append(x)效果与之相同 sb.insert(sb.length(), x)。</p>
+<p>每个字符串缓冲区都有一个容量 只要包含在字符串缓冲区中的字符序列的长度不超过容量，就不需要分配新的内部缓冲区数组。如果内部缓冲区溢出，它会自动变大。从版本JDK 5开始，这个类已经补充了一个为单个线程设计的等价类StringBuilder。由于StringBuilder类支持所有相同的操作，所以通常会优先使用StringBuilder类，但速度更快，因为它不执行同步操作。</p>
+<p>StringBuilder：一个可变的字符序列。这个类提供了一个兼容的API StringBuffer，但不保证同步。这个类被设计成在StringBuffer单个线程正在使用字符串缓冲区的地方（如通常情况下）用作嵌入式替换 。在可能的情况下，建议优先使用此类， StringBuffer因为在大多数实现中它会更快。</p>
+<p>上的主要操作StringBuilder是 append和insert方法，其被重载，以便接受任何类型的数据。每个有效地将给定的数据转换为一个字符串，然后将该字符串的字符追加或插入到字符串生成器。该 append方法总是在构建器的最后添加这些字符; 该insert方法在指定的点添加字符。</p>
+<p>StringBuilder多线程使用的实例不安全。如果需要这种同步，则建议StringBuffer使用。</p>
+<p>String：String类代表字符串。Java程序中的所有字符串文字，例如”abc”，都被实现为这个类的实例。<br>字符串是不变的; 他们的价值创造后不能改变。字符串缓冲区支持可变字符串。因为String对象是不可变的，所以它们可以共享。</p>
+<p><strong>StringBuffer源码</strong><br>1.StringBuffer一个线程安全的，可变的字符序列。<br>2.StringBuffer就像一个String，但可以修改。在任何时间点，它都包含一些特定的字符列，但是序列的长度和内容可以通过某些方法调用来改变<br>3.字符串缓冲区对于多线程使用是安全的。 方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生一样，这与每个涉及的各个线程所进行的方法调用的顺序一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public final class StringBuffer</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence&#123;</span><br><span class="line">      /**</span><br><span class="line">     * 构造一个没有字符的字符串缓冲区，并且字符的初始容量为16个字符。</span><br><span class="line">     */</span><br><span class="line">    public StringBuffer() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个没有字符的字符串缓冲区，并且指定的初始容量</span><br><span class="line">    */</span><br><span class="line">    public StringBuffer(int capacity) &#123;</span><br><span class="line">        super(capacity);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个字符串缓冲区，初始化为*指定字符串的内容。, 字符串缓冲区的初始容量是16加上字符串参数      *的长度。</span><br><span class="line">    */</span><br><span class="line">     public StringBuffer(String str) &#123;</span><br><span class="line">        super(str.length() + 16);</span><br><span class="line">        append(str);</span><br><span class="line">    &#125;</span><br><span class="line">     /**</span><br><span class="line">     * 构造一个字符串缓冲区，其中包含与指定CharSequence相同的字符字符串缓冲区的初始      *容量是 16加上CharSequence参数的长度。</span><br><span class="line">     * @param seq</span><br><span class="line">     */</span><br><span class="line">     public StringBuffer(CharSequence seq) &#123;</span><br><span class="line">        this(seq.length() + 16);</span><br><span class="line">        append(seq);</span><br><span class="line">    &#125;</span><br><span class="line">    //最常用的append 将sb加到该序列  synchronized修饰线程安全的</span><br><span class="line">     public synchronized StringBuffer append(StringBuffer sb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">     @Override</span><br><span class="line">    public synchronized StringBuffer append(CharSequence s) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(s);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    synchronized StringBuffer append(AbstractStringBuilder asb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(asb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>####StringBufer类final修饰说明这个类是“终态的”,不能被继承。类中的方法默认是final所以不能被覆盖。final方法 方法将不能被覆盖</p>
+<p>#####StringBuilder</p>
+<p>一个可变的字符序列，该类提供一个api与stringCuffer兼容，但不是同步的。这个类被设计在单个线程使用字符串缓存的地方用作（StringBuffer）的嵌入替代品，在大多数实现中它更快。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*StringBuilder和stringBuffer 继承和实现的接口相同</span><br><span class="line">*/</span><br><span class="line">public final class StringBuilder</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence</span><br><span class="line">&#123;</span><br><span class="line">/*</span><br><span class="line">*构造方法和StringBuffer相同</span><br><span class="line">*/</span><br><span class="line">  public StringBuilder() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *不同就是append方法  StringBuffer的append方法被synchronized修饰所以是线程安     *全的</span><br><span class="line">    */</span><br><span class="line">     public StringBuilder append(StringBuffer sb) &#123;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>#####String是不可变的，他们的值创建后无法改变</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/27/java反射/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1368,466 +1773,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/27/mybats级联/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/27/mybats级联/" itemprop="url">mybatis  一对一级联  一对多</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T16:03:52+08:00">
-                2018-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一：一对一   用association</p>
-<p>一   建表</p>
-<p>   course 课程与score 课程成绩表是一对一关系</p>
-<p> course课程表<br> <img src="https://i.loli.net/2018/05/27/5b0aaea7dab99.png" alt="mybatis2.png"></p>
-<p>score课程成绩表<br><img src="https://i.loli.net/2018/05/27/5b0aaea7dabee.png" alt="1mybatis.png"></p>
-<p>连接数据库dbconf.xml<br><img src="https://i.loli.net/2018/05/27/5b0aaea7da9f0.png" alt="mybatis3.png"></p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Config 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
-<p><configuration><br>   <properties resource="db.properties"></properties><br>    <environments default="development"><br>        <environment id="development"><br>            <transactionmanager type="JDBC"><br>            <!-- 配置数据库连接信息 --><br>            <datasource type="POOLED"><br>                <property name="driver" value="${jdbc.driver}"><br>                <property name="url" value="${jdbc.url}"><br>                <property name="username" value="${jdbc.username}"><br>                <property name="password" value="${jdbc.password}"><br>            </property></property></property></property></datasource><br>        </transactionmanager></environment><br>    </environments></configuration></p>
-<p><mappers><br>    <!--<mapper resource="StfMapper.xml"/>--><br>    <!--<mapper resource="KcMapper.xml"/>--><br>    <mapper resource="StudMapper.xml"><br>    <mapper resource="ScoreMapper.xml"><br>    <mapper resource="CourseMapper.xml"><br></mapper></mapper></mapper></mappers><br><br>写一个db.properties文件<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://localhost:3306/myba<br>jdbc.username=root<br>jdbc.password=×××</p>
-<p> 二 使用mybatis插件自动生成相对应表的配置文件</p>
-<p>   CourseMapper.xml</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
-<mapper namespace="com.ygy.mapper.CourseMapper"><br>  <resultmap id="course" type="com.ygy.model.Course"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Fri Oct 27 12:25:54 CST 2017.
-    --><br>    <id column="coid" property="coid" jdbctype="INTEGER"><br>    <result column="coname" property="coname" jdbctype="VARCHAR"><br>  </result></id></resultmap><br> <select id="selectcou" resultmap="course" parametertype="int"><br>   SELECT myba.course.* from myba.course WHERE coid=#{coid}<br> </select><br></mapper>
-
-<p>CourseMapper接口<br>*CourseMapper.xml是对接口的实现 所以 select 的id与接口中方法名相同<br>package com.ygy.mapper;</p>
-<p>import com.ygy.model.Course;<br>import com.ygy.model.CourseExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
-<p>public interface CourseMapper {<br>    public Course selectcou(int id);<br>}</p>
-<p>ScoreMapper.xml<br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
-<mapper namespace="com.ygy.mapper.ScoreMapper"><br>  <resultmap id="score" type="com.ygy.model.Score"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Fri Oct 27 12:25:54 CST 2017.
-    --><br>    <id column="scid" property="scid" jdbctype="INTEGER"><br>    <result column="scsid" property="scsid" jdbctype="INTEGER"><br>    <result column="sckcid" property="sckcid" jdbctype="INTEGER"><br>    <result column="mark" property="mark" jdbctype="VARCHAR"><br>    <association property="course" column="sckcid" select="com.ygy.mapper.CourseMapper.selectcou"><br>  </association></result></result></result></id></resultmap><br>  <select id="selectscore" parametertype="int" resultmap="score"><br>    select myba.score.<em> from myba.score WHERE myba.score.scsid=#{id}<br>  </em></select><br></mapper><br>ScoreMapper接口<br>package com.ygy.mapper;<br><br>import com.ygy.model.Score;<br>import com.ygy.model.ScoreExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;<br><br>public interface ScoreMapper {<br>  public Score selectscore(int id);<br>}<br>在score的model中加上<br>private Course course;<br>//get set方法<br><br>三 测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;<br><br>      try {<br>          inputStream= Resources.getResourceAsStream(“dbconf.xml”);<br>          sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);<br>          sqlSession=sqlSessionFactory.openSession()；<br>          //SCORC和course一对一<br>            ScoreMapper scoreMapper=sqlSession.getMapper(ScoreMapper.class);<br>            Score score=scoreMapper.selectscore(1);<br>          System.out.println(score.getCourse().getConame());<br><br>      } catch (IOException e) {<br>          e.printStackTrace();<br>      }finally {<br>          sqlSession.close();<br>      }<br>二：一对多   collection<br>加入学生表<br>stud<br><br>插件生成对应的接口什么的<br><br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;<br><mapper namespace="com.ygy.mapper.StudMapper"><br>  <resultmap id="stud" type="com.ygy.model.Stud"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Thu Oct 26 15:09:44 CST 2017.
-    --><br>    <id column="sid" property="sid" jdbctype="INTEGER"><br>    <result column="sname" property="sname" jdbctype="VARCHAR"><br>    <!--<association property="kc" column="sid" select="com.ygy.mapper.KcMapper.select"/>--><br>    <collection property="scoreList" column="sid" select="com.ygy.mapper.ScoreMapper.selectscore"><br>   <!--collection 将column的数据传到select对应的接口   property映射到列结果的字段或属性--><br>  </collection></result></id></resultmap><br><select id="selectsud" parametertype="int" resultmap="stud"><br>  SELECT myba.stud. FROM  myba.stud WHERE myba.stud.sid=#{id}<br></select><br></mapper>
-
-<p>接口<br>package com.ygy.mapper;</p>
-<p>import com.ygy.model.Stud;<br>import com.ygy.model.StudExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
-<p>public interface StudMapper {<br>   public Stud selectsud(int id);<br>}</p>
-<p>测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;</p>
-<pre><code>try {
-    inputStream= Resources.getResourceAsStream(&quot;dbconf.xml&quot;);
-    sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
-    sqlSession=sqlSessionFactory.openSession();
-   　　　　 StudMapper studMapper=sqlSession.getMapper(StudMapper.class);
-   　　　　 Stud stud=studMapper.selectsud(1);
-    　　　　System.out.println(stud.getScoreList().get(1).getMark());
-　　　　  } catch (IOException e) {
-  　　　　  e.printStackTrace();
- 　　　　 }finally {
-   　　　　 sqlSession.close();
- 　　　　 }
-</code></pre><p>结果：<br><img src="https://i.loli.net/2018/05/27/5b0aaea7e92f8.png" alt="mybatis4.png"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/23/mybatis自动生成代码插件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/23/mybatis自动生成代码插件/" itemprop="url">mybatis自动生成代码插件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-23T08:33:31+08:00">
-                2018-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="一-generatorconfig-xml文件"><a href="#一-generatorconfig-xml文件" class="headerlink" title="一.generatorconfig.xml文件"></a>一.generatorconfig.xml文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql://localhost:3306/ygy&quot;</span><br><span class="line">                        userId=&quot;root&quot;</span><br><span class="line">                        password=&quot;***&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--targetProject 后面跟的是model放的位置 targetPackage放的包名--&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.nomico271.model&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;com.nomico271.mapper&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.nomico271.mapper&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;table tableName=&quot;ygy1&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;/context&gt;</span><br><span class="line"></span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-<p>##二.pox.xml文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">  &lt;groupId&gt;generator&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;generator&lt;/artifactId&gt;</span><br><span class="line">  &lt;packaging&gt;war&lt;/packaging&gt;</span><br><span class="line">  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">  &lt;name&gt;generator Maven Webapp&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.8.1&lt;/version&gt;</span><br><span class="line">      &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.34&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">//××引包</span><br><span class="line">  &lt;/dependencies&gt;</span><br><span class="line">  &lt;build&gt;</span><br><span class="line">    &lt;finalName&gt;generator&lt;/finalName&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">      &lt;plugin&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">          &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.34&lt;/version&gt;</span><br><span class="line">          &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">        &lt;configuration&gt;</span><br><span class="line">          &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">        &lt;/configuration&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">  &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">完成上面的配置  然后打开maven--&gt;plugins---&gt;mybatis-generator---&gt;mybatis-generator:generate</span><br><span class="line">运行mybatis-generator:generate完成自动生成所需要的文件</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##  三.添加数据到数据库中</span><br><span class="line">import com.nomico271.model.Ygy1;</span><br><span class="line">import org.apache.ibatis.io.Resources;</span><br><span class="line">import org.apache.ibatis.session.SqlSession;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.Reader;</span><br><span class="line"></span><br><span class="line">public class main &#123;</span><br><span class="line">    static  Reader reader;</span><br><span class="line">    static SqlSession session;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            reader= Resources.getResourceAsReader(&quot;ygy.xml&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        finally &#123;</span><br><span class="line">            SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">              session=sqlSessionFactory.openSession();</span><br><span class="line">            Ygy1 ygy1=new Ygy1();</span><br><span class="line">            ygy1.setId(3);</span><br><span class="line">            ygy1.setName(&quot;sdhuaik&quot;);</span><br><span class="line">            session.insert(&quot;insert&quot;,ygy1);</span><br><span class="line">            session.commit();</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">运行程序显示 说明添加成功（其他删，改，查相似）</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/05/23/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/05/23/test/" itemprop="url">test</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-23T08:33:31+08:00">
-                2018-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/yueguoyu.github.io/page/2/">2</a><a class="extend next" rel="next" href="/yueguoyu.github.io/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1875,7 +1827,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
