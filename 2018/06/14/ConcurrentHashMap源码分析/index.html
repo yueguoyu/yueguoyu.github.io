@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/yueguoyu.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/yueguoyu.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/yueguoyu.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/yueguoyu.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/yueguoyu.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/yueguoyu.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java基础," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ConcurrentHashMap源码分析ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩">
+<meta name="keywords" content="java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ConcurrentHashMap源码分析">
+<meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/index.html">
+<meta property="og:site_name" content="YgY">
+<meta property="og:description" content="ConcurrentHashMap源码分析ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/06/16/5b24b5a783b63.png">
+<meta property="og:updated_time" content="2018-06-17T01:47:28.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ConcurrentHashMap源码分析">
+<meta name="twitter:description" content="ConcurrentHashMap源码分析ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩">
+<meta name="twitter:image" content="https://i.loli.net/2018/06/16/5b24b5a783b63.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/yueguoyu.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/yueguoyu/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/"/>
+
+
+
+
+
+  <title>ConcurrentHashMap源码分析 | YgY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/yueguoyu.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YgY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活就是这样</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/yueguoyu.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/yueguoyu.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/yueguoyu.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/yueguoyu.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/yueguoyu.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/yueguoyu.github.io/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ConcurrentHashMap源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T15:28:56+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ConcurrentHashMap源码分析"><a href="#ConcurrentHashMap源码分析" class="headerlink" title="ConcurrentHashMap源码分析"></a>ConcurrentHashMap源码分析</h2><p>ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩容是Entry链可能会产生环，一旦Entry链中有环在HashMap增删查时可能陷入死循环。</p>
+<p>####结构图</p>
+<p><img src="https://i.loli.net/2018/06/16/5b24b5a783b63.png" alt="4.png"></p>
+<p>####ConcurrentHashMap源码</p>
+<p>ConcurrentHashMap继承了AbstractMap实现了提供线程安全性和原子性保证的ConcurrentMap接口和序列化Serializable接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class ConcurrentHashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements ConcurrentMap&lt;K,V&gt;, Serializable &#123;</span><br><span class="line">    ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 默认的初始表格容量</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 最大可能（两个非功率）阵列大小。</span><br><span class="line"> */</span><br><span class="line">static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 此表的默认并发级别。</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CONCURRENCY_LEVEL = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 负载因子</span><br><span class="line"> */</span><br><span class="line">private static final float LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *bin使用树而不是列表的bin数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 用于在调整大小操作期间对（拆分）箱进行非订货的箱数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int UNTREEIFY_THRESHOLD = 6;</span><br></pre></td></tr></table></figure>
+<p>#####寻址方式</p>
+<p>Java 8的ConcurrentHashMap同样是通过Key的哈希值与数组长度取模确定该Key在数组中的索引。同样为了避免不太好的Key的hashCode设计，它通过如下方法计算得到Key的最终哈希值。不同的是，Java 8的ConcurrentHashMap作者认为引入红黑树后，即使哈希冲突比较严重，寻址效率也足够高，所以作者并未在哈希值的计算上做过多设计，只是将Key的hashCode值与其高16位作异或并保证最高位为0（从而保证最终结果为正整数）。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static final int spread(int h) &#123;</span><br><span class="line">  return (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####put方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(key, value, false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Implementation for put and putIfAbsent */</span><br><span class="line">    final V putVal(K key, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">        if (key == null || value == null) throw new NullPointerException();</span><br><span class="line">        //通过spread方法获得哈希值</span><br><span class="line">        int hash = spread(key.hashCode());</span><br><span class="line">        //用于记录相应链的长度</span><br><span class="line">        int binCount = 0;</span><br><span class="line">        for (ConcurrentHashMap.Node&lt;K,V&gt;[] tab = table;;) &#123;</span><br><span class="line">            ConcurrentHashMap.Node&lt;K,V&gt; f; int n, i, fh;</span><br><span class="line">            //如果数组为空，则使用sizeCtl中记录的大小初始化表</span><br><span class="line">            if (tab == null || (n = tab.length) == 0)</span><br><span class="line">                tab = initTable();</span><br><span class="line">                // 找该 hash 值对应的数组下标，得到第一个节点 f</span><br><span class="line">            else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) &#123;</span><br><span class="line">                // 如果数组该位置为空，</span><br><span class="line">                //    用一次 CAS 操作将这个新值放入其中即可，这个 put 操作差不多就结束了，可以拉到最后面了</span><br><span class="line">                //          如果 CAS 失败，那就是有并发操作，进到下一个循环就好了</span><br><span class="line">                if (casTabAt(tab, i, null,</span><br><span class="line">                        new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key, value, null)))</span><br><span class="line">                    break;                   // 添加到空箱时不锁</span><br><span class="line">            &#125;</span><br><span class="line">            else if ((fh = f.hash) == MOVED)</span><br><span class="line">                //帮助数据转移</span><br><span class="line">                tab = helpTransfer(tab, f);</span><br><span class="line">            else &#123; // 到这里就是说，f 是该位置的头结点，而且不为空</span><br><span class="line">                V oldVal = null;</span><br><span class="line">                // 获取数组该位置的头结点的监视器锁</span><br><span class="line">                synchronized (f) &#123;</span><br><span class="line">                    if (tabAt(tab, i) == f) &#123;</span><br><span class="line">                        //正常节点散列可用位</span><br><span class="line">                        if (fh &gt;= 0) &#123;</span><br><span class="line">                            //用于记录相应链表的长度</span><br><span class="line">                            binCount = 1;</span><br><span class="line">                            //遍历链表</span><br><span class="line">                            for (ConcurrentHashMap.Node&lt;K,V&gt; e = f;; ++binCount) &#123;</span><br><span class="line">                                K ek;</span><br><span class="line">                                //如果发现了&quot;相等&quot;的 key，判断是否要进行值覆盖，然后也就可以 break 了</span><br><span class="line">                                if (e.hash == hash &amp;&amp;</span><br><span class="line">                                        ((ek = e.key) == key ||</span><br><span class="line">                                                (ek != null &amp;&amp; key.equals(ek)))) &#123;</span><br><span class="line">                                    oldVal = e.val;</span><br><span class="line">                                    if (!onlyIfAbsent)</span><br><span class="line">                                        e.val = value;</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                                ConcurrentHashMap.Node&lt;K,V&gt; pred = e;</span><br><span class="line">                                //如果到链表的尾部，则在后面加一个新的node</span><br><span class="line">                                if ((e = e.next) == null) &#123;</span><br><span class="line">                                    pred.next = new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key,</span><br><span class="line">                                            value, null);</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        //红黑树</span><br><span class="line">                        else if (f instanceof ConcurrentHashMap.TreeBin) &#123;</span><br><span class="line">                            ConcurrentHashMap.Node&lt;K,V&gt; p;</span><br><span class="line">                            binCount = 2;</span><br><span class="line">                            //插入红黑树</span><br><span class="line">                            if ((p = ((ConcurrentHashMap.TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,</span><br><span class="line">                                    value)) != null) &#123;</span><br><span class="line">                                oldVal = p.val;</span><br><span class="line">                                if (!onlyIfAbsent)</span><br><span class="line">                                    p.val = value;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                //</span><br><span class="line">                if (binCount != 0) &#123;</span><br><span class="line">                    //如果超过8就使用红黑树而不是链表</span><br><span class="line">                    if (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                        // 这个方法和 HashMap 中稍微有一点点不同，那就是它不是一定会进行红黑树转换，</span><br><span class="line">                        // 如果当前数组的长度小于 64，那么会选择进行数组扩容，而不是转换为红黑树</span><br><span class="line">                        treeifyBin(tab, i);</span><br><span class="line">                    if (oldVal != null)</span><br><span class="line">                        return oldVal;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        addCount(1L, binCount);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####initTable方法扩容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private final ConcurrentHashMap.Node&lt;K,V&gt;[] initTable() &#123;</span><br><span class="line">       ConcurrentHashMap.Node&lt;K,V&gt;[] tab; int sc;</span><br><span class="line">       while ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">           //sizeCtl为负数时表示正在初始化</span><br><span class="line">           if ((sc = sizeCtl) &lt; 0)</span><br><span class="line">               //线程</span><br><span class="line">               Thread.yield(); // lost initialization race; just spin</span><br><span class="line">               // CAS 一下，将 sizeCtl 设置为 -1，代表抢到了锁</span><br><span class="line">           else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   if ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">                       // DEFAULT_CAPACITY 默认初始容量是 16</span><br><span class="line">                       int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;</span><br><span class="line">                       @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                               //新建一个大小为n的node数组</span><br><span class="line">                       ConcurrentHashMap.Node&lt;K,V&gt;[] nt = (ConcurrentHashMap.Node&lt;K,V&gt;[])new ConcurrentHashMap.Node&lt;?,?&gt;[n];</span><br><span class="line">                       // 将这个数组赋值给 table，table 是 volatile 的</span><br><span class="line">                       table = tab = nt;</span><br><span class="line">                       // 如果 n 为 16 的话，那么这里 sc = 12</span><br><span class="line">                       // 其实就是 0.75 * n</span><br><span class="line">                       sc = n - (n &gt;&gt;&gt; 2);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; finally &#123;</span><br><span class="line">                   // 设置 sizeCtl 为 sc，我们就当是 12 吧</span><br><span class="line">                   sizeCtl = sc;</span><br><span class="line">               &#125;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return tab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>引用：<a href="http://www.importnew.com/22007.html" target="_blank" rel="noopener">ConcurrentHashMap</a></p>
+<p><a href="https://juejin.im/post/5aeeaba8f265da0b9d781d16#comment" target="_blank" rel="noopener">并发容器之ConcurrentHashMap(JDK 1.8版本)</a></p>
+<p><a href="http://www.importnew.com/28263.html" target="_blank" rel="noopener">Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 </a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/yueguoyu.github.io/tags/java基础/" rel="tag"># java基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/06/12/final关键字/" rel="next" title="final关键字">
+                <i class="fa fa-chevron-left"></i> final关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/06/17/Hashtable/" rel="prev" title="Hashtable">
+                Hashtable <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/05/28/5b0b594044b97.jpg"
+                alt="越狱" />
+            
+              <p class="site-author-name" itemprop="name">越狱</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/yueguoyu.github.io/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/yueguoyu.github.io/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/yueguoyu.github.io/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yueguoyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap源码分析"><span class="nav-number">1.</span> <span class="nav-text">ConcurrentHashMap源码分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">越狱</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/yueguoyu.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
