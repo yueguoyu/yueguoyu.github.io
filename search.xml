@@ -34,6 +34,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[HashSet源码]]></title>
+    <url>%2Fyueguoyu.github.io%2F2018%2F06%2F13%2FHashSet%E6%BA%90%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[HashSet源码HashSet类继承AbstractSet类，实现Set接口，Cloneable接口，java.io.Serializable序列化接口。 12345678910public class HashSet&lt;E&gt; extends AbstractSet&lt;E&gt; implements Set&lt;E&gt;, Cloneable, java.io.Serializable&#123;static final long serialVersionUID = -5024744406713321676L; private transient HashMap&lt;E,Object&gt; map; // Dummy value to associate with an Object in the backing Map private static final Object PRESENT = new Object(); 无参构造函数123public HashSet() &#123; map = new HashMap&lt;&gt;();&#125; 可见HashSet是基于HashMap，所以初始容量为16，负载因子为0.75 构造一个包含指定集合中元素的新集合 1234public HashSet(Collection&lt;? extends E&gt; c) &#123; map = new HashMap&lt;&gt;(Math.max((int) (c.size()/.75f) + 1, 16)); addAll(c);&#125; 123public boolean contains(Object o) &#123; return map.containsKey(o); &#125; add方法 add方法也是调用的hashmap的put的方法，只是value值给的是虚拟值。 1234//PRESENTpublic boolean add(E e) &#123; return map.put(e, PRESENT)==null; &#125; contains方法 判断key是否在set中 123public boolean contains(Object o) &#123; return map.containsKey(o); &#125;]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>java基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[final关键字]]></title>
     <url>%2Fyueguoyu.github.io%2F2018%2F06%2F12%2Ffinal%E5%85%B3%E9%94%AE%E5%AD%97%2F</url>
     <content type="text"><![CDATA[final关键字修饰类 被final关键字修饰的类，不能被继承，如：string类就是final修饰，所以string类不能被继承 修饰方法 被final关键字修饰的方法，把方法锁定，以防任何继承类修改它的含义 修饰变量 1.如果是基本数据类型变量，则其数值一旦在初次初始化后就不能改变。 2.如果是引用类型的变量，则在对其初次初始化之后便不能再让其指向另一个对象。]]></content>
