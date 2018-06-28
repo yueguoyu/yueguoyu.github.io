@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="##工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖">
+<meta name="description" content="工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工厂模式">
 <meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/2018/06/10/工厂模式/index.html">
 <meta property="og:site_name" content="YgY">
-<meta property="og:description" content="##工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖">
+<meta property="og:description" content="工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/06/18/5b271d34caca9.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/06/18/5b271d4210ada.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/06/18/5b271d4229940.jpg">
-<meta property="og:updated_time" content="2018-06-18T11:27:35.497Z">
+<meta property="og:updated_time" content="2018-06-18T11:32:28.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工厂模式">
-<meta name="twitter:description" content="##工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖">
+<meta name="twitter:description" content="工厂模式工厂模式将对象的创建和实现分开工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。依赖倒置原则指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置">
 <meta name="twitter:image" content="https://i.loli.net/2018/06/18/5b271d34caca9.jpg">
 
 
@@ -366,10 +366,9 @@
       
 
       
-        <p>##工厂模式<br>工厂模式将对象的创建和实现分开<br>工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。<br>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br><strong>依赖倒置原则</strong><br>指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置原则，工厂方法不是唯一的技巧，但却是最有威力的技巧之一。</p>
-<p>#####设计原则：要依赖抽象，不要依赖具体类。<br><strong>避免违反OO设计中违反依赖倒置原则：</strong><br>1.变量不可以持有具体类的引用（如果使用new就会持有具体类的引用）<br>2.不要让类派生自具体类。（如果派生自具体类，就会依赖具体类，应该派生自一个抽象）<br>3.不要覆盖基类中已经实现的方法（如果覆盖基类已实现的方法，那么你的基类就不是一个真正适合被继承的抽象。基类中已实现的方法，应该由所有的子类共享）</p>
-<p>####要点</p>
-<p><strong>所有的工厂都是用来封装对象的创建</strong></p>
+        <h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>工厂模式将对象的创建和实现分开<br>工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。<br>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br><strong>依赖倒置原则</strong><br>指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置原则，工厂方法不是唯一的技巧，但却是最有威力的技巧之一。</p>
+<h5 id="设计原则：要依赖抽象，不要依赖具体类。"><a href="#设计原则：要依赖抽象，不要依赖具体类。" class="headerlink" title="设计原则：要依赖抽象，不要依赖具体类。"></a>设计原则：要依赖抽象，不要依赖具体类。</h5><p><strong>避免违反OO设计中违反依赖倒置原则：</strong><br>1.变量不可以持有具体类的引用（如果使用new就会持有具体类的引用）<br>2.不要让类派生自具体类。（如果派生自具体类，就会依赖具体类，应该派生自一个抽象）<br>3.不要覆盖基类中已经实现的方法（如果覆盖基类已实现的方法，那么你的基类就不是一个真正适合被继承的抽象。基类中已实现的方法，应该由所有的子类共享）</p>
+<h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4><p><strong>所有的工厂都是用来封装对象的创建</strong></p>
 <ul>
 <li><p><strong>简单工厂：</strong>简单的工厂，虽然不是真正的设计模式，但仍不失为一个简单的方法，可以将客户程序从具体类解耦。</p>
 </li>
@@ -388,11 +387,11 @@
 <li><p>依赖倒置原则，指导我们避免依赖具体类型，而要尽量依赖抽象。</p>
 </li>
 <li><p>工厂是很有威力的技巧，帮助我们针对抽象编程，而不是针对具体类编程。</p>
-<p>###工厂模式图<br><img src="https://i.loli.net/2018/06/18/5b271d34caca9.jpg" alt="webwxgetmsgimg (1).jpg"></p>
+<h3 id="工厂模式图"><a href="#工厂模式图" class="headerlink" title="工厂模式图"></a>工厂模式图</h3><p><img src="https://i.loli.net/2018/06/18/5b271d34caca9.jpg" alt="webwxgetmsgimg (1).jpg"></p>
 </li>
 </ul>
 <p><img src="https://i.loli.net/2018/06/18/5b271d4210ada.jpg" alt="webwxgetmsgimg (2).jpg"></p>
-<p>###抽象工厂模式图<br><img src="https://i.loli.net/2018/06/18/5b271d4229940.jpg" alt="webwxgetmsgimg.jpg"></p>
+<h3 id="抽象工厂模式图"><a href="#抽象工厂模式图" class="headerlink" title="抽象工厂模式图"></a>抽象工厂模式图</h3><p><img src="https://i.loli.net/2018/06/18/5b271d4229940.jpg" alt="webwxgetmsgimg.jpg"></p>
 
       
     </div>
@@ -487,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -507,7 +515,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -518,7 +526,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/yueguoyu.github.io/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -562,6 +570,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">1.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计原则：要依赖抽象，不要依赖具体类。"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">设计原则：要依赖抽象，不要依赖具体类。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要点"><span class="nav-number">1.0.1.</span> <span class="nav-text">要点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式图"><span class="nav-number">1.1.</span> <span class="nav-text">工厂模式图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式图"><span class="nav-number">1.2.</span> <span class="nav-text">抽象工厂模式图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

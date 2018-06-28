@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/yueguoyu.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/yueguoyu.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/yueguoyu.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/yueguoyu.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/yueguoyu.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/yueguoyu.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="线程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AbstractQueuedSynchronizer(AQS)什么是AQS提供了一个框架，用于实现依赖先进先出（FIFO）等待队列的阻塞锁和相关同步器。是用来构建锁或者其他同步组件的基础框架。 synchronized 同步和AQSsynchronized 同步，synchronized 关键字经过编译之后，会在同步块的前后分别形成 monitorenter 和 monitorexit 这两个字节">
+<meta name="keywords" content="线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AbstractQueuedSynchronizer(AQS)">
+<meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/2018/06/28/AbstractQueuedSynchronizer(AQS)/index.html">
+<meta property="og:site_name" content="YgY">
+<meta property="og:description" content="AbstractQueuedSynchronizer(AQS)什么是AQS提供了一个框架，用于实现依赖先进先出（FIFO）等待队列的阻塞锁和相关同步器。是用来构建锁或者其他同步组件的基础框架。 synchronized 同步和AQSsynchronized 同步，synchronized 关键字经过编译之后，会在同步块的前后分别形成 monitorenter 和 monitorexit 这两个字节">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/06/21/5b2b47ba8a47c.png">
+<meta property="og:updated_time" content="2018-06-28T02:21:48.326Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AbstractQueuedSynchronizer(AQS)">
+<meta name="twitter:description" content="AbstractQueuedSynchronizer(AQS)什么是AQS提供了一个框架，用于实现依赖先进先出（FIFO）等待队列的阻塞锁和相关同步器。是用来构建锁或者其他同步组件的基础框架。 synchronized 同步和AQSsynchronized 同步，synchronized 关键字经过编译之后，会在同步块的前后分别形成 monitorenter 和 monitorexit 这两个字节">
+<meta name="twitter:image" content="https://i.loli.net/2018/06/21/5b2b47ba8a47c.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/yueguoyu.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/yueguoyu/yueguoyu.github.io/2018/06/28/AbstractQueuedSynchronizer(AQS)/"/>
+
+
+
+
+
+  <title>AbstractQueuedSynchronizer(AQS) | YgY</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/yueguoyu.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YgY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活就是这样</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/yueguoyu.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/yueguoyu.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/yueguoyu.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/yueguoyu.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/yueguoyu.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/yueguoyu.github.io/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/28/AbstractQueuedSynchronizer(AQS)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AbstractQueuedSynchronizer(AQS)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T10:16:25+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="AbstractQueuedSynchronizer-AQS"><a href="#AbstractQueuedSynchronizer-AQS" class="headerlink" title="AbstractQueuedSynchronizer(AQS)"></a>AbstractQueuedSynchronizer(AQS)</h2><h3 id="什么是AQS"><a href="#什么是AQS" class="headerlink" title="什么是AQS"></a>什么是AQS</h3><p>提供了一个框架，用于实现依赖先进先出（FIFO）等待队列的阻塞锁和相关同步器。是用来构建锁或者其他同步组件的基础框架。</p>
+<h4 id="synchronized-同步和AQS"><a href="#synchronized-同步和AQS" class="headerlink" title="synchronized 同步和AQS"></a>synchronized 同步和AQS</h4><p>synchronized 同步，synchronized 关键字经过编译之后，会在同步块的前后分别形成 monitorenter 和 monitorexit 这两个字节码指令，这两个字节码需要关联到一个监视对象，当线程执行 monitorenter 指令时，需要首先获得获得监视对象的锁，这里监视对象锁就是进入同步块的凭证，只有获得了凭证才可以进入同步块，当线程离开同步块时，会执行 monitorexit 指令，释放对象锁。</p>
+<p>在 AQS 同步中，使用一个 int 类型的变量 state 来表示当前同步块的状态。以独占式同步（一次只能有一个线程进入同步块）为例，state 的有效值有两个 0 和 1，其中 0 表示当前同步块中没有线程，1 表示同步块中已经有线程在执行。当线程要进入同步块时，需要首先判断 state 的值是否为 0，假设为 0，会尝试将 state 修改为 1，只有<strong>修改成功</strong>了之后，线程才可以进入同步块。注意上面提到的两个条件：</p>
+<ul>
+<li>state 为 0，证明当前同步块中没有线程在执行，所以当前线程可以尝试获得进入同步块的凭证，而这里的凭证就是是否成功将 state 修改为 1（在 synchronized 同步中，我们说的凭证是对象锁，但是对象锁的最终实现是否和这种方式类似，没有找到相关的资料）</li>
+<li>成功将 state 修改为 1，通过使用 CAS 操作，我们可以确保即便有多个线程同时修改 state，也只有一个线程会修改成功。关于 CAS 的具体解释会在后面提到。</li>
+</ul>
+<p>当线程离开同步块时，会修改 state 的值，将其设为 0，并唤醒等待的线程。所以在 AQS 同步中，我们说线程获得了锁，实际上是指线程成功修改了状态变量 state，而线程释放了锁，是指线程将状态变量置为了可修改的状态（在独占式同步中就是置为了 0），让其他线程可以再次尝试修改状态变量。在下面的表述中，我们说线程获得和释放了锁，就是上述含义， 这与 synchronized 同步中说的获得和释放锁的含义不同，需要区别理解</p>
+<p><a href="http://www.cnblogs.com/zhangjk1993/p/6715653.html" target="_blank" rel="noopener">原文</a> </p>
+<h3 id="AQS原理"><a href="#AQS原理" class="headerlink" title="AQS原理"></a>AQS原理</h3><p>AQS的实现是依赖内部的同步队列（FIFO双向队列） ，如果当前线程获取同步状态失败，AQS会将线程以及等待状态等信息构成一个node，将其加到队列的尾部，同时阻塞当前线程，当同步状态释放时，唤醒队列的头节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    +------+  prev +-----+       +-----+</span><br><span class="line">* head |      | &lt;---- |     | &lt;---- |     |  tail</span><br><span class="line">*      +------+       +-----+       +-----+</span><br></pre></td></tr></table></figure>
+<h3 id="AQS结构图"><a href="#AQS结构图" class="headerlink" title="AQS结构图"></a>AQS结构图</h3><p><img src="https://i.loli.net/2018/06/21/5b2b47ba8a47c.png" alt="201701240001-1.png"></p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><h4 id="node内部类"><a href="#node内部类" class="headerlink" title="node内部类"></a>node内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">static final class Node &#123;</span><br><span class="line">    /** 标记以指示节点正在以共享模式等待 */</span><br><span class="line">    static final AbstractQueuedSynchronizer.Node SHARED = new AbstractQueuedSynchronizer.Node();</span><br><span class="line">    /** 标记以指示节点正在以独占模式等待 */</span><br><span class="line">    static final AbstractQueuedSynchronizer.Node EXCLUSIVE = null;</span><br><span class="line"></span><br><span class="line">      // 结点状态</span><br><span class="line">        // CANCELLED，值为1，表示当前的线程被取消</span><br><span class="line">        // SIGNAL，值为-1，表示当前节点的后继节点包含的线程需要运行，也就是unpark</span><br><span class="line">        // CONDITION，值为-2，表示当前节点在等待condition，也就是在condition队列中</span><br><span class="line">        // PROPAGATE，值为-3，表示当前场景下后续的acquireShared能够得以执行</span><br><span class="line">        // 值为0，表示当前节点在sync队列中，等待着获取锁</span><br><span class="line">    static final int CANCELLED =  1;</span><br><span class="line">   </span><br><span class="line">    static final int SIGNAL    = -1;</span><br><span class="line">  </span><br><span class="line">    static final int CONDITION = -2;</span><br><span class="line">  </span><br><span class="line">    static final int PROPAGATE = -3;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 状态字段只取下面的值：</span><br><span class="line">     *   SIGNAL:     该节点的后继者（或将很快）被阻塞（通过park），因此当前节点必须在释放或取消后取消其继任者。</span><br><span class="line">     *               为了避免竞争，获取方法必须首先表明他们需要一个信号，然后重试原子捕获，然后在失败时阻止阻塞</span><br><span class="line">     *   CANCELLED:  由于超时或中断，此节点被取消。</span><br><span class="line">     *               节点永远不会离开这个状态。, 尤其是，具有取消节点的线程不会再次阻塞。</span><br><span class="line">     *   CONDITION:  该节点当前处于条件队列中。</span><br><span class="line">     *   PROPAGATE:  releaseShared应该传播到其他*节点。</span><br><span class="line">     *              在doReleaseShared中设置这个（仅用于头节点）以确保传播继续，即使其他操作自干预以来也有*。</span><br><span class="line">     *   0:          None of the above</span><br><span class="line">     */</span><br><span class="line">    volatile int waitStatus;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 链接到当前节点/线程依赖*的前驱节点来检查waitStatus。</span><br><span class="line">     */</span><br><span class="line">    volatile AbstractQueuedSynchronizer.Node prev;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 链接到当前节点/线程*在释放后停止的后继节点。</span><br><span class="line">     */</span><br><span class="line">    volatile AbstractQueuedSynchronizer.Node next;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 排入此节点的线程。初始化施工并在使用后清空</span><br><span class="line">     */</span><br><span class="line">    volatile Thread thread;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 链接到下一个节点等待条件，或者特殊*值SHARED。</span><br><span class="line">     * 因为条件队列只有在独占模式下才被访问，所以我们只需要一个简单的*链接队列来等待*条件下的节点。</span><br><span class="line">     * 然后他们被转移到队列重新获得。 由于条件只能是排他性的，我们通过使用特殊值来保存字段以指示共享模式。</span><br><span class="line">     */</span><br><span class="line">    AbstractQueuedSynchronizer.Node nextWaiter;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 如果节点在共享模式下等待，则返回true。</span><br><span class="line">     */</span><br><span class="line">    final boolean isShared() &#123;</span><br><span class="line">        return nextWaiter == SHARED;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 返回前一个节点，如果为null则抛出NullPointerException。 </span><br><span class="line">     * 前驱不能为空时使用。, 空检查可能会被忽略，但是可以帮助虚拟机。</span><br><span class="line">     *</span><br><span class="line">     * @return the predecessor of this node</span><br><span class="line">     */</span><br><span class="line">    final AbstractQueuedSynchronizer.Node predecessor() throws NullPointerException &#123;</span><br><span class="line">        AbstractQueuedSynchronizer.Node p = prev;</span><br><span class="line">        if (p == null)</span><br><span class="line">            throw new NullPointerException();</span><br><span class="line">        else</span><br><span class="line">            return p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node() &#123;    // Used to establish initial head or SHARED marker</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node(Thread thread, AbstractQueuedSynchronizer.Node mode) &#123;     // Used by addWaiter</span><br><span class="line">        this.nextWaiter = mode;</span><br><span class="line">        this.thread = thread;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node(Thread thread, int waitStatus) &#123; // Used by Condition</span><br><span class="line">        this.waitStatus = waitStatus;</span><br><span class="line">        this.thread = thread;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="AbstractQueuedSynchronizer"><a href="#AbstractQueuedSynchronizer" class="headerlink" title="AbstractQueuedSynchronizer"></a>AbstractQueuedSynchronizer</h4><p>AbstractQueuedSynchronizer类继承AbstractOwnableSynchronizer类，AbstractOwnableSynchronizer类同步器可能由线程专有。 这个<em>类提供了创建锁和相关同步器</em>的基础，这可能需要拥有所有权。 , AbstractOwnableSynchronizer类本身不管理或使用这些信息。 但是，子类和工具可以使用<em>适当维护的值来帮助控制和监视访问</em>并提供诊断。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//队列头节点</span><br><span class="line">private transient volatile Node head;</span><br><span class="line">//尾节点</span><br><span class="line">private transient volatile Node tail;</span><br><span class="line">//同步状态</span><br><span class="line"> private volatile int state;</span><br><span class="line"> //获得同步状态</span><br><span class="line"> protected final int getState() &#123;</span><br><span class="line">        return state;</span><br><span class="line">    &#125;</span><br><span class="line"> //设置同步状态</span><br><span class="line">protected final void setState(int newState) &#123;</span><br><span class="line">        state = newState;</span><br><span class="line">    &#125;</span><br><span class="line">/*</span><br><span class="line">*变更同步状态，基于cas操作，比较expect的值与存储位置的值是否相等</span><br><span class="line">*相等就将值变为update</span><br><span class="line">*/</span><br><span class="line">protected final boolean compareAndSetState(int expect, int update) &#123;</span><br><span class="line">        // See below for intrinsics setup to support this</span><br><span class="line">        return unsafe.compareAndSwapInt(this, stateOffset, expect, update);</span><br><span class="line">    &#125;</span><br><span class="line">//将节点插入队列</span><br><span class="line"> private Node enq(final Node node) &#123;</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            Node t = tail;</span><br><span class="line">            if (t == null) &#123; // Must initialize</span><br><span class="line">                if (compareAndSetHead(new Node()))</span><br><span class="line">                    tail = head;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                node.prev = t;</span><br><span class="line">                if (compareAndSetTail(t, node)) &#123;</span><br><span class="line">                    t.next = node;</span><br><span class="line">                    return t;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>AbstractOwnableSynchronizer类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *设置当前拥有独占访问权限的线程。</span><br><span class="line"> */</span><br><span class="line">protected final void setExclusiveOwnerThread(Thread thread) &#123;</span><br><span class="line">    exclusiveOwnerThread = thread;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回最后由setExclusiveOwnerThread设置的线程，如果从未设置，则返回null。此方法不会以其他方式强制执行任何同步或字段访问。返回所有者线程</span><br><span class="line"> */</span><br><span class="line">protected final Thread getExclusiveOwnerThread() &#123;</span><br><span class="line">    return exclusiveOwnerThread;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AbstractQueuedSynchronizer</span><br><span class="line">    extends AbstractOwnableSynchronizer</span><br><span class="line">    implements java.io.Serializable &#123;</span><br></pre></td></tr></table></figure>
+<h4 id="CountDownLatch源码"><a href="#CountDownLatch源码" class="headerlink" title="CountDownLatch源码"></a>CountDownLatch源码</h4><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><p>一个同步协助，允许一个或多个线程等待，直到完成其他线程中正在执行的一组操作。</p>
+<h4 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private static final class Sync extends AbstractQueuedSynchronizer &#123;</span><br><span class="line">    private static final long serialVersionUID = 4982264981922014374L;</span><br><span class="line"></span><br><span class="line">    Sync(int count) &#123;</span><br><span class="line">        setState(count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int getCount() &#123;</span><br><span class="line">        return getState();</span><br><span class="line">    &#125;</span><br><span class="line">/**</span><br><span class="line">     * 重写 AQS 中的 tryAcquireShared</span><br><span class="line">     * 尝试获取共享锁，如果当前 state 等于 0 返回 1 表示获取成功，否      则返回 -1 表示失败</span><br><span class="line">     */</span><br><span class="line">    protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">        return (getState() == 0) ? 1 : -1;</span><br><span class="line">    &#125;</span><br><span class="line"> /**</span><br><span class="line">     * 重写 AQS 中的 tryReleaseShared</span><br><span class="line">     */</span><br><span class="line">    protected boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">        // Decrement count; signal when transition to zero</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            int c = getState();</span><br><span class="line">            if (c == 0)</span><br><span class="line">                return false;</span><br><span class="line">            int nextc = c-1;</span><br><span class="line">            if (compareAndSetState(c, nextc))</span><br><span class="line">                return nextc == 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/yueguoyu.github.io/tags/线程/" rel="tag"># 线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/06/28/CyclicBarrier源码分析/" rel="next" title="CyclicBarrier源码分析">
+                <i class="fa fa-chevron-left"></i> CyclicBarrier源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/yueguoyu.github.io/2018/06/28/CountDownLatch分析/" rel="prev" title="CountDownLatch分析">
+                CountDownLatch分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://i.loli.net/2018/05/28/5b0b594044b97.jpg"
+                alt="越狱" />
+            
+              <p class="site-author-name" itemprop="name">越狱</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/yueguoyu.github.io/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/yueguoyu.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/yueguoyu.github.io/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yueguoyu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractQueuedSynchronizer-AQS"><span class="nav-number">1.</span> <span class="nav-text">AbstractQueuedSynchronizer(AQS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是AQS"><span class="nav-number">1.1.</span> <span class="nav-text">什么是AQS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized-同步和AQS"><span class="nav-number">1.1.1.</span> <span class="nav-text">synchronized 同步和AQS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AQS原理"><span class="nav-number">1.2.</span> <span class="nav-text">AQS原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AQS结构图"><span class="nav-number">1.3.</span> <span class="nav-text">AQS结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">1.4.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#node内部类"><span class="nav-number">1.4.1.</span> <span class="nav-text">node内部类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AbstractQueuedSynchronizer"><span class="nav-number">1.4.2.</span> <span class="nav-text">AbstractQueuedSynchronizer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch源码"><span class="nav-number">1.4.3.</span> <span class="nav-text">CountDownLatch源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#概述："><span class="nav-number">1.4.4.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码："><span class="nav-number">1.4.5.</span> <span class="nav-text">源码：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">越狱</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/yueguoyu.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/yueguoyu.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/yueguoyu.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
