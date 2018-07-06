@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="YgY">
 <meta property="og:description" content="CountDownLatch分析什么是CountDownLatchCountDownLatch是一个同步工具类，它允许一个或多个线程一直等待，直到其他线程的操作执行完后再执行。   CountDownLatch是在java1.5被引入的，跟它一起被引入的并发工具类还有CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue，它们都存在于java">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-28T02:20:47.358Z">
+<meta property="og:updated_time" content="2018-07-01T08:57:54.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CountDownLatch分析">
 <meta name="twitter:description" content="CountDownLatch分析什么是CountDownLatchCountDownLatch是一个同步工具类，它允许一个或多个线程一直等待，直到其他线程的操作执行完后再执行。   CountDownLatch是在java1.5被引入的，跟它一起被引入的并发工具类还有CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue，它们都存在于java">
@@ -383,6 +383,8 @@
 <p><strong>await（long timeout, TimeUnit unit）方法</strong></p>
 <p>导致当前线程等待，直到锁存器计数到<em>为零，除非线程中断，</em>或经过了指定的等待时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//尝试以共享模式获取，如果中断则中止，如果超时，则失败。</span><br><span class="line">public boolean await(long timeout, TimeUnit unit)</span><br><span class="line">    throws InterruptedException &#123;</span><br><span class="line">    return sync.tryAcquireSharedNanos(1, unit.toNanos(timeout));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package T616;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.CountDownLatch;</span><br><span class="line">import java.util.concurrent.Executor;</span><br><span class="line">import java.util.concurrent.ExecutorService;</span><br><span class="line">import java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line">public class threadTst &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        CountDownLatch end=new CountDownLatch(3);</span><br><span class="line"></span><br><span class="line">      new Thread(new play1(1,end)).start();</span><br><span class="line">      new Thread(new play1(2,end)).start();</span><br><span class="line">      new Thread(new play1(3,end)).start();</span><br><span class="line">        try &#123;</span><br><span class="line">            end.await();</span><br><span class="line">            System.out.println(&quot;main&quot;+&quot;****&quot;+Thread.currentThread().getName());</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  static class play1 implements Runnable&#123;</span><br><span class="line">        int id;</span><br><span class="line">        CountDownLatch end;</span><br><span class="line">     public play1(int id,CountDownLatch end)&#123;</span><br><span class="line">         this.id=id;</span><br><span class="line">         this.end=end;</span><br><span class="line">     &#125;</span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              Thread.sleep(1000);</span><br><span class="line">              System.out.println(Thread.currentThread().getName()+&quot;----&quot;+id);</span><br><span class="line">              end.countDown();</span><br><span class="line">          &#125; catch (InterruptedException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -413,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/yueguoyu.github.io/2018/06/28/AbstractQueuedSynchronizer(AQS)/" rel="next" title="AbstractQueuedSynchronizer(AQS)">
-                <i class="fa fa-chevron-left"></i> AbstractQueuedSynchronizer(AQS)
+              <a href="/yueguoyu.github.io/2018/06/27/实现strStr()/" rel="next" title="实现strStr()">
+                <i class="fa fa-chevron-left"></i> 实现strStr()
               </a>
             
           </div>
@@ -423,8 +425,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/yueguoyu.github.io/2018/06/28/ThreadLocal源码分析/" rel="prev" title="ThreadLocal源码分析">
-                ThreadLocal源码分析 <i class="fa fa-chevron-right"></i>
+              <a href="/yueguoyu.github.io/2018/06/28/Semaphore源码分析/" rel="prev" title="Semaphore源码分析">
+                Semaphore源码分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -506,7 +508,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
