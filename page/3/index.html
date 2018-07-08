@@ -269,6 +269,971 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/19/有效的字母异位词/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/19/有效的字母异位词/" itemprop="url">有效的字母异位词</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-19T23:25:15+08:00">
+                2018-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="有效的字母异位词"><a href="#有效的字母异位词" class="headerlink" title="有效的字母异位词"></a>有效的字母异位词</h2><p>给定两个字符串 <em>s</em> 和 <em>t</em> ，编写一个函数来判断 <em>t</em> 是否是 <em>s</em> 的一个字母异位词。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;anagram&quot;, t = &quot;nagaram&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;rat&quot;, t = &quot;car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong><br>你可以假设字符串只包含小写字母。</p>
+<p><strong>进阶:</strong><br>如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？</p>
+<h5 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h5><p>使用长度为26的两个数组分别存储字符串s和字符串t，然后将两个数组进行比较。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnagram</span><span class="params">(String s, String t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s==<span class="keyword">null</span>||t==<span class="keyword">null</span>||s.length()!=t.length())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> [] z=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">int</span> [] z2=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            z[s.charAt(i)-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;t.length();i++)&#123;</span><br><span class="line">            z2[t.charAt(i)-<span class="string">'a'</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (z[i]!=z2[i])&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/18/2018-06-18-字符串中的第一个唯一字符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/18/2018-06-18-字符串中的第一个唯一字符/" itemprop="url">字符串中的第一个唯一字符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T22:02:37+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> 字符串中的第一个唯一字符</p>
+<p>给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+<p><strong>案例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;leetcode&quot;</span><br><span class="line">返回 0.</span><br><span class="line"></span><br><span class="line">s = &quot;loveleetcode&quot;,</span><br><span class="line">返回 2.</span><br></pre></td></tr></table></figure>
+<p><strong>注意事项：</strong>您可以假定该字符串只包含小写字母。</p>
+<h4 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h4><p>因为字母有26个所以用一个长度为26的int数组来存储字符串转化的char数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static int firstUniqChar(String s) &#123;</span><br><span class="line">    if (s==null)&#123;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    int [] a=new int[26];</span><br><span class="line">    for (int i=0;i&lt;s.length();i++)&#123;</span><br><span class="line">        a[s.charAt(i)-&apos;a&apos;]++;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i=0;i&lt;s.length();i++)&#123;</span><br><span class="line">        if (a[s.charAt(i)-&apos;a&apos;]==1)&#123;</span><br><span class="line">            return i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/18/单件模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/18/单件模式/" itemprop="url">单件模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T11:14:29+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="单件模式"><a href="#单件模式" class="headerlink" title="单件模式"></a>单件模式</h2><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>用来创建一个独一无二的，只有一个实例的对象的入场券。有些对象其实我们只需要一个就行，比如：线程池，缓存，对话框等。可以利用一个私有的构造器，和一个静态方法，一个静态变量实现单例模式。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p><strong>延迟实例化：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//在单线程下可用</span><br><span class="line">public class danli &#123;</span><br><span class="line">    private static danli mydanli;</span><br><span class="line">    private danli()&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    public static danli getMydanli()&#123;</span><br><span class="line">        if (mydanli==null)&#123;</span><br><span class="line">            mydanli=new danli();</span><br><span class="line">        &#125;</span><br><span class="line">        return mydanli;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>单件模式</strong>：确保一个类只有一个实例，并提供一个全局访问点。</p>
+<p>利用延迟实例化的方式创建单件，这种做法对资源敏感的对象特别重要。</p>
+<h4 id="多线程情况"><a href="#多线程情况" class="headerlink" title="多线程情况"></a>多线程情况</h4><p>多线程情况下使用上面的代码，会创建不止一个对象。</p>
+<p><strong>解决方法</strong><br>1.使用synchronized关键字将getMydanli（）变成同步，但对性能可能有影响。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class danli &#123;</span><br><span class="line">    private static danli mydanli;</span><br><span class="line">    private danli()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public  static synchronized danli getMydanli()&#123;</span><br><span class="line">        if (mydanli==null)&#123;</span><br><span class="line">            mydanli=new danli();</span><br><span class="line">        &#125;</span><br><span class="line">        return mydanli;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.使用“急切”创建实例，而不用延迟实例化的做法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class danli &#123;</span><br><span class="line">    //在静态初始化器中创建单件，确保线程安全</span><br><span class="line">    private static danli mydanli=new danli();</span><br><span class="line">    private danli()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public  static  danli getMydanli()&#123;</span><br><span class="line">        return mydanli;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.用“双重检查加锁”，在 getMydanli（）中减少使用同步</p>
+<p>这个做法可以大大的减少getMydanli()的时间消耗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class danli &#123;</span><br><span class="line">    /**</span><br><span class="line">     * volatile关键词确保，当mydanli变量被初始化成danli的实例时</span><br><span class="line">     * 多个线程正确的处理mydanli变量</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    private volatile static danli mydanli;</span><br><span class="line"></span><br><span class="line">    private danli() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static danli getMydanli() &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 只有第一次才彻底执行这里的代码。</span><br><span class="line">         */</span><br><span class="line">        if (mydanli == null) &#123;</span><br><span class="line">            synchronized (danli.class) &#123;</span><br><span class="line">                if (mydanli == null) &#123;</span><br><span class="line">                    mydanli = new danli();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return mydanli;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h5><ul>
+<li><p>单件模型确保程序中一个类最多只有一个实例。</p>
+</li>
+<li><p>单件模型也提供访问这个实例的全局点。</p>
+</li>
+<li><p>在java中实现单件模式需要一个私有的构造器，一个静态方法，一个静态变量。</p>
+</li>
+<li><p>确定在性能和资源上的限制，然后小心地选择适当的方案来实现单件，已解决多线程问题</p>
+</li>
+<li><p>使用多个类加载器可能导致单件失效而产生多个实例</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/2018-06-17-颠倒整数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/2018-06-17-颠倒整数/" itemprop="url">颠倒整数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T21:29:14+08:00">
+                2018-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>给定一个 32 位有符号整数，将整数中的数字进行反转。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 123</span><br><span class="line">输出: 321</span><br></pre></td></tr></table></figure>
+<p> <strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -123</span><br><span class="line">输出: -321</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 120</span><br><span class="line">输出: 21</span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong></p>
+<p>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。根据这个假设，如果反转后的整数溢出，则返回 0。</p>
+<p><strong>解法</strong></p>
+<p>将int转化为String再转化为char数组,然后使用两个指针将char数组的值进行翻转，</p>
+<p>再使用Integer.parseInt（）方法将String转化成int类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (x&gt;Integer.MAX_VALUE||x&lt;Integer.MIN_VALUE)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String a = Integer.toString(x);</span><br><span class="line">        <span class="keyword">char</span>[] chars = a.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> j = chars.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (x&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">                <span class="keyword">char</span> tmp = chars[i];</span><br><span class="line">                chars[i] = chars[j];</span><br><span class="line">                chars[j] = tmp;</span><br><span class="line">                i++;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            String str = <span class="keyword">new</span> String(chars);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="keyword">return</span> Integer.parseInt(str);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/ArrayList源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/ArrayList源码分析/" itemprop="url">ArrayList  和  Vector比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T21:28:22+08:00">
+                2018-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ArrayList-和-Vector比较"><a href="#ArrayList-和-Vector比较" class="headerlink" title="ArrayList  和  Vector比较"></a>ArrayList  和  Vector比较</h2><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>ArrayList类继承了AbstractList类实现了List<e>这个*接口的用户可以精确控制列表中每个元素插入的位置。, 用户可以通过其整数索引（列表中的位置）访问元素，并在列表中搜索元素, RandomAccess支持快速的随机法访问, Cloneable允许clone, java.io.Serializable可序列化接口.</e></p>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>ArrayList的元素存储在其中的数组缓冲区，底层使用的是一个Object[]数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造初始容量为10的空列表。</p>
+<h5 id="contains方法"><a href="#contains方法" class="headerlink" title="contains方法"></a>contains方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">    return indexOf(o) &gt;= 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="indexof方法"><a href="#indexof方法" class="headerlink" title="indexof方法"></a>indexof方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//如果数组中有o则返回第一个下标，否则返回-1</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">//因为ArrayList中可以为null</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">    //遍历查找</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="lastIndexOf方法"><a href="#lastIndexOf方法" class="headerlink" title="lastIndexOf方法"></a>lastIndexOf方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//数组中有o返回最后一个下标</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//返回列表指定位置的元素</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">//检查给定索引是否在范围内。, 如果不是，则抛出一个适当的运行时异常。</span><br><span class="line">//索引为负的化会抛出ArrayIndexOutOfBoundsException</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">//elementData数组获取</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//使用element更换列表指定位置的元素</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //扩容为原来的1.5倍大小</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Fail-Fast-机制"><a href="#Fail-Fast-机制" class="headerlink" title="Fail-Fast 机制"></a>Fail-Fast 机制</h3><p>ArrayList 也采用了快速失败的机制，通过记录 modCount 参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。 关于 Fail-Fast 的更详细的介绍，我在之前将 HashMap 中已经提到。</p>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector类实现了一个动态数组。和ArrayList和相似，但是两者是不同的：</p>
+<ul>
+<li>Vector是同步访问的。</li>
+<li>Vector包含了许多传统的方法，这些方法不属于集合框架。</li>
+</ul>
+<p>Vector主要用在事先不知道数组的大小，或者只是需要一个可以改变大小的数组的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>Vector类继承AbstractList，实现了List<e>, RandomAccess, Cloneable, java.io.Serializable接口和ArrayList相同。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//构造一个空向量，使其内部数据数组的大小为10码，其标准容量增量为零。</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">        super();</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">          // initialCapacity初始容量                           </span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">        //capacityIncrement当矢量溢出时，容量增加的量</span><br><span class="line">        this.capacityIncrement = capacityIncrement;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Object[]数组</span><br><span class="line">protected Object[] elementData;</span><br></pre></td></tr></table></figure>
+<h5 id="setsize方法"><a href="#setsize方法" class="headerlink" title="setsize方法"></a>setsize方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//因为方法被synchronized修饰，所以是线程安全的</span><br><span class="line">public synchronized void setSize(int newSize) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="trimToSize"><a href="#trimToSize" class="headerlink" title="trimToSize"></a>trimToSize</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//修剪此向量的容量为向量的当前大小</span><br><span class="line">public synchronized void trimToSize() &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    if (elementCount &lt; oldCapacity) &#123;</span><br><span class="line">        elementData = Arrays.copyOf(elementData, elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="elementAt方法"><a href="#elementAt方法" class="headerlink" title="elementAt方法"></a>elementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//获取指定索引位置的元素</span><br><span class="line">public synchronized E elementAt(int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; + elementCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line">//返回第一个索引位置的元素</span><br><span class="line">public synchronized E firstElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(0);</span><br><span class="line">    &#125;</span><br><span class="line"> //返回最后一个索引位置的元素</span><br><span class="line">public synchronized E lastElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(elementCount - 1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="setElementAt方法"><a href="#setElementAt方法" class="headerlink" title="setElementAt方法"></a>setElementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//将此矢量的指定 index中的组件设置为指定的对象。 该位置的前一个组件被丢弃。</span><br><span class="line">public synchronized void setElementAt(E obj, int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    elementData[index] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="addElement方法"><a href="#addElement方法" class="headerlink" title="addElement方法"></a>addElement方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//将指定的组件添加到此向量的末尾</span><br><span class="line">public synchronized void addElement(E obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容-1"><a href="#扩容-1" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</span><br><span class="line">    int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                     capacityIncrement : oldCapacity);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>1.线程安全，vector是同步的所以是线程安全的，而arraylist不是线程安全的。</p>
+<p>2.性能，因为vector是同步的所以在单线程情况下arraylist的性能比vector高。</p>
+<p>3.扩容大小不同，arraylist扩容后的大小是原来的1.5倍，而vector根据capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/" itemprop="url">ArrayList  和  Vector比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T15:34:04+08:00">
+                2018-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ArrayList-和-Vector比较"><a href="#ArrayList-和-Vector比较" class="headerlink" title="ArrayList  和  Vector比较"></a>ArrayList  和  Vector比较</h2><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>ArrayList类继承了AbstractList类实现了List<e>这个*接口的用户可以精确控制列表中每个元素插入的位置。, 用户可以通过其整数索引（列表中的位置）访问元素，并在列表中搜索元素, RandomAccess支持快速的随机法访问, Cloneable允许clone, java.io.Serializable可序列化接口.</e></p>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>ArrayList的元素存储在其中的数组缓冲区，底层使用的是一个Object[]数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造初始容量为10的空列表。</p>
+<h5 id="contains方法"><a href="#contains方法" class="headerlink" title="contains方法"></a>contains方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">    return indexOf(o) &gt;= 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="indexof方法"><a href="#indexof方法" class="headerlink" title="indexof方法"></a>indexof方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//如果数组中有o则返回第一个下标，否则返回-1</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">//因为ArrayList中可以为null</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">    //遍历查找</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="lastIndexOf方法"><a href="#lastIndexOf方法" class="headerlink" title="lastIndexOf方法"></a>lastIndexOf方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//数组中有o返回最后一个下标</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//返回列表指定位置的元素</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">//检查给定索引是否在范围内。, 如果不是，则抛出一个适当的运行时异常。</span><br><span class="line">//索引为负的化会抛出ArrayIndexOutOfBoundsException</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">//elementData数组获取</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//使用element更换列表指定位置的元素</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //扩容为原来的1.5倍大小</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Fail-Fast-机制"><a href="#Fail-Fast-机制" class="headerlink" title="Fail-Fast 机制"></a>Fail-Fast 机制</h3><p>ArrayList 也采用了快速失败的机制，通过记录 modCount 参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。 关于 Fail-Fast 的更详细的介绍，我在之前将 HashMap 中已经提到。</p>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector类实现了一个动态数组。和ArrayList和相似，但是两者是不同的：</p>
+<ul>
+<li>Vector是同步访问的。</li>
+<li>Vector包含了许多传统的方法，这些方法不属于集合框架。</li>
+</ul>
+<p>Vector主要用在事先不知道数组的大小，或者只是需要一个可以改变大小的数组的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>Vector类继承AbstractList，实现了List<e>, RandomAccess, Cloneable, java.io.Serializable接口和ArrayList相同。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//构造一个空向量，使其内部数据数组的大小为10码，其标准容量增量为零。</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">        super();</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">          // initialCapacity初始容量                           </span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">        //capacityIncrement当矢量溢出时，容量增加的量</span><br><span class="line">        this.capacityIncrement = capacityIncrement;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Object[]数组</span><br><span class="line">protected Object[] elementData;</span><br></pre></td></tr></table></figure>
+<h5 id="setsize方法"><a href="#setsize方法" class="headerlink" title="setsize方法"></a>setsize方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//因为方法被synchronized修饰，所以是线程安全的</span><br><span class="line">public synchronized void setSize(int newSize) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="trimToSize"><a href="#trimToSize" class="headerlink" title="trimToSize"></a>trimToSize</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//修剪此向量的容量为向量的当前大小</span><br><span class="line">public synchronized void trimToSize() &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    if (elementCount &lt; oldCapacity) &#123;</span><br><span class="line">        elementData = Arrays.copyOf(elementData, elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="elementAt方法"><a href="#elementAt方法" class="headerlink" title="elementAt方法"></a>elementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//获取指定索引位置的元素</span><br><span class="line">public synchronized E elementAt(int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; + elementCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line">//返回第一个索引位置的元素</span><br><span class="line">public synchronized E firstElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(0);</span><br><span class="line">    &#125;</span><br><span class="line"> //返回最后一个索引位置的元素</span><br><span class="line">public synchronized E lastElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(elementCount - 1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="setElementAt方法"><a href="#setElementAt方法" class="headerlink" title="setElementAt方法"></a>setElementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//将此矢量的指定 index中的组件设置为指定的对象。 该位置的前一个组件被丢弃。</span><br><span class="line">public synchronized void setElementAt(E obj, int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    elementData[index] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="addElement方法"><a href="#addElement方法" class="headerlink" title="addElement方法"></a>addElement方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//将指定的组件添加到此向量的末尾</span><br><span class="line">public synchronized void addElement(E obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容-1"><a href="#扩容-1" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</span><br><span class="line">    int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                     capacityIncrement : oldCapacity);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>1.线程安全，vector是同步的所以是线程安全的，而arraylist不是线程安全的。</p>
+<p>2.性能，因为vector是同步的所以在单线程情况下arraylist的性能比vector高。</p>
+<p>3.扩容大小不同，arraylist扩容后的大小是原来的1.5倍，而vector根据capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/有效的数独/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -926,1031 +1891,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/13/HashSet源码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/13/HashSet源码/" itemprop="url">HashSet源码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T10:29:20+08:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="HashSet源码"><a href="#HashSet源码" class="headerlink" title="HashSet源码"></a>HashSet源码</h2><p>HashSet类继承AbstractSet类，实现Set接口，Cloneable接口，java.io.Serializable序列化接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class HashSet&lt;E&gt;</span><br><span class="line">    extends AbstractSet&lt;E&gt;</span><br><span class="line">    implements Set&lt;E&gt;, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">static final long serialVersionUID = -5024744406713321676L;</span><br><span class="line"></span><br><span class="line">    private transient HashMap&lt;E,Object&gt; map;</span><br><span class="line"></span><br><span class="line">    // Dummy value to associate with an Object in the backing Map</span><br><span class="line">    private static final Object PRESENT = new Object();</span><br></pre></td></tr></table></figure>
-<p><strong>无参构造函数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public HashSet() &#123;</span><br><span class="line">    map = new HashMap&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可见HashSet是基于HashMap，所以初始容量为16，负载因子为0.75</p>
-<p><strong>构造一个包含指定集合中元素的新集合</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public HashSet(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    map = new HashMap&lt;&gt;(Math.max((int) (c.size()/.75f) + 1, 16));</span><br><span class="line">    addAll(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">        return map.containsKey(o);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>add方法</strong></p>
-<p>add方法也是调用的hashmap的put的方法，只是value值给的是虚拟值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//PRESENT</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">        return map.put(e, PRESENT)==null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>contains方法</strong></p>
-<p>判断key是否在set中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">        return map.containsKey(o);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/12/final关键字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/12/final关键字/" itemprop="url">final关键字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T19:17:08+08:00">
-                2018-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/关键字/" itemprop="url" rel="index">
-                    <span itemprop="name">关键字</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="final关键字"><a href="#final关键字" class="headerlink" title="final关键字"></a>final关键字</h2><p><strong>修饰类</strong></p>
-<p>被final关键字修饰的类，不能被继承，如：string类就是final修饰，所以string类不能被继承</p>
-<p><strong>修饰方法</strong></p>
-<p>被final关键字修饰的方法，把方法锁定，以防任何继承类修改它的含义 </p>
-<p><strong>修饰变量</strong></p>
-<p>1.如果是基本数据类型变量，则其数值一旦在初次初始化后就不能改变。</p>
-<p>2.如果是引用类型的变量，则在对其初次初始化之后便不能再让其指向另一个对象。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/11/Jvm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/11/Jvm/" itemprop="url">Jvm</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T22:28:11+08:00">
-                2018-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##jvm</p>
-<p>###类加载机制<br><strong>概念</strong><br>类的加载机制是指将.class文件中的二进制数据通过类加载器加载到内存中，并在堆区间上创建一个java.lang.class对象，用来封装方法区内的数据结构。类加载最后的产品就是堆区间生成class对象，Class 对象封装了类在方法区内的数据结构，并且向 Java 程序员提供了访问方法区内的数据结构的接口。<br><strong>生命周期</strong><br>类加载包括，加载，连接，初始化，使用，卸载，前三步为加载过程。<br>加载：将.class文件中的二进数据读到内存中，将其放在运行时数据区的方法区内，并在堆区间java.lang.class对象。<br>连接： 包括1.验证：验证数据是否正确<br>         2.准备：为静态变量分配内存，并初始为默认值<br>         3.解析：把类中的符号引用转化为直接引用<br>初始化：伪静态变量赋值<br>使用：new出对象在程序中使用<br>卸载：垃圾回收<br><strong>类加载器</strong></p>
-<p>类加载器是将Java类加载到内存中，一般步骤是java源文件（.java文件）经过编译生成（.class文件），类加载器负责读取 Java 字节代码，并转换成 <code>java.lang.Class</code>类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 <code>newInstance()</code>方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。 </p>
-<p><strong>java.long.ClassLoader类</strong></p>
-<p>数组类的Class 对象不是由class 加载器创建的，而是根据Java运行时的需要自动创建的。 由getClassLoader（）返回的数组类的类加载器与其元素<em>类的类加载器相同;, 如果元素类型是基本类型，那么数组类没有</em>类加载器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getParent()   返回委托的父类加载器</span><br><span class="line">findClass(String name) 使用指定的二进制查找类</span><br><span class="line">findLoadedClass(String name)	查找名称为 name的已经被加载过的类，返回的结果是 java.lang.Class类的实例。</span><br><span class="line">defineClass(String name, byte[] b, int off, int len)	把字节数组 b中的内容转换成 Java 类，返回的结果是 java.lang.Class类的实例。这个方法被声明为 final的。</span><br><span class="line"> resolveClass(Class&lt;?&gt; c)			链接指定的类。, 这个（具有误导性的命名）方法可以被类加载器用来链接一个类。, 如果类 c已经被链接了，那么这个方法简单地返回。</span><br></pre></td></tr></table></figure>
-<p><strong>类加载器类型</strong></p>
-<p>Java 中的类加载器大致可以分成两类，一类是系统提供的，另外一类则是由 Java 应用开发人员编写的。系统提供的类加载器主要有下面三个：</p>
-<ul>
-<li><p>引导类加载器（bootstrap class loader）：它用来加载 Java 的核心库，是用原生代码来实现的，并不继承自 <code>java.lang.ClassLoader</code>。</p>
-</li>
-<li><p>扩展类加载器（extensions class loader）：它用来加载 Java 的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。</p>
-</li>
-<li><p>系统类加载器（system class loader）：它根据 Java 应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java 应用的类都是由它来完成加载的。可以通过 <code>ClassLoader.getSystemClassLoader()</code>来获取它。</p>
-<p>我们可以通过继承<code>java.lang.ClassLoader</code>类的方式实现自己的类加载器，以满足一些特殊的需求。 </p>
-<p>除了引导类加载器之外，所有的类加载器都有一个父类加载器。通过  <code>getParent()</code>方法可以得到。对于系统提供的类加载器来说，系统类加载器的父类加载器是扩展类加载器，而扩展类加载器的父类加载器是引导类加载器；对于开发人员编写的类加载器来说，其父类加载器是加载此类加载器 Java 类的类加载器。因为类加载器 Java 类如同其它的 Java 类一样，也是要由类加载器来加载的。一般来说，开发人员编写的类加载器的父类加载器是系统类加载器。类加载器通过这种方式组织起来，形成树状结构。树的根节点就是引导类加载器。</p>
-<p>类加载器关系，箭头指向的是父类。</p>
-<p><img src="https://i.loli.net/2018/06/11/5b1dcf4c199d3.jpg" alt="image001.jpg"></p>
-</li>
-</ul>
-<p><strong>双亲委派模型</strong></p>
-<p>ClassLoader 类使用委托模型来搜索<em>类和资源。 , 关联的父类加载器。, 当请求查找类或</em>资源时，ClassLoader实例会在尝试查找<em>类或资源本身之前，将对</em>类或资源的搜索委托给其父类加载器。, 虚拟机的内置类加载器称为“引导类加载器”，它本身不具有父类，但可以作为ClassLoader实例的父类。</p>
-<p><strong>类加载器代理模式</strong></p>
-<p>类加载器在尝试自己去查找某个类的字节代码并定义它时，会先代理给其父类加载器，由父类加载器先去尝试加载这个类，依次类推。在介绍代理模式背后的动机之前，首先需要说明一下 Java 虚拟机是如何判定两个 Java 类是相同的。Java 虚拟机不仅要看类的全名是否相同，还要看加载此类的类加载器是否一样。只有两者都相同的情况，才认为两个类是相同的。即便是同样的字节代码，被不同的类加载器加载之后所得到的类，也是不同的。比如一个 Java 类 <code>com.example.Sample</code>，编译之后生成了字节代码文件 <code>Sample.class</code>。两个不同的类加载器 <code>ClassLoaderA</code>和 <code>ClassLoaderB</code>分别读取了这个 <code>Sample.class</code>文件，并定义出两个 <code>java.lang.Class</code>类的实例来表示这个类。这两个实例是不相同的。对于 Java 虚拟机来说，它们是不同的类。试图对这两个类的对象进行相互赋值，会抛出运行时异常 <code>ClassCastException</code>。</p>
-<p>代理模式是为了保证 Java 核心库的类型安全。所有 Java 应用都至少需要引用 <code>java.lang.Object</code>类，也就是说在运行的时候，<code>java.lang.Object</code>这个类需要被加载到 Java 虚拟机中。如果这个加载过程由 Java 应用自己的类加载器来完成的话，很可能就存在多个版本的 <code>java.lang.Object</code>类，而且这些类之间是不兼容的。通过代理模式，对于 Java 核心库的类的加载工作由引导类加载器来统一完成，保证了 Java 应用所使用的都是同一个版本的 Java 核心库的类，是互相兼容的。 </p>
-<p>不同的类加载器为相同名称的类创建了额外的名称空间。相同名称的类可以并存在 Java 虚拟机中，只需要用不同的类加载器来加载它们即可。不同类加载器加载的类之间是不兼容的，这就相当于在 Java 虚拟机内部创建了一个个相互隔离的 Java 类空间。 </p>
-<p>参考<a href="https://www.ibm.com/developerworks/cn/java/j-lo-classloader/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-lo-classloader/index.html</a></p>
-<p><strong>加载类的过程</strong></p>
-<p>因为代理机制所以类的加载首先代理给其他类进行加载尝试，这就意味着真正完成类的加载工作的类加载器和启动这个加载过程的类加载器，有可能不是同一个。真正完成类的加载工作是通过调用 <code>defineClass</code>来实现的；而启动类的加载过程是通过调用 <code>loadClass</code>来实现的。前者称为一个类的定义加载器（defining loader），后者称为初始加载器（initiating loader）。在 Java 虚拟机判断两个类是否相同的时候，使用的是类的定义加载器。也就是说，哪个类加载器启动类的加载过程并不重要，重要的是最终定义这个类的加载器。两种类加载器的关联之处在于：一个类的定义加载器是它引用的其它类的初始加载器。如类 <code>com.example.Outer</code>引用了类 <code>com.example.Inner</code>，则由类 <code>com.example.Outer</code>的定义加载器负责启动类 <code>com.example.Inner</code>的加载过程。 </p>
-<p>定义加载器：完成类的加载工作，通过调用<code>defineClass</code>来实现的，在java虚拟机判断类是否相同使用。</p>
-<p>初始加载器：启动类的加载过程是通过<code>loadClass</code>来实现的。</p>
-<p>关系：一个类的定义加载器是它引用的其他类的初始加载器。</p>
-<p>类加载器在成功加载某个类之后，会把得到的 <code>java.lang.Class</code>类的实例缓存起来。下次再请求加载该类的时候，类加载器会直接使用缓存的类的实例，而不会尝试再次加载。也就是说，对于一个类加载器实例来说，相同全名的类只加载一次，即 <code>loadClass</code>方法不会被重复调用。 </p>
-<p><strong>线程上下文类加载器</strong><br>线程上下文类加载器（context class loader）是从 JDK 1.2 开始引入的。类 java.lang.Thread中的方法 getContextClassLoader()和 setContextClassLoader(ClassLoader cl)用来获取和设置线程的上下文类加载器。如果没有通过 setContextClassLoader(ClassLoader cl)方法进行设置的话，线程将继承其父线程的上下文类加载器。Java 应用运行的初始线程的上下文类加载器是系统类加载器。在线程中运行的代码可以通过此类加载器来加载类和资源。</p>
-<p>###jvm内存结构</p>
-<p>jvm java虚拟机，.java文件经过编译生成.class文件，jvm执行.class文件。Java 虚拟机在执行字节码时，把字节码解释成具体平台上的机器指令执行。因此实现java平台无关性。它是 Java 程序能在多平台间进行无缝移植的可靠保证 。</p>
-<p>jvm是编译后java程序（.class文件）和硬件系统之间的接口</p>
-<p>jvm=类加载器classloader+执行引擎execution engine+运行时数据区域runtime date area</p>
-<p>类加载器将.class文件加载到jvm中的运行时数据区，执行引擎负责类文件是否执行</p>
-<p><img src="https://i.loli.net/2018/06/11/5b1e64911b556.jpg" alt="jvm内存结构.jpg"></p>
-<p>运行时数据区在所有线程间共享（方法区，堆）</p>
-<p>运行时数据区线程私有（虚拟机栈，本地方法栈，程序计数器）</p>
-<h5 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h5><p>各个线程共享的内存区域，它用于存储类的二进制文件，被虚拟机加载的类信息，常量，静态变量。</p>
-<h5 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h5><p>运行时数据区在所有线程间共享，用于存储类加载生成的java.lang,Class对象实例，几乎所有的对象实例都在这里分配内存。java堆被所有的线程共享的一块内存区域，在虚拟机启动时创建。</p>
-<h5 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h5><p>虚拟机栈对所有线程是私有的，生命周期和线程相同。虚拟机栈描述的是java方法执行的内存模型：每个方法被执行的时候都会创建一个栈帧用来存储局部变量，操作栈，动态链接，方法出口等信息。每个方法被调用到执行完成，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。</p>
-<h5 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h5><p>它也是线程私有的，本地方法栈和虚拟机栈差不多，不同就是虚拟机栈是为java方法服务，而本地方法栈是为Native方法服务。</p>
-<h5 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h5><p>程序计数器是线程私有的，它的作用可以看做是当前线程所执行的字节码的行号指示器。<br>参考：<br><a href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&amp;mid=2247483949&amp;idx=1&amp;sn=8b69d833bbc805e63d5b2fa7c73655f5&amp;chksm=ebf6da52dc815344add64af6fb78fee439c8c27b539b3c0e87d8f6861c8422144d516ae0a837&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">jvm</a></p>
-<p>###GC垃圾回收</p>
-<p>垃圾收集（Garbage Collection，GC），用于内存的动态分配和内存回收。</p>
-<h3 id="GC基本的算法"><a href="#GC基本的算法" class="headerlink" title="GC基本的算法"></a>GC基本的算法</h3><h5 id="标记清除法"><a href="#标记清除法" class="headerlink" title="标记清除法"></a>标记清除法</h5><p><strong>步骤</strong>：先将要回收的对象标记出来，在标记完成后统一回收所有标记的对象。</p>
-<p><strong>不足：</strong>1.效率不高</p>
-<p>​         2.空间问题，回收标记的对象后产生许多琐碎的内存碎片，空间碎片太多可能导致以后在程序运行    时要获得一个大的对象存储空间时，空间不够因而触发另一次垃圾回收。</p>
-<h5 id="复制法"><a href="#复制法" class="headerlink" title="复制法"></a>复制法</h5><p><strong>步骤：</strong>将内存分为两块，每次只使用一个，当一个使用完后就将还存活的对象复制到另一个区域，并清除前一个区域。</p>
-<p><strong>缺点：</strong>内存缩小</p>
-<p>目前商业的虚拟机都是这种算法回收新生代，将内存分为较大空间的Eden空间和两个较小的Survivor空间，每次使用Eden和一个Survivor空间，当回收时，将Eden和Survivor空间还存活的对象复制到另一个Survivor空间中，清除原来的Eden和Survivor空间。HotSpot虚拟机默认的Eden和Survivor空间大小是8:1</p>
-<p>每次新生代内存空间为整个新生代容量的90%。</p>
-<h5 id="标记整理法"><a href="#标记整理法" class="headerlink" title="标记整理法"></a>标记整理法</h5><p>复制法在对象存活率高时会复制多次，效率将会变低，而且不想浪费空间。</p>
-<p>老年代使用标记整理法</p>
-<p><strong>步骤：</strong>和标记清除法一样，但后面不是清除，而是让所有存活的对象向一端移动，然后清除端边界以外的内存。</p>
-<h5 id="分代收集法"><a href="#分代收集法" class="headerlink" title="分代收集法"></a>分代收集法</h5><p>当前商业虚拟机的垃圾回收都使用分代手机法。</p>
-<p>根据对象的生命周期将内存划分成几块。一般将java堆分成新生代和老年代，这样根据不同代的特点使用不同的算法 ，新生代中，每次垃圾回收时会发现大量的对象挂了，只有少量存活，所以一般使用复制算法。 而老年代中因为对象的存活率高，没有额外空间对他进行分配担保，就使用“标记消除”或“标记整理”来进行垃圾回收。</p>
-<p>###GC调优</p>
-<p>Java GC分析参考：<a href="http://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&amp;mid=2247483986&amp;idx=1&amp;sn=a2d7c9f2e73dfcc938a3ec934b3ad3a4&amp;chksm=ebf6da2ddc81533beb5e6fb54c872b5f79524d0780c484718a57ca0712916cd67bda7dee4073&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">jvm系列(五)Java GC 分析</a> </p>
-<p><strong>调优命令</strong></p>
-<p>Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo</p>
-<ul>
-<li><p>jps，JVM Process Status Tool,显示指定系统内所有的HotSpot虚拟机进程。</p>
-</li>
-<li><p>jstat，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</p>
-</li>
-<li><p>jmap，JVM Memory Map命令用于生成heap dump文件</p>
-</li>
-<li><p>jhat，JVM Heap Analysis Tool命令是与jmap搭配使用，用来分析jmap生成的dump，jhat内置了一个微型的HTTP/HTML服务器，生成dump的分析结果后，可以在浏览器中查看</p>
-</li>
-<li><p>jstack，用于生成java虚拟机当前时刻的线程快照。</p>
-</li>
-<li><p>jinfo，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</p>
-<p><em>详细的命令使用参考这里：<a href="https://mp.weixin.qq.com/s?__biz=MzI4NDY5Mjc1Mg==&amp;mid=2247483966&amp;idx=1&amp;sn=dfa3375d36aa2c0c25a775522e381e62&amp;chksm=ebf6da41dc815357e0d53c73865a23f41219e75bac5a4d510bfa31cc51594b59a20e2e4f6cb8&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">jvm系列(四):jvm调优-命令篇</a></em> </p>
-<p><strong>调优工具</strong></p>
-<p>常用调优工具分为两类,jdk自带监控工具：jconsole和jvisualvm，第三方有：MAT(Memory Analyzer Tool)、GChisto。</p>
-<ul>
-<li>jconsole，Java Monitoring and Management Console是从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控</li>
-<li>jvisualvm，jdk自带全能工具，可以分析内存快照、线程快照；监控内存变化、GC变化等。</li>
-<li>MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</li>
-<li>GChisto，一款专业分析gc日志的工具</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/10/工厂模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/10/工厂模式/" itemprop="url">工厂模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T08:27:11+08:00">
-                2018-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>工厂模式将对象的创建和实现分开<br>工厂方法模式通过让子类决定该创建的对象是什么，来达到将对象创建的过程封装的目的。<br>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。<br><strong>依赖倒置原则</strong><br>指的是和一般oo设计的思考方式完全相反。一般的oo设计思想是自上而下的依赖，而依赖倒置是指底层的组件依赖着高层的抽象，同样高层组件现在也依赖相同的抽象。要遵循依赖倒置原则，工厂方法不是唯一的技巧，但却是最有威力的技巧之一。</p>
-<h5 id="设计原则：要依赖抽象，不要依赖具体类。"><a href="#设计原则：要依赖抽象，不要依赖具体类。" class="headerlink" title="设计原则：要依赖抽象，不要依赖具体类。"></a>设计原则：要依赖抽象，不要依赖具体类。</h5><p><strong>避免违反OO设计中违反依赖倒置原则：</strong><br>1.变量不可以持有具体类的引用（如果使用new就会持有具体类的引用）<br>2.不要让类派生自具体类。（如果派生自具体类，就会依赖具体类，应该派生自一个抽象）<br>3.不要覆盖基类中已经实现的方法（如果覆盖基类已实现的方法，那么你的基类就不是一个真正适合被继承的抽象。基类中已实现的方法，应该由所有的子类共享）</p>
-<h4 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h4><p><strong>所有的工厂都是用来封装对象的创建</strong></p>
-<ul>
-<li><p><strong>简单工厂：</strong>简单的工厂，虽然不是真正的设计模式，但仍不失为一个简单的方法，可以将客户程序从具体类解耦。</p>
-</li>
-<li><p><strong>工厂方法使用继承：</strong>把对象的创建委托给子类，子类实现工厂方法来创建对象。</p>
-</li>
-<li><p><strong>抽象工厂使用对象组合：</strong>对象的创建被实现在工厂接口所暴露出来的方法中。</p>
-</li>
-<li><p><strong>工厂方法模式：</strong>定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。</p>
-</li>
-<li><p>所有的工厂模式都通过减少应用程序和具体类之间的依赖促进松耦合。</p>
-</li>
-<li><p>工厂方法允许类将实例化延迟到子类进行。</p>
-</li>
-<li><p>抽象工厂创建相关的对象家族，而不需要依赖它们的具体类。</p>
-</li>
-<li><p>依赖倒置原则，指导我们避免依赖具体类型，而要尽量依赖抽象。</p>
-</li>
-<li><p>工厂是很有威力的技巧，帮助我们针对抽象编程，而不是针对具体类编程。</p>
-<h3 id="工厂模式图"><a href="#工厂模式图" class="headerlink" title="工厂模式图"></a>工厂模式图</h3><p><img src="https://i.loli.net/2018/06/18/5b271d34caca9.jpg" alt="webwxgetmsgimg (1).jpg"></p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2018/06/18/5b271d4210ada.jpg" alt="webwxgetmsgimg (2).jpg"></p>
-<h3 id="抽象工厂模式图"><a href="#抽象工厂模式图" class="headerlink" title="抽象工厂模式图"></a>抽象工厂模式图</h3><p><img src="https://i.loli.net/2018/06/18/5b271d4229940.jpg" alt="webwxgetmsgimg.jpg"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/09/Stomp面向简单文本的消息传递协议/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/09/Stomp面向简单文本的消息传递协议/" itemprop="url">Stomp面向简单文本的消息传递协议</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T21:34:00+08:00">
-                2018-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Stomp面向简单文本的消息传递协议"><a href="#Stomp面向简单文本的消息传递协议" class="headerlink" title="Stomp面向简单文本的消息传递协议"></a>Stomp面向简单文本的消息传递协议</h2><h4 id="是什么："><a href="#是什么：" class="headerlink" title="是什么："></a>是什么：</h4><p>STOMP是简单（或流式）文本定向消息协议。</p>
-<p>STOMP提供可互操作的线路格式，以便STOMP客户端可以与任何STOMP消息代理进行通信，以便在多种语言，平台和代理之间提供简单和广泛的消息互操作性。</p>
-<h4 id="设计："><a href="#设计：" class="headerlink" title="设计："></a>设计：</h4><p> STOMP是一个非常简单易用的协议，来自HTTP设计学院; 服务器端可能很难实现，但编写客户端以便连接起来非常容易。例如，您可以使用Telnet登录到任何STOMP代理并与其交互！ </p>
-<h2 id="WebSocket是一种在单个Tcp连接上进行全双工通讯的协议"><a href="#WebSocket是一种在单个Tcp连接上进行全双工通讯的协议" class="headerlink" title="WebSocket是一种在单个Tcp连接上进行全双工通讯的协议"></a>WebSocket是一种在单个Tcp连接上进行全双工通讯的协议</h2><p>在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。</p>
-<h4 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h4><p>WebSocket协议是由HTML5定义的，它能更好的节省服务器资源和带宽，并且能够更实时地进行通讯。 </p>
-<p>Websocket使用ws或wss的<a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E6%A0%87%E5%BF%97%E7%AC%A6" target="_blank" rel="noopener">统一资源标志符</a>，类似于<a href="https://zh.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener">HTTPS</a>，其中wss表示在TLS之上的Websocket。</p>
-<p>Websocket使用和 HTTP 相同的 TCP 端口，可以绕过大多数防火墙的限制。默认情况下，Websocket协议使用80端口；运行在TLS之上时，默认使用443端口。 </p>
-<h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><p>1.较少的控制开销。 在连接创建后，服务器和客户端之间交换数据时，用于协议控制的数据包头部相对较小。在不包含扩展的情况下，对于服务器到客户端的内容，此头部大小只有2至10字节（和数据包长度有关）；对于客户端到服务器的内容，此头部还需要加上额外的4字节的掩码。相对于HTTP请求每次都要携带完整的头部，此项开销显著减少了。<br>2.更强的实时性。由于协议是全双工的，所以服务器可以随时主动给客户端下发数据。相对于HTTP请求需要等待客户端发起请求服务端才能响应，延迟明显更少；即使是和Comet等类似的长轮询比较，其也能在短时间内更多次地传递数据。<br>3.保持连接状态。与HTTP不同的是，Websocket需要先创建连接，这就使得其成为一种有状态的协议，之后通信时可以省略部分状态信息。而HTTP请求可能需要在每个请求都携带状态信息（如身份认证等）。<br>4.更好的二进制支持。Websocket定义了二进制帧，相对HTTP，可以更轻松地处理二进制内容。<br>5.可以支持扩展。Websocket定义了扩展，用户可以扩展协议、实现部分自定义的子协议。如部分浏览器支持压缩等。<br>6.更好的压缩效果。相对于HTTP压缩，Websocket在适当的扩展支持下，可以沿用之前内容的上下文，在传递类似的数据时，可以显著地提高压缩率。</p>
-<h4 id="握手协议："><a href="#握手协议：" class="headerlink" title="握手协议："></a>握手协议：</h4><p>WebSocket 是独立的、创建在 TCP 上的协议。<br>Websocket 通过 HTTP/1.1 协议的101状态码进行握手。<br>为了创建Websocket连接，需要通过浏览器发出请求，之后服务器进行回应，这个过程通常称为“握手”（handshaking）。</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h4><p>一个典型的Websocket握手请求如下：<br>客户端请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Upgrade: websocket    //表示希望升级到Websocket协议。</span><br><span class="line">Connection: Upgrade    //表示客户端希望连接升级</span><br><span class="line">Host: example.com    </span><br><span class="line">Origin: http://example.com</span><br><span class="line">Sec-WebSocket-Key: sN9cRrP/n9NdMgdcy2VJFQ==   //Sec-WebSocket-Key是随机的字符串，服务器端会用这些数据来构造出一个SHA-1的信息摘要。把“Sec-WebSocket-Key”加上一个特殊字符串“258EAFA5-E914-47DA-95CA-C5AB0DC85B11”，然后计算SHA-1摘要，之后进行BASE-64编码，将结果做为“Sec-WebSocket-Accept”头的值，返回给客户端。如此操作，可以尽量避免普通HTTP请求被误认为Websocket协议。</span><br><span class="line">Sec-WebSocket-Version: 13   //表示支持的Websocket版本。</span><br></pre></td></tr></table></figure></p>
-<p>服务器回应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: fFBooB7FAkLlXgRSz0BT3v4hq5s=</span><br><span class="line">Sec-WebSocket-Location: ws://example.com/</span><br></pre></td></tr></table></figure></p>
-<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>超文本传输安全协议（英语：Hypertext Transfer Protocol Secure，缩写：HTTPS，常称为HTTP over TLS，HTTP over SSL或HTTP Secure）是一种通过电脑网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。这个协议由网景公司（Netscape）在1994年首次提出，随后扩展到互联网上。</p>
-<h4 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h4><p>HTTPS的主要思想是在不安全的网络上创建一安全信道，并可在使用适当的加密包和服务器证书可被验证且可被信任时，对窃听和中间人攻击提供合理的防护。</p>
-<p>HTTPS的信任继承基于预先安装在浏览器中的证书颁发机构（如Symantec、Comodo、GoDaddy和GlobalSign等）（意即“我信任证书颁发机构告诉我应该信任的”）。因此，一个到某网站的HTTPS连接可被信任，当且仅当：</p>
-<p>用户相信他们的浏览器正确实现了HTTPS且安装了正确的证书颁发机构；<br>用户相信证书颁发机构仅信任合法的网站；<br>被访问的网站提供了一个有效的证书，意即，它是由一个被信任的证书颁发机构签发的（大部分浏览器会对无效的证书发出警告）；<br>该证书正确地验证了被访问的网站（如，访问<a href="https://example.com时收到了给example.com而不是其它组织的证书）；" target="_blank" rel="noopener">https://example.com时收到了给example.com而不是其它组织的证书）；</a><br>或者互联网上相关的节点是值得信任的，或者用户相信本协议的加密层（TLS或SSL）不能被窃听者破坏。<br>HTTPS不应与在 RFC 2660 中定义的安全超文本传输协议（S-HTTP）相混淆。</p>
-<h4 id="与HTTP差别"><a href="#与HTTP差别" class="headerlink" title="与HTTP差别"></a>与HTTP差别</h4><p>与HTTP的URL由“http://”起始且默认使用端口80不同，HTTPS的URL由“https://”起始且默认使用端口443。</p>
-<p>HTTP是不安全的，且攻击者通过监听和中间人攻击等手段，可以获取网站帐户和敏感信息等。HTTPS被设计为可防止前述攻击，并在正确配置时被认为是安全的。</p>
-<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><p>超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议[1]。HTTP是万维网的数据通信的基础。</p>
-<p>设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。通过HTTP或者HTTPS协议请求的资源由统一资源标识符（Uniform Resource Identifiers，URI）来标识。</p>
-<h4 id="协议概述"><a href="#协议概述" class="headerlink" title="协议概述"></a>协议概述</h4><p>HTTP是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个客户端为用户代理程序（user agent）。应答的服务器上存储着一些资源，比如HTML文件和图像。我们称这个应答服务器为源服务器（origin server）。在用户代理和源服务器中间可能存在多个“中间层”，比如代理服务器、网关或者隧道（tunnel）。</p>
-<p>尽管TCP/IP协议是互联网上最流行的应用，HTTP协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。HTTP假定其下层协议提供可靠的传输。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在TCP/IP协议族使用TCP作为其传输层。</p>
-<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP/1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/09/HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/09/HashMap/" itemprop="url">HashMap</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T21:32:21+08:00">
-                2018-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><blockquote>
-<blockquote>
-<p>：带符号右移。正数右移高位补0，负数右移高位补1。比如：</p>
-</blockquote>
-</blockquote>
-<p>4 &gt;&gt; 1，结果是2；-4 &gt;&gt; 1，结果是-2。-2 &gt;&gt; 1，结果是-1。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>：无符号右移。无论是正数还是负数，高位通通补0。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>对于正数而言，&gt;&gt;和&gt;&gt;&gt;没区别。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>1.HashMap基于哈希的map接口实现。<br>2.HashMap 类大致相当于 Hashtable ，只是它是非同步的并且允许为空值。<br>3.HashMap根据键的hashCode值存储数据，一般直接可以定位到它的值，但他遍历顺序是不确定的。HashMap只允许key中只有一个null，而value可以是多个，HashMap是非线程安全的。如果要满足线程安全，可以用Collection的synchronizedMap方法使的HashMap具有线程安全的能力，或使用ConcurrentHashMap。</p>
-<h2 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h2><p>从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下如所示。<br><img src="https://i.loli.net/2018/06/01/5b10be1cb1a8b.png" alt="hashMap内存结构图.png"></p>
-<h4 id="1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。"><a href="#1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。" class="headerlink" title="1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。"></a>1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。</h4><figure class="highlight plain"><figcaption><span>HashMap的内部类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">            this.hash = hash;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final K getKey()        &#123; return key; &#125;</span><br><span class="line">        public final V getValue()      &#123; return value; &#125;</span><br><span class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">        public final int hashCode() &#123;</span><br><span class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final V setValue(V newValue) &#123;</span><br><span class="line">            V oldValue = value;</span><br><span class="line">            value = newValue;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final boolean equals(Object o) &#123;</span><br><span class="line">            if (o == this)</span><br><span class="line">                return true;</span><br><span class="line">            if (o instanceof Map.Entry) &#123;</span><br><span class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                    Objects.equals(value, e.getValue()))</span><br><span class="line">                    return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>2.HashMap构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*使用指定的初始容量和指定加载因子构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor)&#123;...&#125;</span><br><span class="line">/*</span><br><span class="line">*使用指定的初始容量和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line"> public HashMap(int initialCapacity)&#123;...&#125;</span><br><span class="line"> /*</span><br><span class="line"> *使用默认的初始容量（16）和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line"> */</span><br><span class="line">  public HashMap() &#123;...&#125;</span><br><span class="line">  /*</span><br><span class="line">  *使用与指定的&lt;tt&gt; Map &lt;/ tt&gt;相同的映射构造一个新的HashMapHashMap用默认加载因子   *（0.75）和一个初始容量来创建，该容量足以将映射保存在指定的Map</span><br><span class="line">  */</span><br><span class="line">   public HashMap(Map&lt;? extends K, ? extends V&gt; m)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.jdk1.8 HashMap的put方法源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        HashMap.Node&lt;K,V&gt;[] tab; HashMap.Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">//        判断table是否为空，创建默认大小</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">//        计算index，并对null做处理 （有点懵）</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            HashMap.Node&lt;K,V&gt; e; K k;</span><br><span class="line">            //节点key存在，直接覆盖value</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            //判断是否是红黑树</span><br><span class="line">            else if (p instanceof HashMap.TreeNode)</span><br><span class="line">                e = ((HashMap.TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                //该链为链表</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        //链表长度大于8转换为红黑树进行处理</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //key存在就覆盖value</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        //超过阈值就扩容</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>4.HashMap 扩容<br>扩容(resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组。</p>
-<p>（1）.jdk1.7的扩容是当容量大于阈值时，使用大的数组代替小的数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> void resize(int newCapacity) &#123;   //传入新的容量</span><br><span class="line">      Entry[] oldTable = table;    //引用扩容前的Entry数组</span><br><span class="line">      int oldCapacity = oldTable.length;         </span><br><span class="line">      if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</span><br><span class="line">          threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">   </span><br><span class="line">      Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</span><br><span class="line">     transfer(newTable);                         //！！将数据转移到新的Entry数组里</span><br><span class="line">     table = newTable;                           //HashMap的table属性引用新的Entry数组</span><br><span class="line">     threshold = (int)(newCapacity * loadFactor);//修改阈值</span><br><span class="line"> &#125;</span><br><span class="line"> //用于将原来的数组中的数据拷贝到新的数组</span><br><span class="line"> void transfer(Entry[] newTable) &#123;</span><br><span class="line">      Entry[] src = table;                   //src引用了旧的Entry数组</span><br><span class="line">      int newCapacity = newTable.length;</span><br><span class="line">      for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</span><br><span class="line">          Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</span><br><span class="line">          if (e != null) &#123;</span><br><span class="line">              src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</span><br><span class="line">              do &#123;</span><br><span class="line">                  Entry&lt;K,V&gt; next = e.next;</span><br><span class="line">                 int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</span><br><span class="line">                 e.next = newTable[i]; //标记[1]</span><br><span class="line">                 newTable[i] = e;      //将元素放在数组上</span><br><span class="line">                 e = next;             //访问下一个Entry链上的元素</span><br><span class="line">             &#125; while (e != null);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"><a href="#jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。" class="headerlink" title="jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"></a>jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。</h4><p>（2）.jdk1.8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">final HashMap.Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">       int oldCap = (oldTab == null) ? 0 : oldTab.length;</span><br><span class="line">       int oldThr = threshold;</span><br><span class="line">       int newCap, newThr = 0;</span><br><span class="line">       if (oldCap &gt; 0) &#123;</span><br><span class="line">           //判断是否大于最大容量</span><br><span class="line">           if (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">               threshold = Integer.MAX_VALUE;</span><br><span class="line">               return oldTab;</span><br><span class="line">           &#125;</span><br><span class="line">           //当小于最大容量时，扩充为原来的2倍</span><br><span class="line">           else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                   oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">               newThr = oldThr &lt;&lt; 1; // double threshold</span><br><span class="line">       &#125;</span><br><span class="line">       else if (oldThr &gt; 0) // initial capacity was placed in threshold</span><br><span class="line">           newCap = oldThr;</span><br><span class="line">       else &#123;               // zero initial threshold signifies using defaults</span><br><span class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">           newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">       &#125;</span><br><span class="line">       if (newThr == 0) &#123;</span><br><span class="line">           float ft = (float)newCap * loadFactor;</span><br><span class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?</span><br><span class="line">                   (int)ft : Integer.MAX_VALUE);</span><br><span class="line">       &#125;</span><br><span class="line">       threshold = newThr;</span><br><span class="line">       @SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] newTab = (HashMap.Node&lt;K,V&gt;[])new HashMap.Node[newCap];</span><br><span class="line">       table = newTab;</span><br><span class="line">       if (oldTab != null) &#123;</span><br><span class="line">           // 把每个bucket都移动到新的buckets中</span><br><span class="line">           for (int j = 0; j &lt; oldCap; ++j) &#123;</span><br><span class="line">               HashMap.Node&lt;K,V&gt; e;</span><br><span class="line">               //遍历老数组，并释放它</span><br><span class="line">               if ((e = oldTab[j]) != null) &#123;</span><br><span class="line">                   oldTab[j] = null;</span><br><span class="line">                   if (e.next == null)</span><br><span class="line">                       //e的哈希和新的容量-1做与运算 得出在新数组的位置</span><br><span class="line">                       newTab[e.hash &amp; (newCap - 1)] = e;</span><br><span class="line">                   else if (e instanceof HashMap.TreeNode)//判断它是红黑树</span><br><span class="line">                       ((HashMap.TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);</span><br><span class="line">                   else &#123;  // 链表优化重hash的代码块</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; loHead = null, loTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; hiHead = null, hiTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; next;</span><br><span class="line">                       do &#123;</span><br><span class="line">                           next = e.next;</span><br><span class="line">                           // 原索引</span><br><span class="line">                           if ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">                               if (loTail == null)</span><br><span class="line">                                   loHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   loTail.next = e;</span><br><span class="line">                               loTail = e;</span><br><span class="line">                           &#125; // 原索引+oldCap</span><br><span class="line">                           else &#123;</span><br><span class="line">                               if (hiTail == null)</span><br><span class="line">                                   hiHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   hiTail.next = e;</span><br><span class="line">                               hiTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125; while ((e = next) != null);</span><br><span class="line">                       // 原索引放到bucket里</span><br><span class="line">                       if (loTail != null) &#123;</span><br><span class="line">                           loTail.next = null;</span><br><span class="line">                           newTab[j] = loHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                       // 原索引+oldCap放到bucket里</span><br><span class="line">                       if (hiTail != null) &#123;</span><br><span class="line">                           hiTail.next = null;</span><br><span class="line">                           newTab[j + oldCap] = hiHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return newTab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>HashMap是非线程安全的，线程安全的ConcurrentHashMap。在多线程情况下HashMap会产生死循环</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2005,7 +1945,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
