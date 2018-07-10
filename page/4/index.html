@@ -269,6 +269,514 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/Hashtable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/Hashtable/" itemprop="url">Hashtable</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T08:05:05+08:00">
+                2018-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>Hashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。</p>
+<p>然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。</p>
+<p>像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。</p>
+<p>然后，该键经过哈希处理，所得到的散列码被用作存储在该表中值的索引。</p>
+<h4 id="Hashtable和HashMap的区别"><a href="#Hashtable和HashMap的区别" class="headerlink" title="Hashtable和HashMap的区别"></a>Hashtable和HashMap的区别</h4><p>HashMap 和 Hashtable 都实现了 Map 接口，但决定用哪一个之前先要弄清楚它们之间的分别。主要的区别有：线程安全性，同步 (synchronization)，以及速度。</p>
+<ol>
+<li>HashMap 几乎可以等价于 Hashtable，除了 HashMap 是非 synchronized 的，并可以接受 null(HashMap 可以接受为 null 的键值 (key) 和值(value)，而 Hashtable 则不行)。</li>
+<li>HashMap 是非 synchronized，而 Hashtable 是 synchronized，这意味着 Hashtable 是线程安全的，多个线程可以共享一个 Hashtable；而如果没有正确的同步的话，多个线程是不能共享 HashMap 的。Java 5 提供了 ConcurrentHashMap，它是 HashTable 的替代，比 HashTable 的扩展性更好。</li>
+<li>另一个区别是 HashMap 的迭代器 (Iterator) 是 fail-fast 迭代器，而 Hashtable 的 enumerator 迭代器不是 fail-fast 的。所以当有其它线程改变了 HashMap 的结构（增加或者移除元素），将会抛出 ConcurrentModificationException，但迭代器本身的 remove()方法移除元素则不会抛出 ConcurrentModificationException 异常。但这并不是一个一定发生的行为，要看 JVM。这条同样也是 Enumeration 和 Iterator 的区别。</li>
+<li>由于 Hashtable 是线程安全的也是 synchronized，所以在单线程环境下它比 HashMap 要慢。如果你不需要同步，只需要单一线程，那么使用 HashMap 性能要好过 Hashtable。</li>
+<li>HashMap 不能保证随着时间的推移 Map 中的元素次序是不变的。</li>
+</ol>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><p>默认Hashtable的初始容量为11，负载因子是0.75</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Hashtable() &#123;</span><br><span class="line">    this(11, 0.75f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="同步的实现"><a href="#同步的实现" class="headerlink" title="同步的实现"></a>同步的实现</h5><p>Hashtable中每个方法都被synchronized修饰来实现线程安全的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public synchronized int size() &#123;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public synchronized boolean isEmpty() &#123;</span><br><span class="line">        return count == 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public synchronized Enumeration&lt;K&gt; keys() &#123;</span><br><span class="line">        return this.&lt;K&gt;getEnumeration(KEYS);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Hashtable中使用的是Entry数组</p>
+<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//方法被synchronized修饰所以是线程安全的</span><br><span class="line">public synchronized V get(Object key) &#123;</span><br><span class="line">    Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">    int hash = key.hashCode();</span><br><span class="line">    //key的哈希值与上int的最大值在和tab数组的长度取余</span><br><span class="line">    int index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">    //遍历链表</span><br><span class="line">    for (Entry&lt;?,?&gt; e = tab[index] ; e != null ; e = e.next) &#123;</span><br><span class="line">        if ((e.hash == hash) &amp;&amp; e.key.equals(key)) &#123;</span><br><span class="line">            return (V)e.value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//同步</span><br><span class="line">public synchronized V put(K key, V value) &#123;</span><br><span class="line">    // value不能为空</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Makes sure the key is not already in the hashtable.</span><br><span class="line">    Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">    int hash = key.hashCode();</span><br><span class="line">    int index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    Entry&lt;K,V&gt; entry = (Entry&lt;K,V&gt;)tab[index];</span><br><span class="line">    //遍历</span><br><span class="line">    for(; entry != null ; entry = entry.next) &#123;</span><br><span class="line">    //如果链表中存在相同的key则进行覆盖</span><br><span class="line">        if ((entry.hash == hash) &amp;&amp; entry.key.equals(key)) &#123;</span><br><span class="line">            V old = entry.value;</span><br><span class="line">            entry.value = value;</span><br><span class="line">            return old;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    addEntry(hash, key, value, index);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="addEntry-）方法"><a href="#addEntry-）方法" class="headerlink" title="addEntry(）方法"></a>addEntry(）方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private void addEntry(int hash, K key, V value, int index) &#123;</span><br><span class="line">       modCount++;</span><br><span class="line"></span><br><span class="line">       Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">       if (count &gt;= threshold) &#123;</span><br><span class="line">           //如果超出阈值，则重新筛查表格</span><br><span class="line">           rehash();</span><br><span class="line"></span><br><span class="line">           tab = table;</span><br><span class="line">           hash = key.hashCode();</span><br><span class="line">           index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       //创建一个新的Entry</span><br><span class="line">       @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">       Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) tab[index];</span><br><span class="line">       tab[index] = new Entry&lt;&gt;(hash, key, value, e);</span><br><span class="line">       count++;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="rehash（）方法"><a href="#rehash（）方法" class="headerlink" title="rehash（）方法"></a>rehash（）方法</h5><p>扩容，当散列表中的键数超过散列表容量*和加载因子时，将自动调用此方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">protected void rehash() &#123;</span><br><span class="line">    int oldCapacity = table.length;</span><br><span class="line">    Entry&lt;?,?&gt;[] oldMap = table;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int newCapacity = (oldCapacity &lt;&lt; 1) + 1;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0) &#123;</span><br><span class="line">        if (oldCapacity == MAX_ARRAY_SIZE)</span><br><span class="line">            // Keep running with MAX_ARRAY_SIZE buckets</span><br><span class="line">            return;</span><br><span class="line">        newCapacity = MAX_ARRAY_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">    Entry&lt;?,?&gt;[] newMap = new Entry&lt;?,?&gt;[newCapacity];</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    threshold = (int)Math.min(newCapacity * loadFactor, MAX_ARRAY_SIZE + 1);</span><br><span class="line">    table = newMap;</span><br><span class="line"></span><br><span class="line">    for (int i = oldCapacity ; i-- &gt; 0 ;) &#123;</span><br><span class="line">        for (Entry&lt;K,V&gt; old = (Entry&lt;K,V&gt;)oldMap[i] ; old != null ; ) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; e = old;</span><br><span class="line">            old = old.next;</span><br><span class="line"></span><br><span class="line">            int index = (e.hash &amp; 0x7FFFFFFF) % newCapacity;</span><br><span class="line">            e.next = (Entry&lt;K,V&gt;)newMap[index];</span><br><span class="line">            newMap[index] = e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/14/位运算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/14/位运算/" itemprop="url">位运算</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T17:20:12+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>＆</td>
+<td>如果相对应位都是1，则结果为1，否则为0</td>
+<td>（A＆B），得到12，即0000 1100</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>如果相对应位都是0，则结果为0，否则为1</td>
+<td>（A \</td>
+<td>B）得到61，即 0011 1101</td>
+</tr>
+<tr>
+<td>^</td>
+<td>如果相对应位值相同，则结果为0，否则为1</td>
+<td>（A ^ B）得到49，即 0011 0001</td>
+</tr>
+<tr>
+<td>〜</td>
+<td>按位取反运算符翻转操作数的每一位，即0变成1，1变成0。</td>
+<td>（〜A）得到-61，即1100 0011</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>按位左移运算符。左操作数按位左移右操作数指定的位数。</td>
+<td>A &lt;&lt; 2得到240，即 1111 0000</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>按位右移运算符。左操作数按位右移右操作数指定的位数。</td>
+<td>A &gt;&gt; 2得到15即 1111</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>按位右移补零操作符。左操作数的值按右操作数指定的位数右移，移动得到的空位以零填充。</td>
+<td>A&gt;&gt;&gt;2得到15即0000 1111</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/" itemprop="url">ConcurrentHashMap源码分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T15:28:56+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ConcurrentHashMap源码分析"><a href="#ConcurrentHashMap源码分析" class="headerlink" title="ConcurrentHashMap源码分析"></a>ConcurrentHashMap源码分析</h2><p>ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩容是Entry链可能会产生环，一旦Entry链中有环在HashMap增删查时可能陷入死循环。</p>
+<p>####结构图</p>
+<p><img src="https://i.loli.net/2018/06/16/5b24b5a783b63.png" alt="4.png"></p>
+<p>####ConcurrentHashMap源码</p>
+<p>ConcurrentHashMap继承了AbstractMap实现了提供线程安全性和原子性保证的ConcurrentMap接口和序列化Serializable接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class ConcurrentHashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements ConcurrentMap&lt;K,V&gt;, Serializable &#123;</span><br><span class="line">    ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 默认的初始表格容量</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 最大可能（两个非功率）阵列大小。</span><br><span class="line"> */</span><br><span class="line">static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 此表的默认并发级别。</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CONCURRENCY_LEVEL = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 负载因子</span><br><span class="line"> */</span><br><span class="line">private static final float LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *bin使用树而不是列表的bin数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 用于在调整大小操作期间对（拆分）箱进行非订货的箱数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int UNTREEIFY_THRESHOLD = 6;</span><br></pre></td></tr></table></figure>
+<p>#####寻址方式</p>
+<p>Java 8的ConcurrentHashMap同样是通过Key的哈希值与数组长度取模确定该Key在数组中的索引。同样为了避免不太好的Key的hashCode设计，它通过如下方法计算得到Key的最终哈希值。不同的是，Java 8的ConcurrentHashMap作者认为引入红黑树后，即使哈希冲突比较严重，寻址效率也足够高，所以作者并未在哈希值的计算上做过多设计，只是将Key的hashCode值与其高16位作异或并保证最高位为0（从而保证最终结果为正整数）。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static final int spread(int h) &#123;</span><br><span class="line">  return (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####put方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(key, value, false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Implementation for put and putIfAbsent */</span><br><span class="line">    final V putVal(K key, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">        if (key == null || value == null) throw new NullPointerException();</span><br><span class="line">        //通过spread方法获得哈希值</span><br><span class="line">        int hash = spread(key.hashCode());</span><br><span class="line">        //用于记录相应链的长度</span><br><span class="line">        int binCount = 0;</span><br><span class="line">        for (ConcurrentHashMap.Node&lt;K,V&gt;[] tab = table;;) &#123;</span><br><span class="line">            ConcurrentHashMap.Node&lt;K,V&gt; f; int n, i, fh;</span><br><span class="line">            //如果数组为空，则使用sizeCtl中记录的大小初始化表</span><br><span class="line">            if (tab == null || (n = tab.length) == 0)</span><br><span class="line">                tab = initTable();</span><br><span class="line">                // 找该 hash 值对应的数组下标，得到第一个节点 f</span><br><span class="line">            else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) &#123;</span><br><span class="line">                // 如果数组该位置为空，</span><br><span class="line">                //    用一次 CAS 操作将这个新值放入其中即可，这个 put 操作差不多就结束了，可以拉到最后面了</span><br><span class="line">                //          如果 CAS 失败，那就是有并发操作，进到下一个循环就好了</span><br><span class="line">                if (casTabAt(tab, i, null,</span><br><span class="line">                        new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key, value, null)))</span><br><span class="line">                    break;                   // 添加到空箱时不锁</span><br><span class="line">            &#125;</span><br><span class="line">            else if ((fh = f.hash) == MOVED)</span><br><span class="line">                //帮助数据转移</span><br><span class="line">                tab = helpTransfer(tab, f);</span><br><span class="line">            else &#123; // 到这里就是说，f 是该位置的头结点，而且不为空</span><br><span class="line">                V oldVal = null;</span><br><span class="line">                // 获取数组该位置的头结点的监视器锁</span><br><span class="line">                synchronized (f) &#123;</span><br><span class="line">                    if (tabAt(tab, i) == f) &#123;</span><br><span class="line">                        //正常节点散列可用位</span><br><span class="line">                        if (fh &gt;= 0) &#123;</span><br><span class="line">                            //用于记录相应链表的长度</span><br><span class="line">                            binCount = 1;</span><br><span class="line">                            //遍历链表</span><br><span class="line">                            for (ConcurrentHashMap.Node&lt;K,V&gt; e = f;; ++binCount) &#123;</span><br><span class="line">                                K ek;</span><br><span class="line">                                //如果发现了&quot;相等&quot;的 key，判断是否要进行值覆盖，然后也就可以 break 了</span><br><span class="line">                                if (e.hash == hash &amp;&amp;</span><br><span class="line">                                        ((ek = e.key) == key ||</span><br><span class="line">                                                (ek != null &amp;&amp; key.equals(ek)))) &#123;</span><br><span class="line">                                    oldVal = e.val;</span><br><span class="line">                                    if (!onlyIfAbsent)</span><br><span class="line">                                        e.val = value;</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                                ConcurrentHashMap.Node&lt;K,V&gt; pred = e;</span><br><span class="line">                                //如果到链表的尾部，则在后面加一个新的node</span><br><span class="line">                                if ((e = e.next) == null) &#123;</span><br><span class="line">                                    pred.next = new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key,</span><br><span class="line">                                            value, null);</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        //红黑树</span><br><span class="line">                        else if (f instanceof ConcurrentHashMap.TreeBin) &#123;</span><br><span class="line">                            ConcurrentHashMap.Node&lt;K,V&gt; p;</span><br><span class="line">                            binCount = 2;</span><br><span class="line">                            //插入红黑树</span><br><span class="line">                            if ((p = ((ConcurrentHashMap.TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,</span><br><span class="line">                                    value)) != null) &#123;</span><br><span class="line">                                oldVal = p.val;</span><br><span class="line">                                if (!onlyIfAbsent)</span><br><span class="line">                                    p.val = value;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                //</span><br><span class="line">                if (binCount != 0) &#123;</span><br><span class="line">                    //如果超过8就使用红黑树而不是链表</span><br><span class="line">                    if (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                        // 这个方法和 HashMap 中稍微有一点点不同，那就是它不是一定会进行红黑树转换，</span><br><span class="line">                        // 如果当前数组的长度小于 64，那么会选择进行数组扩容，而不是转换为红黑树</span><br><span class="line">                        treeifyBin(tab, i);</span><br><span class="line">                    if (oldVal != null)</span><br><span class="line">                        return oldVal;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        addCount(1L, binCount);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####initTable方法扩容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private final ConcurrentHashMap.Node&lt;K,V&gt;[] initTable() &#123;</span><br><span class="line">       ConcurrentHashMap.Node&lt;K,V&gt;[] tab; int sc;</span><br><span class="line">       while ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">           //sizeCtl为负数时表示正在初始化</span><br><span class="line">           if ((sc = sizeCtl) &lt; 0)</span><br><span class="line">               //线程</span><br><span class="line">               Thread.yield(); // lost initialization race; just spin</span><br><span class="line">               // CAS 一下，将 sizeCtl 设置为 -1，代表抢到了锁</span><br><span class="line">           else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   if ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">                       // DEFAULT_CAPACITY 默认初始容量是 16</span><br><span class="line">                       int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;</span><br><span class="line">                       @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                               //新建一个大小为n的node数组</span><br><span class="line">                       ConcurrentHashMap.Node&lt;K,V&gt;[] nt = (ConcurrentHashMap.Node&lt;K,V&gt;[])new ConcurrentHashMap.Node&lt;?,?&gt;[n];</span><br><span class="line">                       // 将这个数组赋值给 table，table 是 volatile 的</span><br><span class="line">                       table = tab = nt;</span><br><span class="line">                       // 如果 n 为 16 的话，那么这里 sc = 12</span><br><span class="line">                       // 其实就是 0.75 * n</span><br><span class="line">                       sc = n - (n &gt;&gt;&gt; 2);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; finally &#123;</span><br><span class="line">                   // 设置 sizeCtl 为 sc，我们就当是 12 吧</span><br><span class="line">                   sizeCtl = sc;</span><br><span class="line">               &#125;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return tab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>引用：<a href="http://www.importnew.com/22007.html" target="_blank" rel="noopener">ConcurrentHashMap</a></p>
+<p><a href="https://juejin.im/post/5aeeaba8f265da0b9d781d16#comment" target="_blank" rel="noopener">并发容器之ConcurrentHashMap(JDK 1.8版本)</a></p>
+<p><a href="http://www.importnew.com/28263.html" target="_blank" rel="noopener">Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 </a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/13/HashSet源码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1429,451 +1937,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/数组加一/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/03/数组加一/" itemprop="url">数组加一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T23:09:25+08:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>加一</p>
-<p>给定一个<strong>非负整数</strong>组成的<strong>非空</strong>数组，在该数的基础上加一，返回一个新的数组。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2,4]</span><br><span class="line">解释: 输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,3,2,1]</span><br><span class="line">输出: [4,3,2,2]</span><br><span class="line">解释: 输入数组表示数字 4321。</span><br></pre></td></tr></table></figure>
-<p>#####Java：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] plusOne(<span class="keyword">int</span>[] digits) &#123;</span><br><span class="line">   <span class="keyword">int</span> creay=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i=digits.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">       <span class="keyword">if</span> (creay==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">int</span> tmp=digits[i]+creay;</span><br><span class="line">       creay=tmp/<span class="number">10</span>;</span><br><span class="line">       digits[i]=tmp%<span class="number">10</span>;</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="keyword">if</span> (creay!=<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> [] re=<span class="keyword">new</span> <span class="keyword">int</span>[digits.length+<span class="number">1</span>];</span><br><span class="line">        re[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> digits;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#####go:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusOne</span><span class="params">(a [] <span class="keyword">int</span>)</span> [] <span class="title">int</span></span>&#123;</span><br><span class="line">	crray:=<span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="built_in">len</span>(a)<span class="number">-1</span>;i&gt;=<span class="number">0</span> ; i-- &#123;</span><br><span class="line">		<span class="keyword">if</span> crray==<span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> a</span><br><span class="line">		&#125;</span><br><span class="line">		tmp:=a[i]+crray</span><br><span class="line">		crray=tmp/<span class="number">10</span></span><br><span class="line">		a[i]=tmp%<span class="number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> crray!=<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> newa [] <span class="keyword">int</span>=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="built_in">len</span>(a)+<span class="number">1</span>)</span><br><span class="line">		newa[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> newa</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/java-并发编程实战-读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/03/java-并发编程实战-读书笔记/" itemprop="url">java 并发编程实战 读书笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T15:34:25+08:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="对象的共享"><a href="#对象的共享" class="headerlink" title="对象的共享"></a>对象的共享</h3><h5 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h5><p>已知同步方法和同步代码块，可以以原子性的方式执行。同步还可以通过内存可见性实现。当多个线程对一个公共的数据进行set和get ，如果set和get方法不用synchronized修饰是非线程安全的。<br>为了确保多个线程之间对内存写入操作的可见性，必须使用同步机制。</p>
-<h4 id="失效数据"><a href="#失效数据" class="headerlink" title="失效数据"></a>失效数据</h4><p>多个线程调用一个数据时，一个线程获取的数据不是最新的，而是一个过期的数据。<br>失效问题：一个线程set后另一个线程get的数据可能不是最新的获知可能获取不到。</p>
-<h4 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h4><p>非volatile类型double，long变量，jvm在对64位的double或long变量的读操作或写操作是分为高位32和低位32位进行操作的，在进行操作时可能是取一个数的高32位而取另一个数的低32位。所以在多线程情况下要使用volatile关键字对double，long变量进行修饰。</p>
-<h4 id="volatile变量"><a href="#volatile变量" class="headerlink" title="volatile变量"></a>volatile变量</h4><p>volatile变量是一种稍微的同步机制。volatile变量不会存在寄存器或者对其他处理器不可见的地方，因此每次读取的数据都是最新的。volatile是一种比synchronization稍微弱的同步机制。<br>访问volatile变量时不需要加锁操作，因此也就不会使执行线程阻塞的。<br><strong>正确使用方法：</strong><br>确保它们自身状态的可见性，确保它们所引用对象的状态的可见性，以及标识一些重要的程序生命周期事件的发生（例如，初始化或关闭）<br><strong>局限性：</strong><br>volatile变量通常用做某个操作完成，发生中断或者状态的标志。</p>
-<p>####### 加锁机制能可以确保原子性和可见性，而volatile只能确保可见性。<br><strong>使用volatile前提：</strong><br>1.对变量的写入操作不依赖变量的当前值；<br>2.该变量不会与其他状态变量一起纳入不变性条件中。<br>3.在访问时不需要加锁。</p>
-<h5 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h5><p>一种避免使用同步的方法就是不共享数据。线程封闭是实现线程安全性的最简单的方式之一。<br><strong>Ad-hoc线程封闭</strong><br>Ad-hoc线程封闭是指，维护线程封闭性的职责完全由程序实现来承担，它是非常脆弱的，因为没有任何一种语言特性，能将对象封闭到目标线程上。一般不使用。<br><strong>栈封闭</strong><br>在栈封闭中，只能通过局部变量才能访问对象。局部变量封闭在执行线程中，它们位于执行线程的栈中，其他线程无法访问这个栈。栈封闭也被称为线程内部使用或线程局部使用。比Ad-hoc更加易于维护，更加健壮。<br><strong>ThreadLocal类</strong><br>ThreadLocal类能使线程中的某个值与保存值的对象关联起来。<br>ThreadLocal 为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。<br>ThreadLoacl类中使用map存储数据，key为线程而value为变量副本。<br>ThreadLocal类中有一个ThreadLocalMap内部类，用来存储副本key为线程，而value为变量的副本。</p>
-<h2 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h2><p><strong>什么是不变性</strong><br>不变性指对象的状态不改变。<br>不变性对象一定是线程安全的。<br><strong>满足条件</strong><br>1.对象创建后其状态不再改变<br>2.对象的所有域都是final类型的<br>3.对象是正确创建的（在对象创建之间，this引用没有逸出）</p>
-<h4 id="Final域"><a href="#Final域" class="headerlink" title="Final域"></a>Final域</h4><p>final域能确保初始化过程中的安全性，从而可以不受限制的访问不可变对象，并在共享这些对象的时无须同步。</p>
-<h3 id="除非需要更高的可见性，否则应将所有的域都声明为私有域"><a href="#除非需要更高的可见性，否则应将所有的域都声明为私有域" class="headerlink" title="除非需要更高的可见性，否则应将所有的域都声明为私有域"></a>除非需要更高的可见性，否则应将所有的域都声明为私有域</h3><h3 id="除非需要某个域是可变的，否则应将其声明为final域"><a href="#除非需要某个域是可变的，否则应将其声明为final域" class="headerlink" title="除非需要某个域是可变的，否则应将其声明为final域"></a>除非需要某个域是可变的，否则应将其声明为final域</h3><p>####使用volatile类型来发布不可变对象<br>在某些情况下，不可变对象能提供一种弱形式的原子性，对于在访问和更新多个相关变量的竞争问题，可以将这些变量存储在一个不变对象中来消除。如果是一个可变对象，只能用锁来确保原子性。如果是一个不可变对象，当一个线程获得他的值后，另一个线程不能改变对象的状态。<br>更新这些变量时，创建一个新的容器对象，但其他使用原有对象的线程仍然会看到对象处于一致状态。<br>使用不可变对象容器的volatile类型引用以缓存最新的结果。<br>volatile在修饰不可变对象容器时是线程安全的。</p>
-<p>##安全发布<br><strong>为什么要安全发布</strong><br>要在足够同步的情况下发布对象，不安全的发布会导致其他线程看见尚未完成的对象。<br>对象在不完全发布时会出现两个问题：<br>1.当一个对象未安全发布时除了发布对象的线程外其他线程看见的对象要么是旧值，要么是空引用。<br>2.某一个线程在第一次读取时得到失效值，而再一次读取这个域时会得到一个更新值。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/03/买卖股票的最佳时机 II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/03/买卖股票的最佳时机 II/" itemprop="url">买卖股票的最佳时机2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T15:29:14+08:00">
-                2018-06-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="买卖股票的最佳时机 II"></a>买卖股票的最佳时机 II</h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。<br>示例 1:<br>输入: [7,1,5,3,6,4]输出: 7解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。<br>示例 2:<br>输入: [1,2,3,4,5]输出: 4解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。<br>     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。<br>示例 3:<br>输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
-<h3 id="思路：因为要获取最大利润，所以只要后面比前面的大就获利"><a href="#思路：因为要获取最大利润，所以只要后面比前面的大就获利" class="headerlink" title="思路：因为要获取最大利润，所以只要后面比前面的大就获利"></a>思路：因为要获取最大利润，所以只要后面比前面的大就获利</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">java版本:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (prices==<span class="keyword">null</span> || prices.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min=prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (prices[i]&gt;min)&#123;</span><br><span class="line"></span><br><span class="line">               sum+=prices[i]-min;</span><br><span class="line"></span><br><span class="line">               min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span>版本:</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(a)==<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	min := a[<span class="number">0</span>]</span><br><span class="line">	sum :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(a) ;i++  &#123;</span><br><span class="line">		<span class="keyword">if</span> min&lt;a[i] &#123;</span><br><span class="line">			sum+=(a[i]-min)</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1928,7 +1991,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

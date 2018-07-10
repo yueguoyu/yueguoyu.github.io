@@ -269,6 +269,443 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/27/java的强，软，弱，虚引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/27/java的强，软，弱，虚引用/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-27T10:54:56+08:00">
+                2018-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="java的强，软，弱，虚引用"><a href="#java的强，软，弱，虚引用" class="headerlink" title="java的强，软，弱，虚引用"></a>java的强，软，弱，虚引用</h2><p><a href="https://www.jianshu.com/p/9deb7042121a" target="_blank" rel="noopener">借鉴</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/25/字符串转整数（atoi）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/25/字符串转整数（atoi）/" itemprop="url">字符串转整数（atoi）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T19:43:22+08:00">
+                2018-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="字符串转整数（atoi）"><a href="#字符串转整数（atoi）" class="headerlink" title="字符串转整数（atoi）"></a>字符串转整数（atoi）</h2><p>实现 <code>atoi</code>，将字符串转为整数。</p>
+<p>在找到第一个非空字符之前，需要移除掉字符串中的空格字符。如果第一个非空字符是正号或负号，选取该符号，并将其与后面尽可能多的连续的数字组合起来，这部分字符即为整数的值。如果第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
+<p>字符串可以在形成整数的字符后面包括多余的字符，这些字符可以被忽略，它们对于函数没有影响。</p>
+<p>当字符串中的第一个非空字符序列不是个有效的整数；或字符串为空；或字符串仅包含空白字符时，则不进行转换。</p>
+<p>若函数不能执行有效的转换，返回 0。</p>
+<p><strong>说明：</strong></p>
+<p>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。如果数值超过可表示的范围，则返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;42&quot;</span><br><span class="line">输出: 42</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;   -42&quot;</span><br><span class="line">输出: -42</span><br><span class="line">解释: 第一个非空白字符为 &apos;-&apos;, 它是一个负号。</span><br><span class="line">     我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;4193 with words&quot;</span><br><span class="line">输出: 4193</span><br><span class="line">解释: 转换截止于数字 &apos;3&apos; ，因为它的下一个字符不为数字。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;words and 987&quot;</span><br><span class="line">输出: 0</span><br><span class="line">解释: 第一个非空字符是 &apos;w&apos;, 但它不是数字或正、负号。</span><br><span class="line">     因此无法执行有效的转换。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 5:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;-91283472332&quot;</span><br><span class="line">输出: -2147483648</span><br><span class="line">解释: 数字 &quot;-91283472332&quot; 超过 32 位有符号整数范围。 </span><br><span class="line">     因此返回 INT_MIN (−231) 。</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<p>我的解法</p>
+<p>1.使用String类的trim方法去掉空格。</p>
+<p>2.判断字符串，如果是+，-，和0到9的数则添加到StringBuilder中，否则返回0。</p>
+<p>3.直接用Integer中的parseInt方法将String转化成int类型，这一步如果大于或小于Integer边界会报错，在这用了try，catch。</p>
+<p>4.根据第一个是正负号判断返回MIN_VALUE还是MAX_VALUE。</p>
+<p>本地好使，但是leetcode跑不过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public static int myAtoi(String str) &#123;</span><br><span class="line">        if (str == null||str.length()==0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        String str1 = str.trim();</span><br><span class="line">        StringBuilder st1 = new StringBuilder(str1.length());</span><br><span class="line">        int i = 0;</span><br><span class="line">        while (i &lt; str1.length()) &#123;</span><br><span class="line">            if (!(str1.charAt(i) &gt;= &apos;0&apos; &amp;&amp; str1.charAt(i) &lt;= &apos;9&apos; || str1.charAt(i) == &apos;-&apos;)) &#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            st1.append(str1.charAt(i));</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        int re = 0;</span><br><span class="line">        try &#123;</span><br><span class="line">            re=Integer.parseInt(st1.toString());</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            if (st1.toString().charAt(0) == &apos;-&apos;) &#123;</span><br><span class="line">                return Integer.MIN_VALUE;</span><br><span class="line">            &#125;</span><br><span class="line">            return Integer.MAX_VALUE;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>其他解法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public int myAtoi(String str) &#123;</span><br><span class="line">       str = str.trim();</span><br><span class="line">      int result = 0;</span><br><span class="line">      boolean isPos = true;</span><br><span class="line">      for(int i = 0; i &lt; str.length(); i++)&#123;</span><br><span class="line">          char c = str.charAt(i);</span><br><span class="line">          if(i==0 &amp;&amp; (c==&apos;-&apos;||c==&apos;+&apos;))&#123;</span><br><span class="line">              isPos = c==&apos;+&apos;?true:false;</span><br><span class="line">          &#125; else if (c&gt;=&apos;0&apos; &amp;&amp; c&lt;=&apos;9&apos;)&#123;</span><br><span class="line">              // 检查溢出情况</span><br><span class="line">              if(result&gt;(Integer.MAX_VALUE - (c - &apos;0&apos;))/10)&#123;</span><br><span class="line">                  return isPos? Integer.MAX_VALUE : Integer.MIN_VALUE;</span><br><span class="line">              &#125;</span><br><span class="line">              result *= 10;</span><br><span class="line">              result += c - &apos;0&apos;;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              return isPos?result:-result;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return isPos?result:-result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/23/验证回文字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/23/验证回文字符串/" itemprop="url">验证回文字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T15:04:08+08:00">
+                2018-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="验证回文字符串"><a href="#验证回文字符串" class="headerlink" title="验证回文字符串"></a>验证回文字符串</h2><p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。</p>
+<p><strong>说明：</strong>本题中，我们将空字符串定义为有效的回文串。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;race a car&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
+<p><strong>解法：</strong></p>
+<p>用两个指针一个放在头，一个放在屁股，比较就行。这题比较麻烦的是只考虑字母和数字字符，可以忽略字母的大小写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public static boolean isPalindrome(String s) &#123;</span><br><span class="line">    if (s == null) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    StringBuilder s1 = new StringBuilder();</span><br><span class="line">    int i = 0;</span><br><span class="line">//大写转化为小写</span><br><span class="line">    String str=s.toLowerCase();</span><br><span class="line">    //去除除去字母和数字字符</span><br><span class="line">    while (i&lt;str.length()) &#123;</span><br><span class="line">        if (str.charAt(i)&gt;=&apos;a&apos;&amp;&amp;str.charAt(i)&lt;=&apos;z&apos;||(str.charAt(i)&lt;=&apos;9&apos;&amp;&amp;str.charAt(i)&gt;=&apos;0&apos;))&#123;</span><br><span class="line">            s1.append(str.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    int j = s1.length() - 1;</span><br><span class="line">    int m=0;</span><br><span class="line">    while (m &lt; j) &#123;</span><br><span class="line">        if (s1.charAt(j) != s1.charAt(m)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        m++;</span><br><span class="line">        j--;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/19/有效的字母异位词/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1383,514 +1820,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/Hashtable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/Hashtable/" itemprop="url">Hashtable</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T08:05:05+08:00">
-                2018-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>Hashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。</p>
-<p>然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。</p>
-<p>像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。</p>
-<p>然后，该键经过哈希处理，所得到的散列码被用作存储在该表中值的索引。</p>
-<h4 id="Hashtable和HashMap的区别"><a href="#Hashtable和HashMap的区别" class="headerlink" title="Hashtable和HashMap的区别"></a>Hashtable和HashMap的区别</h4><p>HashMap 和 Hashtable 都实现了 Map 接口，但决定用哪一个之前先要弄清楚它们之间的分别。主要的区别有：线程安全性，同步 (synchronization)，以及速度。</p>
-<ol>
-<li>HashMap 几乎可以等价于 Hashtable，除了 HashMap 是非 synchronized 的，并可以接受 null(HashMap 可以接受为 null 的键值 (key) 和值(value)，而 Hashtable 则不行)。</li>
-<li>HashMap 是非 synchronized，而 Hashtable 是 synchronized，这意味着 Hashtable 是线程安全的，多个线程可以共享一个 Hashtable；而如果没有正确的同步的话，多个线程是不能共享 HashMap 的。Java 5 提供了 ConcurrentHashMap，它是 HashTable 的替代，比 HashTable 的扩展性更好。</li>
-<li>另一个区别是 HashMap 的迭代器 (Iterator) 是 fail-fast 迭代器，而 Hashtable 的 enumerator 迭代器不是 fail-fast 的。所以当有其它线程改变了 HashMap 的结构（增加或者移除元素），将会抛出 ConcurrentModificationException，但迭代器本身的 remove()方法移除元素则不会抛出 ConcurrentModificationException 异常。但这并不是一个一定发生的行为，要看 JVM。这条同样也是 Enumeration 和 Iterator 的区别。</li>
-<li>由于 Hashtable 是线程安全的也是 synchronized，所以在单线程环境下它比 HashMap 要慢。如果你不需要同步，只需要单一线程，那么使用 HashMap 性能要好过 Hashtable。</li>
-<li>HashMap 不能保证随着时间的推移 Map 中的元素次序是不变的。</li>
-</ol>
-<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><p>默认Hashtable的初始容量为11，负载因子是0.75</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Hashtable() &#123;</span><br><span class="line">    this(11, 0.75f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="同步的实现"><a href="#同步的实现" class="headerlink" title="同步的实现"></a>同步的实现</h5><p>Hashtable中每个方法都被synchronized修饰来实现线程安全的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public synchronized int size() &#123;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public synchronized boolean isEmpty() &#123;</span><br><span class="line">        return count == 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public synchronized Enumeration&lt;K&gt; keys() &#123;</span><br><span class="line">        return this.&lt;K&gt;getEnumeration(KEYS);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Hashtable中使用的是Entry数组</p>
-<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//方法被synchronized修饰所以是线程安全的</span><br><span class="line">public synchronized V get(Object key) &#123;</span><br><span class="line">    Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">    int hash = key.hashCode();</span><br><span class="line">    //key的哈希值与上int的最大值在和tab数组的长度取余</span><br><span class="line">    int index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">    //遍历链表</span><br><span class="line">    for (Entry&lt;?,?&gt; e = tab[index] ; e != null ; e = e.next) &#123;</span><br><span class="line">        if ((e.hash == hash) &amp;&amp; e.key.equals(key)) &#123;</span><br><span class="line">            return (V)e.value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//同步</span><br><span class="line">public synchronized V put(K key, V value) &#123;</span><br><span class="line">    // value不能为空</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Makes sure the key is not already in the hashtable.</span><br><span class="line">    Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">    int hash = key.hashCode();</span><br><span class="line">    int index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    Entry&lt;K,V&gt; entry = (Entry&lt;K,V&gt;)tab[index];</span><br><span class="line">    //遍历</span><br><span class="line">    for(; entry != null ; entry = entry.next) &#123;</span><br><span class="line">    //如果链表中存在相同的key则进行覆盖</span><br><span class="line">        if ((entry.hash == hash) &amp;&amp; entry.key.equals(key)) &#123;</span><br><span class="line">            V old = entry.value;</span><br><span class="line">            entry.value = value;</span><br><span class="line">            return old;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    addEntry(hash, key, value, index);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="addEntry-）方法"><a href="#addEntry-）方法" class="headerlink" title="addEntry(）方法"></a>addEntry(）方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private void addEntry(int hash, K key, V value, int index) &#123;</span><br><span class="line">       modCount++;</span><br><span class="line"></span><br><span class="line">       Entry&lt;?,?&gt; tab[] = table;</span><br><span class="line">       if (count &gt;= threshold) &#123;</span><br><span class="line">           //如果超出阈值，则重新筛查表格</span><br><span class="line">           rehash();</span><br><span class="line"></span><br><span class="line">           tab = table;</span><br><span class="line">           hash = key.hashCode();</span><br><span class="line">           index = (hash &amp; 0x7FFFFFFF) % tab.length;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       //创建一个新的Entry</span><br><span class="line">       @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">       Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;) tab[index];</span><br><span class="line">       tab[index] = new Entry&lt;&gt;(hash, key, value, e);</span><br><span class="line">       count++;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="rehash（）方法"><a href="#rehash（）方法" class="headerlink" title="rehash（）方法"></a>rehash（）方法</h5><p>扩容，当散列表中的键数超过散列表容量*和加载因子时，将自动调用此方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">protected void rehash() &#123;</span><br><span class="line">    int oldCapacity = table.length;</span><br><span class="line">    Entry&lt;?,?&gt;[] oldMap = table;</span><br><span class="line"></span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int newCapacity = (oldCapacity &lt;&lt; 1) + 1;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0) &#123;</span><br><span class="line">        if (oldCapacity == MAX_ARRAY_SIZE)</span><br><span class="line">            // Keep running with MAX_ARRAY_SIZE buckets</span><br><span class="line">            return;</span><br><span class="line">        newCapacity = MAX_ARRAY_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">    Entry&lt;?,?&gt;[] newMap = new Entry&lt;?,?&gt;[newCapacity];</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    threshold = (int)Math.min(newCapacity * loadFactor, MAX_ARRAY_SIZE + 1);</span><br><span class="line">    table = newMap;</span><br><span class="line"></span><br><span class="line">    for (int i = oldCapacity ; i-- &gt; 0 ;) &#123;</span><br><span class="line">        for (Entry&lt;K,V&gt; old = (Entry&lt;K,V&gt;)oldMap[i] ; old != null ; ) &#123;</span><br><span class="line">            Entry&lt;K,V&gt; e = old;</span><br><span class="line">            old = old.next;</span><br><span class="line"></span><br><span class="line">            int index = (e.hash &amp; 0x7FFFFFFF) % newCapacity;</span><br><span class="line">            e.next = (Entry&lt;K,V&gt;)newMap[index];</span><br><span class="line">            newMap[index] = e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/14/位运算/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/14/位运算/" itemprop="url">位运算</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T17:20:12+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>描述</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>＆</td>
-<td>如果相对应位都是1，则结果为1，否则为0</td>
-<td>（A＆B），得到12，即0000 1100</td>
-</tr>
-<tr>
-<td>\</td>
-<td></td>
-<td>如果相对应位都是0，则结果为0，否则为1</td>
-<td>（A \</td>
-<td>B）得到61，即 0011 1101</td>
-</tr>
-<tr>
-<td>^</td>
-<td>如果相对应位值相同，则结果为0，否则为1</td>
-<td>（A ^ B）得到49，即 0011 0001</td>
-</tr>
-<tr>
-<td>〜</td>
-<td>按位取反运算符翻转操作数的每一位，即0变成1，1变成0。</td>
-<td>（〜A）得到-61，即1100 0011</td>
-</tr>
-<tr>
-<td>&lt;&lt;</td>
-<td>按位左移运算符。左操作数按位左移右操作数指定的位数。</td>
-<td>A &lt;&lt; 2得到240，即 1111 0000</td>
-</tr>
-<tr>
-<td>&gt;&gt;</td>
-<td>按位右移运算符。左操作数按位右移右操作数指定的位数。</td>
-<td>A &gt;&gt; 2得到15即 1111</td>
-</tr>
-<tr>
-<td>&gt;&gt;&gt;</td>
-<td>按位右移补零操作符。左操作数的值按右操作数指定的位数右移，移动得到的空位以零填充。</td>
-<td>A&gt;&gt;&gt;2得到15即0000 1111</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/14/ConcurrentHashMap源码分析/" itemprop="url">ConcurrentHashMap源码分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T15:28:56+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="ConcurrentHashMap源码分析"><a href="#ConcurrentHashMap源码分析" class="headerlink" title="ConcurrentHashMap源码分析"></a>ConcurrentHashMap源码分析</h2><p>ConcurrentHashMap 是 J.U.C(java.util.concurrent 包) 的重要成员，它是 HashMap 的一个线程安全的、支持高效并发的版本。 在默认理想状态下，ConcurrentHashMap 可以支持 16 个线程执行并发写操作及任意数量线程的读操作。 HashMap是非线程安全的，当HashMap在线程中使用时在进行扩容是Entry链可能会产生环，一旦Entry链中有环在HashMap增删查时可能陷入死循环。</p>
-<p>####结构图</p>
-<p><img src="https://i.loli.net/2018/06/16/5b24b5a783b63.png" alt="4.png"></p>
-<p>####ConcurrentHashMap源码</p>
-<p>ConcurrentHashMap继承了AbstractMap实现了提供线程安全性和原子性保证的ConcurrentMap接口和序列化Serializable接口。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class ConcurrentHashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements ConcurrentMap&lt;K,V&gt;, Serializable &#123;</span><br><span class="line">    ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 默认的初始表格容量</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CAPACITY = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 最大可能（两个非功率）阵列大小。</span><br><span class="line"> */</span><br><span class="line">static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 此表的默认并发级别。</span><br><span class="line"> */</span><br><span class="line">private static final int DEFAULT_CONCURRENCY_LEVEL = 16;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 负载因子</span><br><span class="line"> */</span><br><span class="line">private static final float LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *bin使用树而不是列表的bin数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 用于在调整大小操作期间对（拆分）箱进行非订货的箱数阈值。</span><br><span class="line"> */</span><br><span class="line">static final int UNTREEIFY_THRESHOLD = 6;</span><br></pre></td></tr></table></figure>
-<p>#####寻址方式</p>
-<p>Java 8的ConcurrentHashMap同样是通过Key的哈希值与数组长度取模确定该Key在数组中的索引。同样为了避免不太好的Key的hashCode设计，它通过如下方法计算得到Key的最终哈希值。不同的是，Java 8的ConcurrentHashMap作者认为引入红黑树后，即使哈希冲突比较严重，寻址效率也足够高，所以作者并未在哈希值的计算上做过多设计，只是将Key的hashCode值与其高16位作异或并保证最高位为0（从而保证最终结果为正整数）。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static final int spread(int h) &#123;</span><br><span class="line">  return (h ^ (h &gt;&gt;&gt; 16)) &amp; HASH_BITS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#####put方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(key, value, false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Implementation for put and putIfAbsent */</span><br><span class="line">    final V putVal(K key, V value, boolean onlyIfAbsent) &#123;</span><br><span class="line">        if (key == null || value == null) throw new NullPointerException();</span><br><span class="line">        //通过spread方法获得哈希值</span><br><span class="line">        int hash = spread(key.hashCode());</span><br><span class="line">        //用于记录相应链的长度</span><br><span class="line">        int binCount = 0;</span><br><span class="line">        for (ConcurrentHashMap.Node&lt;K,V&gt;[] tab = table;;) &#123;</span><br><span class="line">            ConcurrentHashMap.Node&lt;K,V&gt; f; int n, i, fh;</span><br><span class="line">            //如果数组为空，则使用sizeCtl中记录的大小初始化表</span><br><span class="line">            if (tab == null || (n = tab.length) == 0)</span><br><span class="line">                tab = initTable();</span><br><span class="line">                // 找该 hash 值对应的数组下标，得到第一个节点 f</span><br><span class="line">            else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) &#123;</span><br><span class="line">                // 如果数组该位置为空，</span><br><span class="line">                //    用一次 CAS 操作将这个新值放入其中即可，这个 put 操作差不多就结束了，可以拉到最后面了</span><br><span class="line">                //          如果 CAS 失败，那就是有并发操作，进到下一个循环就好了</span><br><span class="line">                if (casTabAt(tab, i, null,</span><br><span class="line">                        new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key, value, null)))</span><br><span class="line">                    break;                   // 添加到空箱时不锁</span><br><span class="line">            &#125;</span><br><span class="line">            else if ((fh = f.hash) == MOVED)</span><br><span class="line">                //帮助数据转移</span><br><span class="line">                tab = helpTransfer(tab, f);</span><br><span class="line">            else &#123; // 到这里就是说，f 是该位置的头结点，而且不为空</span><br><span class="line">                V oldVal = null;</span><br><span class="line">                // 获取数组该位置的头结点的监视器锁</span><br><span class="line">                synchronized (f) &#123;</span><br><span class="line">                    if (tabAt(tab, i) == f) &#123;</span><br><span class="line">                        //正常节点散列可用位</span><br><span class="line">                        if (fh &gt;= 0) &#123;</span><br><span class="line">                            //用于记录相应链表的长度</span><br><span class="line">                            binCount = 1;</span><br><span class="line">                            //遍历链表</span><br><span class="line">                            for (ConcurrentHashMap.Node&lt;K,V&gt; e = f;; ++binCount) &#123;</span><br><span class="line">                                K ek;</span><br><span class="line">                                //如果发现了&quot;相等&quot;的 key，判断是否要进行值覆盖，然后也就可以 break 了</span><br><span class="line">                                if (e.hash == hash &amp;&amp;</span><br><span class="line">                                        ((ek = e.key) == key ||</span><br><span class="line">                                                (ek != null &amp;&amp; key.equals(ek)))) &#123;</span><br><span class="line">                                    oldVal = e.val;</span><br><span class="line">                                    if (!onlyIfAbsent)</span><br><span class="line">                                        e.val = value;</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                                ConcurrentHashMap.Node&lt;K,V&gt; pred = e;</span><br><span class="line">                                //如果到链表的尾部，则在后面加一个新的node</span><br><span class="line">                                if ((e = e.next) == null) &#123;</span><br><span class="line">                                    pred.next = new ConcurrentHashMap.Node&lt;K,V&gt;(hash, key,</span><br><span class="line">                                            value, null);</span><br><span class="line">                                    break;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        //红黑树</span><br><span class="line">                        else if (f instanceof ConcurrentHashMap.TreeBin) &#123;</span><br><span class="line">                            ConcurrentHashMap.Node&lt;K,V&gt; p;</span><br><span class="line">                            binCount = 2;</span><br><span class="line">                            //插入红黑树</span><br><span class="line">                            if ((p = ((ConcurrentHashMap.TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,</span><br><span class="line">                                    value)) != null) &#123;</span><br><span class="line">                                oldVal = p.val;</span><br><span class="line">                                if (!onlyIfAbsent)</span><br><span class="line">                                    p.val = value;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                //</span><br><span class="line">                if (binCount != 0) &#123;</span><br><span class="line">                    //如果超过8就使用红黑树而不是链表</span><br><span class="line">                    if (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                        // 这个方法和 HashMap 中稍微有一点点不同，那就是它不是一定会进行红黑树转换，</span><br><span class="line">                        // 如果当前数组的长度小于 64，那么会选择进行数组扩容，而不是转换为红黑树</span><br><span class="line">                        treeifyBin(tab, i);</span><br><span class="line">                    if (oldVal != null)</span><br><span class="line">                        return oldVal;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        addCount(1L, binCount);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#####initTable方法扩容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private final ConcurrentHashMap.Node&lt;K,V&gt;[] initTable() &#123;</span><br><span class="line">       ConcurrentHashMap.Node&lt;K,V&gt;[] tab; int sc;</span><br><span class="line">       while ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">           //sizeCtl为负数时表示正在初始化</span><br><span class="line">           if ((sc = sizeCtl) &lt; 0)</span><br><span class="line">               //线程</span><br><span class="line">               Thread.yield(); // lost initialization race; just spin</span><br><span class="line">               // CAS 一下，将 sizeCtl 设置为 -1，代表抢到了锁</span><br><span class="line">           else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) &#123;</span><br><span class="line">               try &#123;</span><br><span class="line">                   if ((tab = table) == null || tab.length == 0) &#123;</span><br><span class="line">                       // DEFAULT_CAPACITY 默认初始容量是 16</span><br><span class="line">                       int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;</span><br><span class="line">                       @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                               //新建一个大小为n的node数组</span><br><span class="line">                       ConcurrentHashMap.Node&lt;K,V&gt;[] nt = (ConcurrentHashMap.Node&lt;K,V&gt;[])new ConcurrentHashMap.Node&lt;?,?&gt;[n];</span><br><span class="line">                       // 将这个数组赋值给 table，table 是 volatile 的</span><br><span class="line">                       table = tab = nt;</span><br><span class="line">                       // 如果 n 为 16 的话，那么这里 sc = 12</span><br><span class="line">                       // 其实就是 0.75 * n</span><br><span class="line">                       sc = n - (n &gt;&gt;&gt; 2);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; finally &#123;</span><br><span class="line">                   // 设置 sizeCtl 为 sc，我们就当是 12 吧</span><br><span class="line">                   sizeCtl = sc;</span><br><span class="line">               &#125;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return tab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>引用：<a href="http://www.importnew.com/22007.html" target="_blank" rel="noopener">ConcurrentHashMap</a></p>
-<p><a href="https://juejin.im/post/5aeeaba8f265da0b9d781d16#comment" target="_blank" rel="noopener">并发容器之ConcurrentHashMap(JDK 1.8版本)</a></p>
-<p><a href="http://www.importnew.com/28263.html" target="_blank" rel="noopener">Java7/8 中的 HashMap 和 ConcurrentHashMap 全解析 </a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1945,7 +1874,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
