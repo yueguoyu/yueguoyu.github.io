@@ -269,6 +269,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/28/Exchanger源码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/28/Exchanger源码/" itemprop="url">Exchanger的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T10:16:25+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Exchanger的使用"><a href="#Exchanger的使用" class="headerlink" title="Exchanger的使用"></a>Exchanger的使用</h2><h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>Exchanger可以让两个线程之间进行数据交换。</p>
+<p><img src="https://i.loli.net/2018/06/26/5b31f3e5bc230.png" alt="exchanger.png"></p>
+<h2 id="使用："><a href="#使用：" class="headerlink" title="使用："></a>使用：</h2><h4 id="使用：-1"><a href="#使用：-1" class="headerlink" title="使用："></a>使用：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package T616;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.Exchanger;</span><br><span class="line">import java.util.concurrent.ExecutorService;</span><br><span class="line">import java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line">public class exchangerTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ExecutorService service = Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">        Exchanger exchanger = new Exchanger();</span><br><span class="line">        service.execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                dow(exchanger, &quot;date1&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        service.execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                dow(exchanger, &quot;date2&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        service.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void dow(Exchanger exchanger, String date) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + &quot;-----&quot; + date);</span><br><span class="line">            Thread.sleep((long) (Math.random() * 1000));</span><br><span class="line">            String date1 = (String) exchanger.exchange(date);</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + &quot;-----&quot; + date1);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong></p>
+<p><strong>pool-1-thread-1—–date1</strong><br><strong>pool-1-thread-2—–date2</strong><br><strong>pool-1-thread-1—–date2</strong><br><strong>pool-1-thread-2—–date1</strong></p>
+<p><strong>分析：</strong></p>
+<p>线程1执行exchange方法后线程阻塞，等线程2当线程2执行exchange方法时，线程数据交换。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/27/实现strStr()/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1637,180 +1785,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/" itemprop="url">ArrayList  和  Vector比较</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T15:34:04+08:00">
-                2018-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="ArrayList-和-Vector比较"><a href="#ArrayList-和-Vector比较" class="headerlink" title="ArrayList  和  Vector比较"></a>ArrayList  和  Vector比较</h2><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
-<p>ArrayList类继承了AbstractList类实现了List<e>这个*接口的用户可以精确控制列表中每个元素插入的位置。, 用户可以通过其整数索引（列表中的位置）访问元素，并在列表中搜索元素, RandomAccess支持快速的随机法访问, Cloneable允许clone, java.io.Serializable可序列化接口.</e></p>
-<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>ArrayList的元素存储在其中的数组缓冲区，底层使用的是一个Object[]数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>构造初始容量为10的空列表。</p>
-<h5 id="contains方法"><a href="#contains方法" class="headerlink" title="contains方法"></a>contains方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">    return indexOf(o) &gt;= 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="indexof方法"><a href="#indexof方法" class="headerlink" title="indexof方法"></a>indexof方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//如果数组中有o则返回第一个下标，否则返回-1</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">//因为ArrayList中可以为null</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">    //遍历查找</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="lastIndexOf方法"><a href="#lastIndexOf方法" class="headerlink" title="lastIndexOf方法"></a>lastIndexOf方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//数组中有o返回最后一个下标</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//返回列表指定位置的元素</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">//检查给定索引是否在范围内。, 如果不是，则抛出一个适当的运行时异常。</span><br><span class="line">//索引为负的化会抛出ArrayIndexOutOfBoundsException</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">//elementData数组获取</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//使用element更换列表指定位置的元素</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //扩容为原来的1.5倍大小</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Fail-Fast-机制"><a href="#Fail-Fast-机制" class="headerlink" title="Fail-Fast 机制"></a>Fail-Fast 机制</h3><p>ArrayList 也采用了快速失败的机制，通过记录 modCount 参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。 关于 Fail-Fast 的更详细的介绍，我在之前将 HashMap 中已经提到。</p>
-<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector类实现了一个动态数组。和ArrayList和相似，但是两者是不同的：</p>
-<ul>
-<li>Vector是同步访问的。</li>
-<li>Vector包含了许多传统的方法，这些方法不属于集合框架。</li>
-</ul>
-<p>Vector主要用在事先不知道数组的大小，或者只是需要一个可以改变大小的数组的情况。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
-<p>Vector类继承AbstractList，实现了List<e>, RandomAccess, Cloneable, java.io.Serializable接口和ArrayList相同。</e></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//构造一个空向量，使其内部数据数组的大小为10码，其标准容量增量为零。</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">        super();</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">          // initialCapacity初始容量                           </span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">        //capacityIncrement当矢量溢出时，容量增加的量</span><br><span class="line">        this.capacityIncrement = capacityIncrement;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Object[]数组</span><br><span class="line">protected Object[] elementData;</span><br></pre></td></tr></table></figure>
-<h5 id="setsize方法"><a href="#setsize方法" class="headerlink" title="setsize方法"></a>setsize方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//因为方法被synchronized修饰，所以是线程安全的</span><br><span class="line">public synchronized void setSize(int newSize) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="trimToSize"><a href="#trimToSize" class="headerlink" title="trimToSize"></a>trimToSize</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//修剪此向量的容量为向量的当前大小</span><br><span class="line">public synchronized void trimToSize() &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    if (elementCount &lt; oldCapacity) &#123;</span><br><span class="line">        elementData = Arrays.copyOf(elementData, elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="elementAt方法"><a href="#elementAt方法" class="headerlink" title="elementAt方法"></a>elementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//获取指定索引位置的元素</span><br><span class="line">public synchronized E elementAt(int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; + elementCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line">//返回第一个索引位置的元素</span><br><span class="line">public synchronized E firstElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(0);</span><br><span class="line">    &#125;</span><br><span class="line"> //返回最后一个索引位置的元素</span><br><span class="line">public synchronized E lastElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(elementCount - 1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="setElementAt方法"><a href="#setElementAt方法" class="headerlink" title="setElementAt方法"></a>setElementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//将此矢量的指定 index中的组件设置为指定的对象。 该位置的前一个组件被丢弃。</span><br><span class="line">public synchronized void setElementAt(E obj, int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    elementData[index] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="addElement方法"><a href="#addElement方法" class="headerlink" title="addElement方法"></a>addElement方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//将指定的组件添加到此向量的末尾</span><br><span class="line">public synchronized void addElement(E obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="扩容-1"><a href="#扩容-1" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</span><br><span class="line">    int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                     capacityIncrement : oldCapacity);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>1.线程安全，vector是同步的所以是线程安全的，而arraylist不是线程安全的。</p>
-<p>2.性能，因为vector是同步的所以在单线程情况下arraylist的性能比vector高。</p>
-<p>3.扩容大小不同，arraylist扩容后的大小是原来的1.5倍，而vector根据capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1865,7 +1839,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

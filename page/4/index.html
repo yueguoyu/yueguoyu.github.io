@@ -269,6 +269,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/17/ArrayList  和  Vector比较/" itemprop="url">ArrayList  和  Vector比较</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T15:34:04+08:00">
+                2018-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ArrayList-和-Vector比较"><a href="#ArrayList-和-Vector比较" class="headerlink" title="ArrayList  和  Vector比较"></a>ArrayList  和  Vector比较</h2><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>ArrayList类继承了AbstractList类实现了List<e>这个*接口的用户可以精确控制列表中每个元素插入的位置。, 用户可以通过其整数索引（列表中的位置）访问元素，并在列表中搜索元素, RandomAccess支持快速的随机法访问, Cloneable允许clone, java.io.Serializable可序列化接口.</e></p>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>ArrayList的元素存储在其中的数组缓冲区，底层使用的是一个Object[]数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData; // non-private to simplify nested class access</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public ArrayList() &#123;</span><br><span class="line">    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造初始容量为10的空列表。</p>
+<h5 id="contains方法"><a href="#contains方法" class="headerlink" title="contains方法"></a>contains方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean contains(Object o) &#123;</span><br><span class="line">    return indexOf(o) &gt;= 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="indexof方法"><a href="#indexof方法" class="headerlink" title="indexof方法"></a>indexof方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//如果数组中有o则返回第一个下标，否则返回-1</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">//因为ArrayList中可以为null</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">    //遍历查找</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="lastIndexOf方法"><a href="#lastIndexOf方法" class="headerlink" title="lastIndexOf方法"></a>lastIndexOf方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//数组中有o返回最后一个下标</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    if (o == null) &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (elementData[i]==null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = size-1; i &gt;= 0; i--)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//返回列表指定位置的元素</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">//检查给定索引是否在范围内。, 如果不是，则抛出一个适当的运行时异常。</span><br><span class="line">//索引为负的化会抛出ArrayIndexOutOfBoundsException</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">//elementData数组获取</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//使用element更换列表指定位置的元素</span><br><span class="line">public E set(int index, E element) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;</span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //扩容为原来的1.5倍大小</span><br><span class="line">    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    // minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Fail-Fast-机制"><a href="#Fail-Fast-机制" class="headerlink" title="Fail-Fast 机制"></a>Fail-Fast 机制</h3><p>ArrayList 也采用了快速失败的机制，通过记录 modCount 参数来实现。在面对并发的修改时，迭代器很快就会完全失败，而不是冒着在将来某个不确定时间发生任意不确定行为的风险。 关于 Fail-Fast 的更详细的介绍，我在之前将 HashMap 中已经提到。</p>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector类实现了一个动态数组。和ArrayList和相似，但是两者是不同的：</p>
+<ul>
+<li>Vector是同步访问的。</li>
+<li>Vector包含了许多传统的方法，这些方法不属于集合框架。</li>
+</ul>
+<p>Vector主要用在事先不知道数组的大小，或者只是需要一个可以改变大小的数组的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Vector&lt;E&gt;</span><br><span class="line">    extends AbstractList&lt;E&gt;</span><br><span class="line">    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>Vector类继承AbstractList，实现了List<e>, RandomAccess, Cloneable, java.io.Serializable接口和ArrayList相同。</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//构造一个空向量，使其内部数据数组的大小为10码，其标准容量增量为零。</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">        super();</span><br><span class="line">        if (initialCapacity &lt; 0)</span><br><span class="line">            throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">          // initialCapacity初始容量                           </span><br><span class="line">        this.elementData = new Object[initialCapacity];</span><br><span class="line">        //capacityIncrement当矢量溢出时，容量增加的量</span><br><span class="line">        this.capacityIncrement = capacityIncrement;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Object[]数组</span><br><span class="line">protected Object[] elementData;</span><br></pre></td></tr></table></figure>
+<h5 id="setsize方法"><a href="#setsize方法" class="headerlink" title="setsize方法"></a>setsize方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//因为方法被synchronized修饰，所以是线程安全的</span><br><span class="line">public synchronized void setSize(int newSize) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="trimToSize"><a href="#trimToSize" class="headerlink" title="trimToSize"></a>trimToSize</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//修剪此向量的容量为向量的当前大小</span><br><span class="line">public synchronized void trimToSize() &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    if (elementCount &lt; oldCapacity) &#123;</span><br><span class="line">        elementData = Arrays.copyOf(elementData, elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="elementAt方法"><a href="#elementAt方法" class="headerlink" title="elementAt方法"></a>elementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//获取指定索引位置的元素</span><br><span class="line">public synchronized E elementAt(int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; + elementCount);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line">//返回第一个索引位置的元素</span><br><span class="line">public synchronized E firstElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(0);</span><br><span class="line">    &#125;</span><br><span class="line"> //返回最后一个索引位置的元素</span><br><span class="line">public synchronized E lastElement() &#123;</span><br><span class="line">        if (elementCount == 0) &#123;</span><br><span class="line">            throw new NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        return elementData(elementCount - 1);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h5 id="setElementAt方法"><a href="#setElementAt方法" class="headerlink" title="setElementAt方法"></a>setElementAt方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//将此矢量的指定 index中的组件设置为指定的对象。 该位置的前一个组件被丢弃。</span><br><span class="line">public synchronized void setElementAt(E obj, int index) &#123;</span><br><span class="line">    if (index &gt;= elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index + &quot; &gt;= &quot; +</span><br><span class="line">                                                 elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    elementData[index] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="addElement方法"><a href="#addElement方法" class="headerlink" title="addElement方法"></a>addElement方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//将指定的组件添加到此向量的末尾</span><br><span class="line">public synchronized void addElement(E obj) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    elementData[elementCount++] = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="扩容-1"><a href="#扩容-1" class="headerlink" title="扩容"></a>扩容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    int oldCapacity = elementData.length;</span><br><span class="line">    //capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</span><br><span class="line">    int newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                     capacityIncrement : oldCapacity);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>1.线程安全，vector是同步的所以是线程安全的，而arraylist不是线程安全的。</p>
+<p>2.性能，因为vector是同步的所以在单线程情况下arraylist的性能比vector高。</p>
+<p>3.扩容大小不同，arraylist扩容后的大小是原来的1.5倍，而vector根据capacityIncrement当矢量的容量大于容量时，矢量的容量自动增加的量。, 如果*容量增量小于或等于零，则每次需要增加时，矢量的容量就会增加一倍。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/17/有效的数独/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1786,171 +1960,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/06/09/HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/06/09/HashMap/" itemprop="url">HashMap</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T21:32:21+08:00">
-                2018-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><blockquote>
-<blockquote>
-<p>：带符号右移。正数右移高位补0，负数右移高位补1。比如：</p>
-</blockquote>
-</blockquote>
-<p>4 &gt;&gt; 1，结果是2；-4 &gt;&gt; 1，结果是-2。-2 &gt;&gt; 1，结果是-1。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>：无符号右移。无论是正数还是负数，高位通通补0。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>对于正数而言，&gt;&gt;和&gt;&gt;&gt;没区别。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>1.HashMap基于哈希的map接口实现。<br>2.HashMap 类大致相当于 Hashtable ，只是它是非同步的并且允许为空值。<br>3.HashMap根据键的hashCode值存储数据，一般直接可以定位到它的值，但他遍历顺序是不确定的。HashMap只允许key中只有一个null，而value可以是多个，HashMap是非线程安全的。如果要满足线程安全，可以用Collection的synchronizedMap方法使的HashMap具有线程安全的能力，或使用ConcurrentHashMap。</p>
-<h2 id="内部实现"><a href="#内部实现" class="headerlink" title="内部实现"></a>内部实现</h2><p>从结构实现来讲，HashMap是数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下如所示。<br><img src="https://i.loli.net/2018/06/01/5b10be1cb1a8b.png" alt="hashMap内存结构图.png"></p>
-<h4 id="1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。"><a href="#1-HashMap中有Node-lt-K-V-gt-table-即哈希桶数组。" class="headerlink" title="1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。"></a>1.HashMap中有Node&lt;K,V&gt;[] table 即哈希桶数组。</h4><figure class="highlight plain"><figcaption><span>HashMap的内部类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">            this.hash = hash;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.next = next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final K getKey()        &#123; return key; &#125;</span><br><span class="line">        public final V getValue()      &#123; return value; &#125;</span><br><span class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">        public final int hashCode() &#123;</span><br><span class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final V setValue(V newValue) &#123;</span><br><span class="line">            V oldValue = value;</span><br><span class="line">            value = newValue;</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public final boolean equals(Object o) &#123;</span><br><span class="line">            if (o == this)</span><br><span class="line">                return true;</span><br><span class="line">            if (o instanceof Map.Entry) &#123;</span><br><span class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                    Objects.equals(value, e.getValue()))</span><br><span class="line">                    return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>2.HashMap构造方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*使用指定的初始容量和指定加载因子构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor)&#123;...&#125;</span><br><span class="line">/*</span><br><span class="line">*使用指定的初始容量和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line">*/</span><br><span class="line"> public HashMap(int initialCapacity)&#123;...&#125;</span><br><span class="line"> /*</span><br><span class="line"> *使用默认的初始容量（16）和默认加载因子（0.75）构造一个空的HashMap</span><br><span class="line"> */</span><br><span class="line">  public HashMap() &#123;...&#125;</span><br><span class="line">  /*</span><br><span class="line">  *使用与指定的&lt;tt&gt; Map &lt;/ tt&gt;相同的映射构造一个新的HashMapHashMap用默认加载因子   *（0.75）和一个初始容量来创建，该容量足以将映射保存在指定的Map</span><br><span class="line">  */</span><br><span class="line">   public HashMap(Map&lt;? extends K, ? extends V&gt; m)&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.jdk1.8 HashMap的put方法源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"> public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        HashMap.Node&lt;K,V&gt;[] tab; HashMap.Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">//        判断table是否为空，创建默认大小</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">//        计算index，并对null做处理 （有点懵）</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            HashMap.Node&lt;K,V&gt; e; K k;</span><br><span class="line">            //节点key存在，直接覆盖value</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            //判断是否是红黑树</span><br><span class="line">            else if (p instanceof HashMap.TreeNode)</span><br><span class="line">                e = ((HashMap.TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                //该链为链表</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        //链表长度大于8转换为红黑树进行处理</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //key存在就覆盖value</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        //超过阈值就扩容</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>4.HashMap 扩容<br>扩容(resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组。</p>
-<p>（1）.jdk1.7的扩容是当容量大于阈值时，使用大的数组代替小的数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> void resize(int newCapacity) &#123;   //传入新的容量</span><br><span class="line">      Entry[] oldTable = table;    //引用扩容前的Entry数组</span><br><span class="line">      int oldCapacity = oldTable.length;         </span><br><span class="line">      if (oldCapacity == MAXIMUM_CAPACITY) &#123;  //扩容前的数组大小如果已经达到最大(2^30)了</span><br><span class="line">          threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1)，这样以后就不会扩容了</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line">   </span><br><span class="line">      Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组</span><br><span class="line">     transfer(newTable);                         //！！将数据转移到新的Entry数组里</span><br><span class="line">     table = newTable;                           //HashMap的table属性引用新的Entry数组</span><br><span class="line">     threshold = (int)(newCapacity * loadFactor);//修改阈值</span><br><span class="line"> &#125;</span><br><span class="line"> //用于将原来的数组中的数据拷贝到新的数组</span><br><span class="line"> void transfer(Entry[] newTable) &#123;</span><br><span class="line">      Entry[] src = table;                   //src引用了旧的Entry数组</span><br><span class="line">      int newCapacity = newTable.length;</span><br><span class="line">      for (int j = 0; j &lt; src.length; j++) &#123; //遍历旧的Entry数组</span><br><span class="line">          Entry&lt;K,V&gt; e = src[j];             //取得旧Entry数组的每个元素</span><br><span class="line">          if (e != null) &#123;</span><br><span class="line">              src[j] = null;//释放旧Entry数组的对象引用（for循环后，旧的Entry数组不再引用任何对象）</span><br><span class="line">              do &#123;</span><br><span class="line">                  Entry&lt;K,V&gt; next = e.next;</span><br><span class="line">                 int i = indexFor(e.hash, newCapacity); //！！重新计算每个元素在数组中的位置</span><br><span class="line">                 e.next = newTable[i]; //标记[1]</span><br><span class="line">                 newTable[i] = e;      //将元素放在数组上</span><br><span class="line">                 e = next;             //访问下一个Entry链上的元素</span><br><span class="line">             &#125; while (e != null);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"><a href="#jdk1-7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。" class="headerlink" title="jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。"></a>jdk1.7扩容后会重新计算每个元素在数组中的位置，当put时数据会放在链表的前面，所以最先插入的数据应该在链表的末尾。</h4><p>（2）.jdk1.8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">final HashMap.Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">       int oldCap = (oldTab == null) ? 0 : oldTab.length;</span><br><span class="line">       int oldThr = threshold;</span><br><span class="line">       int newCap, newThr = 0;</span><br><span class="line">       if (oldCap &gt; 0) &#123;</span><br><span class="line">           //判断是否大于最大容量</span><br><span class="line">           if (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">               threshold = Integer.MAX_VALUE;</span><br><span class="line">               return oldTab;</span><br><span class="line">           &#125;</span><br><span class="line">           //当小于最大容量时，扩充为原来的2倍</span><br><span class="line">           else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                   oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">               newThr = oldThr &lt;&lt; 1; // double threshold</span><br><span class="line">       &#125;</span><br><span class="line">       else if (oldThr &gt; 0) // initial capacity was placed in threshold</span><br><span class="line">           newCap = oldThr;</span><br><span class="line">       else &#123;               // zero initial threshold signifies using defaults</span><br><span class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">           newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">       &#125;</span><br><span class="line">       if (newThr == 0) &#123;</span><br><span class="line">           float ft = (float)newCap * loadFactor;</span><br><span class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ?</span><br><span class="line">                   (int)ft : Integer.MAX_VALUE);</span><br><span class="line">       &#125;</span><br><span class="line">       threshold = newThr;</span><br><span class="line">       @SuppressWarnings(&#123;&quot;rawtypes&quot;,&quot;unchecked&quot;&#125;)</span><br><span class="line">       HashMap.Node&lt;K,V&gt;[] newTab = (HashMap.Node&lt;K,V&gt;[])new HashMap.Node[newCap];</span><br><span class="line">       table = newTab;</span><br><span class="line">       if (oldTab != null) &#123;</span><br><span class="line">           // 把每个bucket都移动到新的buckets中</span><br><span class="line">           for (int j = 0; j &lt; oldCap; ++j) &#123;</span><br><span class="line">               HashMap.Node&lt;K,V&gt; e;</span><br><span class="line">               //遍历老数组，并释放它</span><br><span class="line">               if ((e = oldTab[j]) != null) &#123;</span><br><span class="line">                   oldTab[j] = null;</span><br><span class="line">                   if (e.next == null)</span><br><span class="line">                       //e的哈希和新的容量-1做与运算 得出在新数组的位置</span><br><span class="line">                       newTab[e.hash &amp; (newCap - 1)] = e;</span><br><span class="line">                   else if (e instanceof HashMap.TreeNode)//判断它是红黑树</span><br><span class="line">                       ((HashMap.TreeNode&lt;K,V&gt;)e).split(this, newTab, j, oldCap);</span><br><span class="line">                   else &#123;  // 链表优化重hash的代码块</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; loHead = null, loTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; hiHead = null, hiTail = null;</span><br><span class="line">                       HashMap.Node&lt;K,V&gt; next;</span><br><span class="line">                       do &#123;</span><br><span class="line">                           next = e.next;</span><br><span class="line">                           // 原索引</span><br><span class="line">                           if ((e.hash &amp; oldCap) == 0) &#123;</span><br><span class="line">                               if (loTail == null)</span><br><span class="line">                                   loHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   loTail.next = e;</span><br><span class="line">                               loTail = e;</span><br><span class="line">                           &#125; // 原索引+oldCap</span><br><span class="line">                           else &#123;</span><br><span class="line">                               if (hiTail == null)</span><br><span class="line">                                   hiHead = e;</span><br><span class="line">                               else</span><br><span class="line">                                   hiTail.next = e;</span><br><span class="line">                               hiTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125; while ((e = next) != null);</span><br><span class="line">                       // 原索引放到bucket里</span><br><span class="line">                       if (loTail != null) &#123;</span><br><span class="line">                           loTail.next = null;</span><br><span class="line">                           newTab[j] = loHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                       // 原索引+oldCap放到bucket里</span><br><span class="line">                       if (hiTail != null) &#123;</span><br><span class="line">                           hiTail.next = null;</span><br><span class="line">                           newTab[j + oldCap] = hiHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return newTab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><p>HashMap是非线程安全的，线程安全的ConcurrentHashMap。在多线程情况下HashMap会产生死循环</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2005,7 +2014,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
