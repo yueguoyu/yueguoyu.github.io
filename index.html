@@ -269,6 +269,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/12/对称二叉树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/12/对称二叉树/" itemprop="url">对称二叉树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-12T20:42:12+08:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="对称二叉树"><a href="#对称二叉树" class="headerlink" title="对称二叉树"></a>对称二叉树</h2><p>给定一个二叉树，检查它是否是镜像对称的。</p>
+<p>例如，二叉树 <code>[1,2,2,3,4,4,3]</code> 是对称的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   2</span><br><span class="line"> / \ / \</span><br><span class="line">3  4 4  3</span><br></pre></td></tr></table></figure>
+<p>但是下面这个 <code>[1,2,2,null,3,null,3]</code> 则不是镜像对称的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   2</span><br><span class="line"> \   \</span><br><span class="line"> 3    3</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong></p>
+<p>如果你可以运用递归和迭代两种方法解决这个问题，会很加分。</p>
+<p><strong>解法一：</strong></p>
+<p>递归实现,只要判断左子树的左节点和右子树的右节点，左子树的右节点和右子树的左节点相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean isSymmetric(TreeNode root) &#123;</span><br><span class="line">       if (root==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       return zhongxu(root.left,root.right);</span><br><span class="line">   &#125;</span><br><span class="line">   public boolean zhongxu(TreeNode p,TreeNode q)&#123;</span><br><span class="line">       if (p==null&amp;&amp;q==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       if (p==null||q==null)&#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       return p.val==q.val&amp;&amp;zhongxu(p.left,q.right)&amp;&amp;zhongxu(p.right,q.left);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解法二：</strong></p>
+<p>迭代实现，使用一个栈，将左节点和右节点压入，最重要的是空节点也要压入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public boolean isSymmetric1(TreeNode root) &#123;</span><br><span class="line">       if (root==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       TreeNode l=root.left,r=root.right;</span><br><span class="line">       Stack&lt;TreeNode&gt; s=new Stack&lt;&gt;();</span><br><span class="line">       //空节点也压入栈中</span><br><span class="line">       s.push(l);</span><br><span class="line">       s.push(r);</span><br><span class="line">       while(!s.empty())&#123;</span><br><span class="line">           l=s.peek();</span><br><span class="line">           s.pop();</span><br><span class="line">           r=s.peek();</span><br><span class="line">           s.pop();</span><br><span class="line">           //循环结束条件</span><br><span class="line">           if (l==null&amp;&amp;r==null)&#123;</span><br><span class="line">               continue;</span><br><span class="line">           &#125;</span><br><span class="line">           if (l==null||r==null)&#123;</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line">           if (l.val!=r.val)&#123;</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line">           s.push(l.left);</span><br><span class="line">           s.push(r.right);</span><br><span class="line">           s.push(l.right);</span><br><span class="line">           s.push(r.left);</span><br><span class="line">       &#125;</span><br><span class="line">       return true;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/11/二叉树的最大深度/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1828,155 +1982,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/06/107. 二叉树的层次遍历 II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/06/107. 二叉树的层次遍历 II/" itemprop="url">二叉树的层次遍历 II</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-06T15:34:53+08:00">
-                2018-07-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="107-二叉树的层次遍历-II"><a href="#107-二叉树的层次遍历-II" class="headerlink" title="107. 二叉树的层次遍历 II"></a>107. 二叉树的层次遍历 II</h3><hr>
-<p>给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）</p>
-<p>例如：<br>给定二叉树 <code>[3,9,20,null,null,15,7]</code>,</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
-<p>返回其自底向上的层次遍历为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [15,7],</span><br><span class="line">  [9,20],</span><br><span class="line">  [3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>使用队列来实现二叉树的层遍历。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 自下而上的层遍历</span><br><span class="line"> * 从叶子节点所在层到根节点所在的层，逐层从左向右遍历</span><br><span class="line"> * @param root</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">public List&lt;List&lt;Integer&gt;&gt; cen1(TreeNode root)&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; lists=new ArrayList&lt;&gt;();</span><br><span class="line">    if (root==null)&#123;</span><br><span class="line">        return lists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList&lt;TreeNode&gt; treeNodes=new LinkedList&lt;&gt;();</span><br><span class="line">    treeNodes.add(root);</span><br><span class="line">    while(!treeNodes.isEmpty())&#123;</span><br><span class="line">        List&lt;Integer&gt; list=new ArrayList&lt;&gt;();</span><br><span class="line">       int size=treeNodes.size();</span><br><span class="line">       for (int i=0;i&lt;size;i++)&#123;</span><br><span class="line">           TreeNode n=treeNodes.pop();</span><br><span class="line">           list.add(n.val);</span><br><span class="line">           if (n.l!=null)&#123;</span><br><span class="line">               treeNodes.add(n.l);</span><br><span class="line">           &#125;</span><br><span class="line">           if (n.r!=null)&#123;</span><br><span class="line">               treeNodes.add(n.r);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       lists.add(list);</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; lists1=new ArrayList&lt;&gt;();</span><br><span class="line">    for(int i=lists.size()-1;i&gt;=0;i--)&#123;</span><br><span class="line">        lists1.add(lists.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    return lists1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2031,7 +2036,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
