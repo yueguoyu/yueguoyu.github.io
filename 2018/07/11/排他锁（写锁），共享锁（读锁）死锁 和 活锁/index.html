@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/07/11/5b45d90889c7e.png">
 <meta property="og:image" content="https://i.loli.net/2018/07/11/5b45d492ce632.jpg">
-<meta property="og:updated_time" content="2018-07-11T12:38:24.642Z">
+<meta property="og:updated_time" content="2018-07-13T02:11:13.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排他锁（写锁），共享锁（读锁）死锁 和 活锁">
 <meta name="twitter:description" content="排他锁（写锁），共享锁（读锁）死锁 和 活锁排他锁（写锁，X锁）： 事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。 共享锁（读锁，S锁）： 若事务t对数据a加上s锁，则事务t可以读a但不能修改a，其他事务可以对a加s锁，而在t没有释放a的锁时不能加x锁，表示其他事">
@@ -377,7 +377,7 @@
 <h4 id="活锁："><a href="#活锁：" class="headerlink" title="活锁："></a>活锁：</h4><p>如果事务t1封锁了数据r，事务t2又请求封锁r，于是t2等待；T3也请求封锁r，当t1释放r上的锁之后系统首先批准t3的请求，t2接着等，t4也请求封锁r，t3释放r系统又批准t4，就不给r2，r2一直等啊等，永远的等下去，这就是活锁的情景。</p>
 <p><strong>避免活锁：</strong></p>
 <p>系统采用先来先服务的策略。（先到先得）</p>
-<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后r1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
+<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后t1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
 <p><strong>死锁的预防（不适用）：</strong></p>
 <p>1.一次封锁法</p>
 <p>一次封锁法要求每个事务必须一次将所有使用的数据全部加锁，否则就不能继续执行。如上面的例子中，如果t1将r1和r2都加锁，当t1释放锁后t2在加锁，这样就不会发生死锁。</p>
