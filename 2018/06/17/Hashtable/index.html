@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="YgY">
 <meta property="og:description" content="HashtableHashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。 然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。 像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。 然">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-17T01:46:23.950Z">
+<meta property="og:updated_time" content="2018-07-20T09:21:30.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hashtable">
 <meta name="twitter:description" content="HashtableHashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。 然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。 像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。 然">
@@ -368,11 +368,11 @@
 <p>然后，该键经过哈希处理，所得到的散列码被用作存储在该表中值的索引。</p>
 <h4 id="Hashtable和HashMap的区别"><a href="#Hashtable和HashMap的区别" class="headerlink" title="Hashtable和HashMap的区别"></a>Hashtable和HashMap的区别</h4><p>HashMap 和 Hashtable 都实现了 Map 接口，但决定用哪一个之前先要弄清楚它们之间的分别。主要的区别有：线程安全性，同步 (synchronization)，以及速度。</p>
 <ol>
-<li>HashMap 几乎可以等价于 Hashtable，除了 HashMap 是非 synchronized 的，并可以接受 null(HashMap 可以接受为 null 的键值 (key) 和值(value)，而 Hashtable 则不行)。</li>
-<li>HashMap 是非 synchronized，而 Hashtable 是 synchronized，这意味着 Hashtable 是线程安全的，多个线程可以共享一个 Hashtable；而如果没有正确的同步的话，多个线程是不能共享 HashMap 的。Java 5 提供了 ConcurrentHashMap，它是 HashTable 的替代，比 HashTable 的扩展性更好。</li>
-<li>另一个区别是 HashMap 的迭代器 (Iterator) 是 fail-fast 迭代器，而 Hashtable 的 enumerator 迭代器不是 fail-fast 的。所以当有其它线程改变了 HashMap 的结构（增加或者移除元素），将会抛出 ConcurrentModificationException，但迭代器本身的 remove()方法移除元素则不会抛出 ConcurrentModificationException 异常。但这并不是一个一定发生的行为，要看 JVM。这条同样也是 Enumeration 和 Iterator 的区别。</li>
-<li>由于 Hashtable 是线程安全的也是 synchronized，所以在单线程环境下它比 HashMap 要慢。如果你不需要同步，只需要单一线程，那么使用 HashMap 性能要好过 Hashtable。</li>
-<li>HashMap 不能保证随着时间的推移 Map 中的元素次序是不变的。</li>
+<li>最主要的区别，线程安全，因为Hashtable的每个方法都被synchronized所修饰，所以他是线程安全的。</li>
+<li>Hashmap和Hashtable的默认初始容量和扩容不同，hashtable初始容量为11，而hashmap为16，扩容的话hashtable为2*old+1，而hashmap为默认容量16，扩容后一定是2的指数。</li>
+<li>hashmap允许有1个key为null和多个value为空，而hashtable不允许有null否则会报错。</li>
+<li>另一个区别是HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，但迭代器本身的remove()方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。这条同样也是Enumeration和Iterator的区别。</li>
+<li>Hashtable继承Dictionary而Hashmap继承AbstractMap都实现了map接口</li>
 </ol>
 <h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><p>默认Hashtable的初始容量为11，负载因子是0.75</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Hashtable() &#123;</span><br><span class="line">    this(11, 0.75f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
