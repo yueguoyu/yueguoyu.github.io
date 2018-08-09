@@ -269,6 +269,336 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/11/死锁 和 活锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/11/死锁 和 活锁/" itemprop="url">排他锁（写锁），共享锁（读锁）死锁 和 活锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T20:38:52+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="排他锁（写锁），共享锁（读锁）死锁-和-活锁"><a href="#排他锁（写锁），共享锁（读锁）死锁-和-活锁" class="headerlink" title="排他锁（写锁），共享锁（读锁）死锁 和 活锁"></a>排他锁（写锁），共享锁（读锁）死锁 和 活锁</h2><p><strong>排他锁（写锁，X锁）：</strong></p>
+<p>事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。</p>
+<p><strong>共享锁（读锁，S锁）：</strong></p>
+<p>若事务t对数据a加上s锁，则事务t可以读a但不能修改a，其他事务可以对a加s锁，而在t没有释放a的锁时不能加x锁，表示其他事务可以读取a的数据，但在t释放a</p>
+<p>的s锁之前不能对a进行修改。</p>
+<p><strong>分所类型的相容矩阵</strong></p>
+<p><img src="https://i.loli.net/2018/07/11/5b45d90889c7e.png" alt="下载 (1).png"></p>
+<p><strong>概述：</strong></p>
+<p>在数据库系统中，封锁的方法可能引起活锁和死锁</p>
+<h4 id="活锁："><a href="#活锁：" class="headerlink" title="活锁："></a>活锁：</h4><p>如果事务t1封锁了数据r，事务t2又请求封锁r，于是t2等待；T3也请求封锁r，当t1释放r上的锁之后系统首先批准t3的请求，t2接着等，t4也请求封锁r，t3释放r系统又批准t4，就不给r2，r2一直等啊等，永远的等下去，这就是活锁的情景。</p>
+<p><strong>避免活锁：</strong></p>
+<p>系统采用先来先服务的策略。（先到先得）</p>
+<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后r1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
+<p><strong>死锁的预防（不适用）：</strong></p>
+<p>1.一次封锁法</p>
+<p>一次封锁法要求每个事务必须一次将所有使用的数据全部加锁，否则就不能继续执行。如上面的例子中，如果t1将r1和r2都加锁，当t1释放锁后t2在加锁，这样就不会发生死锁。</p>
+<p>2.顺序封锁法</p>
+<p>顺序封锁法是加锁前先对数据对象指定一个封锁顺序，所有事务都按照这个顺序执行。</p>
+<p>缺点：太复杂，成本高，</p>
+<p><strong>死锁的诊断与解除</strong></p>
+<h5 id="超时法："><a href="#超时法：" class="headerlink" title="超时法："></a>超时法：</h5><p>当一个事务的等待时间超过了规定的时间，就认为发生了死锁。</p>
+<p>缺点：时间设置太短，发生误判，时间太长，不能及时发现</p>
+<h5 id="等待图法："><a href="#等待图法：" class="headerlink" title="等待图法："></a>等待图法：</h5><p>事务等待图是一个有向图G=(T,U)，t为节点的集合，每个节点表示一个事务；u为边的集合，每个边表示事务等待的情况；t1等待t2，t1指向t2一条线。<br><img src="https://i.loli.net/2018/07/11/5b45d492ce632.jpg" alt="IMG_20180711_175547.jpg"></p>
+<p>同常采用的方法是选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有所有的锁，使其他事务得以继续运行下去。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/11/排他锁（写锁），共享锁（读锁）死锁 和 活锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="越狱">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YgY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/11/排他锁（写锁），共享锁（读锁）死锁 和 活锁/" itemprop="url">排他锁（写锁），共享锁（读锁）死锁 和 活锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T20:38:52+08:00">
+                2018-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yueguoyu.github.io/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="排他锁（写锁），共享锁（读锁）死锁-和-活锁"><a href="#排他锁（写锁），共享锁（读锁）死锁-和-活锁" class="headerlink" title="排他锁（写锁），共享锁（读锁）死锁 和 活锁"></a>排他锁（写锁），共享锁（读锁）死锁 和 活锁</h2><p><strong>排他锁（写锁，X锁）：</strong></p>
+<p>事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。</p>
+<p><strong>共享锁（读锁，S锁）：</strong></p>
+<p>若事务t对数据a加上s锁，则事务t可以读a但不能修改a，其他事务可以对a加s锁，而在t没有释放a的锁时不能加x锁，表示其他事务可以读取a的数据，但在t释放a</p>
+<p>的s锁之前不能对a进行修改。</p>
+<p><strong>分所类型的相容矩阵</strong></p>
+<p><img src="https://i.loli.net/2018/07/11/5b45d90889c7e.png" alt="下载 (1).png"></p>
+<p><strong>概述：</strong></p>
+<p>在数据库系统中，封锁的方法可能引起活锁和死锁</p>
+<h4 id="活锁："><a href="#活锁：" class="headerlink" title="活锁："></a>活锁：</h4><p>如果事务t1封锁了数据r，事务t2又请求封锁r，于是t2等待；T3也请求封锁r，当t1释放r上的锁之后系统首先批准t3的请求，t2接着等，t4也请求封锁r，t3释放r系统又批准t4，就不给r2，r2一直等啊等，永远的等下去，这就是活锁的情景。</p>
+<p><strong>避免活锁：</strong></p>
+<p>系统采用先来先服务的策略。（先到先得）</p>
+<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后t1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
+<p><strong>死锁的预防（不适用）：</strong></p>
+<p>1.一次封锁法</p>
+<p>一次封锁法要求每个事务必须一次将所有使用的数据全部加锁，否则就不能继续执行。如上面的例子中，如果t1将r1和r2都加锁，当t1释放锁后t2在加锁，这样就不会发生死锁。</p>
+<p>2.顺序封锁法</p>
+<p>顺序封锁法是加锁前先对数据对象指定一个封锁顺序，所有事务都按照这个顺序执行。</p>
+<p>缺点：太复杂，成本高，</p>
+<p><strong>死锁的诊断与解除</strong></p>
+<h5 id="超时法："><a href="#超时法：" class="headerlink" title="超时法："></a>超时法：</h5><p>当一个事务的等待时间超过了规定的时间，就认为发生了死锁。</p>
+<p>缺点：时间设置太短，发生误判，时间太长，不能及时发现</p>
+<h5 id="等待图法："><a href="#等待图法：" class="headerlink" title="等待图法："></a>等待图法：</h5><p>事务等待图是一个有向图G=(T,U)，t为节点的集合，每个节点表示一个事务；u为边的集合，每个边表示事务等待的情况；t1等待t2，t1指向t2一条线。<br><img src="https://i.loli.net/2018/07/11/5b45d492ce632.jpg" alt="IMG_20180711_175547.jpg"></p>
+<p>同常采用的方法是选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有所有的锁，使其他事务得以继续运行下去。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/11/环形链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1656,350 +1986,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/08/mysql 存储引擎/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/08/mysql 存储引擎/" itemprop="url">mysql 存储引擎MyISAM和InnoDB的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T14:07:52+08:00">
-                2018-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="mysql-存储引擎"><a href="#mysql-存储引擎" class="headerlink" title="mysql 存储引擎"></a>mysql 存储引擎</h2><h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><p>数据库存储引擎是数据库底层软件组件，数据库管理系统（DBMS）使用数据引擎进行创建，查询，更新和删除数据操作。不同的存储引擎提供不同的存储机制，索引技巧，锁定水平等功能，使用不同的存储引擎，还可以获得特定的功能。</p>
-<p>mysql提供了不同的存储引擎，mysql中不需要整个服务器用一个引擎，针对具体的要求，一个表可以用多个存储引擎。</p>
-<p><strong>InnoDB存储引擎</strong></p>
-<p>InnoDB事物型数据库首选的存储引擎，InnoDB主要特征：</p>
-<p>1.InnoDB给mysql提供了具有提交，回滚，崩溃恢复能力的事物安全（ACID兼容）存储引擎。</p>
-<p>2.InnoDB为了处理巨大数据量的最大性能设计。他的cpu效率相比与其他存储引擎是最好的。</p>
-<p>3.InnoDB存储引擎完全与mysql服务器整合，InnoDB将索引和表放在一个逻辑表空间中，表空间可以包含数个文件。而MyISAM表中每个表被存在在分离的文件中。</p>
-<p>4.InnoDB支持外键完整性约束。当表没有指定主键时，InnoDB会为每一行生成一个6字节的ROWID，并以此为主键。</p>
-<p>5.InnoDB应用在众多需要高性能的大型数据库站点上。</p>
-<p>InnoDB不创建目录，使用InnoDB时，MySQL在mysql数据目录下创建一个名为ibdata1的10mb大小的自动扩展数据文件，以及两个名为ib_logfile0和ib_logfile1的5mb大小的日志文件。</p>
-<p><strong>MyISAM存储引擎</strong></p>
-<p>MyISAM基于ISAM，他是在web，数据仓储和其他应用环境下最常使用的存储引擎之一。MyISAM拥有较高的插入，查询速度，但不支持事务。每张MyISAM表存放在三个文件中：frm 文件存放表格定义；数据文件是MYD (MYData)；索引文件是MYI (MYIndex)。 </p>
-<p><strong>MyISAM和InnoDB的区别：</strong></p>
-<p>一、InnoDB支持事务，MyISAM不支持，这一点是非常之重要。事务是一种高级的处理方式，如在一些列增删改中只要哪个出错还可以回滚还原，而MyISAM就不可以了。 </p>
-<p> 二、MyISAM适合查询以及插入为主的应用，InnoDB适合频繁修改以及涉及到安全性较高的应用  </p>
-<p>三、InnoDB支持外键，MyISAM不支持 </p>
-<p> 四、MyISAM是默认引擎，InnoDB需要指定  </p>
-<p>五、InnoDB不支持FULLTEXT类型的索引  </p>
-<p>六、InnoDB中不保存表的行数，如select count(<em>) from table时，InnoDB需要扫描一遍整个表来计算有多少行，但是MyISAM只要简单的读出保存好的行数即可。注意的是，当count(</em>)语句包含where条件时MyISAM也需要扫描整个表  </p>
-<p>七、对于自增长的字段，InnoDB中必须包含只有该字段的索引，但是在MyISAM表中可以和其他字段一起建立联合索引  </p>
-<p>八、清空整个表时，InnoDB是一行一行的删除，效率非常慢。MyISAM则会重建表  </p>
-<p>九、InnoDB支持行锁（某些情况下还是锁整表，如 update table set a=1 where user like ‘%lee%’  </p>
-<p><strong>应用场景：</strong></p>
-<ul>
-<li><p>MyISAM管理非事务表。它提供高速存储和检索，以及全文搜索能力。如果应用中需要执行大量的SELECT查询，那么MyISAM是更好的选择。</p>
-</li>
-<li><p>InnoDB用于事务处理应用程序，具有众多特性，包括ACID事务支持。如果应用中需要执行大量的INSERT或UPDATE操作，则应该使用InnoDB，这样可以提高多用户并发操作的性能。</p>
-</li>
-</ul>
-<p><strong>常用命令：</strong></p>
-<p>　　（1）查看表的存储类型（三种）：</p>
-<ul>
-<li>show create table tablename</li>
-<li>show table status from  dbname  where name=tablename</li>
-<li>mysqlshow  -u user -p password –status dbname tablename</li>
-</ul>
-<p>　　（2）修改表的存储引擎：</p>
-<ul>
-<li>alter table tablename type=InnoDB</li>
-</ul>
-<p>　　（3）启动mysql数据库的命令行中添加以下参数使新发布的表都默认使用事务：</p>
-<ul>
-<li>–default-table-type=InnoDB</li>
-</ul>
-<p>　　（4）临时改变默认表类型：</p>
-<ul>
-<li><p>set table_type=InnoDB</p>
-</li>
-<li><p>show variables like ‘table_type’</p>
-</li>
-</ul>
-<p>参考：1.<a href="http://www.cnblogs.com/panfeng412/archive/2011/08/16/2140364.html" target="_blank" rel="noopener">http://www.cnblogs.com/panfeng412/archive/2011/08/16/2140364.html</a><br>            2.<a href="https://my.oschina.net/junn/blog/183341" target="_blank" rel="noopener">https://my.oschina.net/junn/blog/183341</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/yueguoyu/yueguoyu.github.io/yueguoyu.github.io/2018/07/07/176. 第二高的薪水/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="越狱">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://i.loli.net/2018/05/28/5b0b594044b97.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YgY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/yueguoyu.github.io/2018/07/07/176. 第二高的薪水/" itemprop="url">第二高的薪水</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T18:33:53+08:00">
-                2018-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/yueguoyu.github.io/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="176-第二高的薪水"><a href="#176-第二高的薪水" class="headerlink" title="176. 第二高的薪水"></a>176. 第二高的薪水</h3><p><a href="https://leetcode-cn.com/problems/second-highest-salary/description/" target="_blank" rel="noopener">题目描述</a><a href="https://leetcode-cn.com/problems/second-highest-salary/hints/" target="_blank" rel="noopener">提示帮助</a><a href="https://leetcode-cn.com/problems/second-highest-salary/submissions/" target="_blank" rel="noopener">提交记录</a>社区讨论阅读解答</p>
-<p> SQL架构<a href="https://leetcode-cn.com/problems/random-one-question/" target="_blank" rel="noopener">随机一题</a></p>
-<hr>
-<p>编写一个 SQL 查询，获取 <code>Employee</code> 表中第二高的薪水（Salary） 。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+----+--------+</span><br><span class="line">| Id | Salary |</span><br><span class="line">+----+--------+</span><br><span class="line">| 1  | 100    |</span><br><span class="line">| 2  | 200    |</span><br><span class="line">| 3  | 300    |</span><br><span class="line">+----+--------+</span><br></pre></td></tr></table></figure>
-<p>例如上述 <code>Employee</code> 表，SQL查询应该返回 <code>200</code> 作为第二高的薪水。如果不存在第二高的薪水，那么查询应返回 <code>null</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+---------------------+</span><br><span class="line">| SecondHighestSalary |</span><br><span class="line">+---------------------+</span><br><span class="line">| 200                 |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
-<hr>
-<p><strong>先排序再改名</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select (select distinct  Salary from Employee order by Salary desc limit 1,1) as SecondHighestSalary;</span><br></pre></td></tr></table></figure>
-<h2 id="使用-DISTINCT-关键词去重，否则报错"><a href="#使用-DISTINCT-关键词去重，否则报错" class="headerlink" title="使用 DISTINCT 关键词去重，否则报错"></a>使用 DISTINCT 关键词去重，否则报错</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2054,7 +2040,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
