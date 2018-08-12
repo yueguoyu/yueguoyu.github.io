@@ -362,18 +362,21 @@
       
         
           
-            <p>加一</p>
-<p>给定一个<strong>非负整数</strong>组成的<strong>非空</strong>数组，在该数的基础上加一，返回一个新的数组。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出: [1,2,4]</span><br><span class="line">解释: 输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [4,3,2,1]</span><br><span class="line">输出: [4,3,2,2]</span><br><span class="line">解释: 输入数组表示数字 4321。</span><br></pre></td></tr></table></figure>
-<p>#####Java：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] plusOne(<span class="keyword">int</span>[] digits) &#123;</span><br><span class="line">   <span class="keyword">int</span> creay=<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i=digits.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">       <span class="keyword">if</span> (creay==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">int</span> tmp=digits[i]+creay;</span><br><span class="line">       creay=tmp/<span class="number">10</span>;</span><br><span class="line">       digits[i]=tmp%<span class="number">10</span>;</span><br><span class="line">   &#125;</span><br><span class="line">    <span class="keyword">if</span> (creay!=<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> [] re=<span class="keyword">new</span> <span class="keyword">int</span>[digits.length+<span class="number">1</span>];</span><br><span class="line">        re[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> digits;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#####go:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusOne</span><span class="params">(a [] <span class="keyword">int</span>)</span> [] <span class="title">int</span></span>&#123;</span><br><span class="line">	crray:=<span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="built_in">len</span>(a)<span class="number">-1</span>;i&gt;=<span class="number">0</span> ; i-- &#123;</span><br><span class="line">		<span class="keyword">if</span> crray==<span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> a</span><br><span class="line">		&#125;</span><br><span class="line">		tmp:=a[i]+crray</span><br><span class="line">		crray=tmp/<span class="number">10</span></span><br><span class="line">		a[i]=tmp%<span class="number">10</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> crray!=<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> newa [] <span class="keyword">int</span>=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="built_in">len</span>(a)+<span class="number">1</span>)</span><br><span class="line">		newa[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> newa</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
+          加一
+给定一个非负整数组成的非空数组，在该数的基础上加一，返回一个新的数组。
+最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。
+你可以假设除了整数 0 之外，这个整数不会以零开头。
+示例 1:
+123输入: [1,2,3]输出: [1,2,4]解释: 输入数组表示数字 123。
+示例 2
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/06/03/数组加一/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -513,18 +516,16 @@
       
         
           
-            <h3 id="对象的共享"><a href="#对象的共享" class="headerlink" title="对象的共享"></a>对象的共享</h3><h5 id="简述："><a href="#简述：" class="headerlink" title="简述："></a>简述：</h5><p>已知同步方法和同步代码块，可以以原子性的方式执行。同步还可以通过内存可见性实现。当多个线程对一个公共的数据进行set和get ，如果set和get方法不用synchronized修饰是非线程安全的。<br>为了确保多个线程之间对内存写入操作的可见性，必须使用同步机制。</p>
-<h4 id="失效数据"><a href="#失效数据" class="headerlink" title="失效数据"></a>失效数据</h4><p>多个线程调用一个数据时，一个线程获取的数据不是最新的，而是一个过期的数据。<br>失效问题：一个线程set后另一个线程get的数据可能不是最新的获知可能获取不到。</p>
-<h4 id="非原子的64位操作"><a href="#非原子的64位操作" class="headerlink" title="非原子的64位操作"></a>非原子的64位操作</h4><p>非volatile类型double，long变量，jvm在对64位的double或long变量的读操作或写操作是分为高位32和低位32位进行操作的，在进行操作时可能是取一个数的高32位而取另一个数的低32位。所以在多线程情况下要使用volatile关键字对double，long变量进行修饰。</p>
-<h4 id="volatile变量"><a href="#volatile变量" class="headerlink" title="volatile变量"></a>volatile变量</h4><p>volatile变量是一种稍微的同步机制。volatile变量不会存在寄存器或者对其他处理器不可见的地方，因此每次读取的数据都是最新的。volatile是一种比synchronization稍微弱的同步机制。<br>访问volatile变量时不需要加锁操作，因此也就不会使执行线程阻塞的。<br><strong>正确使用方法：</strong><br>确保它们自身状态的可见性，确保它们所引用对象的状态的可见性，以及标识一些重要的程序生命周期事件的发生（例如，初始化或关闭）<br><strong>局限性：</strong><br>volatile变量通常用做某个操作完成，发生中断或者状态的标志。</p>
-<p>####### 加锁机制能可以确保原子性和可见性，而volatile只能确保可见性。<br><strong>使用volatile前提：</strong><br>1.对变量的写入操作不依赖变量的当前值；<br>2.该变量不会与其他状态变量一起纳入不变性条件中。<br>3.在访问时不需要加锁。</p>
-<h5 id="线程封闭"><a href="#线程封闭" class="headerlink" title="线程封闭"></a>线程封闭</h5><p>一种避免使用同步的方法就是不共享数据。线程封闭是实现线程安全性的最简单的方式之一。<br><strong>Ad-hoc线程封闭</strong><br>Ad-hoc线程封闭是指，维护线程封闭性的职责完全由程序实现来承担，它是非常脆弱的，因为没有任何一种语言特性，能将对象封闭到目标线程上。一般不使用。<br><strong>栈封闭</strong><br>在栈封闭中，只能通过局部变量才能访问对象。局部变量封闭在执行线程中，它们位于执行线程的栈中，其他线程无法访问这个栈。栈封闭也被称为线程内部使用或线程局部使用。比Ad-hoc更加易于维护，更加健壮。<br><strong>ThreadLocal类</strong><br>ThreadLocal类能使线程中的某个值与保存值的对象关联起来。<br>ThreadLocal 为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量。<br>ThreadLoacl类中使用map存储数据，key为线程而value为变量副本。<br>ThreadLocal类中有一个ThreadLocalMap内部类，用来存储副本key为线程，而value为变量的副本。</p>
-<h2 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h2><p><strong>什么是不变性</strong><br>不变性指对象的状态不改变。<br>不变性对象一定是线程安全的。<br><strong>满足条件</strong><br>1.对象创建后其状态不再改变<br>2.对象的所有域都是final类型的<br>3.对象是正确创建的（在对象创建之间，this引用没有逸出）</p>
-<h4 id="Final域"><a href="#Final域" class="headerlink" title="Final域"></a>Final域</h4><p>final域能确保初始化过程中的安全性，从而可以不受限制的访问不可变对象，并在共享这些对象的时无须同步。</p>
-<h3 id="除非需要更高的可见性，否则应将所有的域都声明为私有域"><a href="#除非需要更高的可见性，否则应将所有的域都声明为私有域" class="headerlink" title="除非需要更高的可见性，否则应将所有的域都声明为私有域"></a>除非需要更高的可见性，否则应将所有的域都声明为私有域</h3><h3 id="除非需要某个域是可变的，否则应将其声明为final域"><a href="#除非需要某个域是可变的，否则应将其声明为final域" class="headerlink" title="除非需要某个域是可变的，否则应将其声明为final域"></a>除非需要某个域是可变的，否则应将其声明为final域</h3><p>####使用volatile类型来发布不可变对象<br>在某些情况下，不可变对象能提供一种弱形式的原子性，对于在访问和更新多个相关变量的竞争问题，可以将这些变量存储在一个不变对象中来消除。如果是一个可变对象，只能用锁来确保原子性。如果是一个不可变对象，当一个线程获得他的值后，另一个线程不能改变对象的状态。<br>更新这些变量时，创建一个新的容器对象，但其他使用原有对象的线程仍然会看到对象处于一致状态。<br>使用不可变对象容器的volatile类型引用以缓存最新的结果。<br>volatile在修饰不可变对象容器时是线程安全的。</p>
-<p>##安全发布<br><strong>为什么要安全发布</strong><br>要在足够同步的情况下发布对象，不安全的发布会导致其他线程看见尚未完成的对象。<br>对象在不完全发布时会出现两个问题：<br>1.当一个对象未安全发布时除了发布对象的线程外其他线程看见的对象要么是旧值，要么是空引用。<br>2.某一个线程在第一次读取时得到失效值，而再一次读取这个域时会得到一个更新值。</p>
-
-          
+          对象的共享简述：已知同步方法和同步代码块，可以以原子性的方式执行。同步还可以通过内存可见性实现。当多个线程对一个公共的数据进行set和get ，如果set和get方法不用synchronized修饰是非线程安全的。为了确保多个线程之间对内存写入操作的可见性，必须使用同步机制。
+失效数据多个线程调用一
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/06/03/java-并发编程实战-读书笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -664,10 +665,15 @@
       
         
           
-            <h2 id="买卖股票的最佳时机-II"><a href="#买卖股票的最佳时机-II" class="headerlink" title="买卖股票的最佳时机 II"></a>买卖股票的最佳时机 II</h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。<br>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。<br>示例 1:<br>输入: [7,1,5,3,6,4]输出: 7解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。<br>示例 2:<br>输入: [1,2,3,4,5]输出: 4解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。<br>     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。<br>     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。<br>示例 3:<br>输入: [7,6,4,3,1]输出: 0解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
-<h3 id="思路：因为要获取最大利润，所以只要后面比前面的大就获利"><a href="#思路：因为要获取最大利润，所以只要后面比前面的大就获利" class="headerlink" title="思路：因为要获取最大利润，所以只要后面比前面的大就获利"></a>思路：因为要获取最大利润，所以只要后面比前面的大就获利</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">java版本:</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> (prices==<span class="keyword">null</span> || prices.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min=prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (prices[i]&gt;min)&#123;</span><br><span class="line"></span><br><span class="line">               sum+=prices[i]-min;</span><br><span class="line"></span><br><span class="line">               min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                min=prices[i];</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span>版本:</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a []<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(a)==<span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	min := a[<span class="number">0</span>]</span><br><span class="line">	sum :=<span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="built_in">len</span>(a) ;i++  &#123;</span><br><span class="line">		<span class="keyword">if</span> min&lt;a[i] &#123;</span><br><span class="line">			sum+=(a[i]-min)</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			min=a[i]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          买卖股票的最佳时机 II给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。示例 1:输入: [7,1,5,3,6,4]输出: 7
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/06/03/买卖股票的最佳时机 II/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -807,20 +813,17 @@
       
         
           
-            <h1 id="旋转数组"><a href="#旋转数组" class="headerlink" title="旋转数组"></a>旋转数组</h1><p>给定一个数组，将数组中的元素向右移动 <em>k</em> 个位置，其中 <em>k</em> 是非负数。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3,4,5,6,7] 和 k = 3</span><br><span class="line">输出: [5,6,7,1,2,3,4]</span><br><span class="line">解释:</span><br><span class="line">向右旋转 1 步: [7,1,2,3,4,5,6]</span><br><span class="line">向右旋转 2 步: [6,7,1,2,3,4,5]</span><br><span class="line">向右旋转 3 步: [5,6,7,1,2,3,4]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: [-1,-100,3,99] 和 k = 2</span><br><span class="line">输出: [3,99,-1,-100]</span><br><span class="line">解释: </span><br><span class="line">向右旋转 1 步: [99,-1,-100,3]</span><br><span class="line">向右旋转 2 步: [3,99,-1,-100]</span><br></pre></td></tr></table></figure>
-<p><strong>说明:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。</span><br><span class="line"></span><br><span class="line">- 要求使用空间复杂度为 O(1) 的原地算法。</span><br></pre></td></tr></table></figure></p>
-<p><strong>方法一：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-利用length-k将数组分为两部分</span><br><span class="line">-分别调换两段数组</span><br><span class="line">-再转化整个数组</span><br><span class="line">例如：</span><br><span class="line">    1 2 3 4 5 6 7　　如果k = 3 的话， 会变成 5 6 7 1 2 3 4</span><br><span class="line"></span><br><span class="line">　　1 2 3 4 5 6 7　　middle = 7 - 3 = 4，分为左边 4个数字，右边 3个数字</span><br><span class="line"></span><br><span class="line">　　4 3 2 1 7 6 5　　分别把左右swap 一下</span><br><span class="line"></span><br><span class="line">　　5 6 7 1 2 3 4　　把总数组swap 一下就会得到答案</span><br><span class="line">​`</span><br></pre></td></tr></table></figure></p>
-<p><strong>java:</strong><br>​<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length==<span class="number">0</span>||nums==<span class="keyword">null</span>||k%nums.length==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">int</span> t=k%nums.length;</span><br><span class="line">        <span class="keyword">int</span> sta=nums.length-t;</span><br><span class="line">        swap(nums,<span class="number">0</span>,sta-<span class="number">1</span>);</span><br><span class="line">        swap(nums,sta,nums.length-<span class="number">1</span>);</span><br><span class="line">        swap(nums,<span class="number">0</span>,nums.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = a[i];</span><br><span class="line">            a[i] = a[j];</span><br><span class="line">            a[j] = tmp;</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>go:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">func rotate(nums []int,k int)  &#123;</span><br><span class="line">	if len(nums)==0 || nums==nil ||k%len(nums)==0 &#123;</span><br><span class="line">		return </span><br><span class="line">	&#125;</span><br><span class="line">	t:=k%len(nums)</span><br><span class="line">	sta:=len(nums)-t</span><br><span class="line">	swap(nums,0,sta-1)</span><br><span class="line">	swap(nums,sta,len(nums)-1)</span><br><span class="line">	swap(nums,0,len(nums)-1)</span><br><span class="line">&#125;</span><br><span class="line">func swap(a [] int,i int,j int)  &#123;</span><br><span class="line">	for i&lt;j&#123;</span><br><span class="line">		tmp:=a[i]</span><br><span class="line">		a[i]=a[j]</span><br><span class="line">		a[j]=tmp</span><br><span class="line">		i++</span><br><span class="line">		j--</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>方法二：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-创建一个大小相同的数组</span><br><span class="line">-然后将原数组中的值写到新数组中，关键点（a[(i + k) % nums.length] = nums[i];）</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] rotate1(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">//关键点</span></span><br><span class="line">            a[(i + k) % nums.length] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>go:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func rotate1(nums [] int,k int)  []int&#123;</span><br><span class="line">	//go中切片 相当于动态数组 切片的长度不是固定的，在追加时可能使的容量增大</span><br><span class="line">	var a [] int=make([]int,len(nums))</span><br><span class="line">	for i:=0;i&lt;len(nums) ;i++  &#123;</span><br><span class="line">		a[(i+k)%len(nums)]=nums[i]</span><br><span class="line">	&#125;</span><br><span class="line">	return a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
+          旋转数组给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+示例 1:
+123456输入: [1,2,3,4,5,6,7] 和 k = 3输出: [5,6,7,1,2,3,4]解释:向右旋转 1 步: [7,1,2,3,4,5,6]向右旋转 2 步: [6,7,1,2,3,4,5
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/29/旋转数组/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -960,68 +963,21 @@
       
         
           
-            <p>踩过的坑  防止再掉</p>
-<h2 id="1-mysql文件和文件夹-linux-配置文件文件后缀为cnf"><a href="#1-mysql文件和文件夹-linux-配置文件文件后缀为cnf" class="headerlink" title="1.mysql文件和文件夹(linux 配置文件文件后缀为cnf)"></a>1.mysql文件和文件夹(linux 配置文件文件后缀为cnf)</h2><p>  bin  放可执行性文件</p>
-<p>  include   存放头文件</p>
-<p>  lib   存放库文件</p>
-<p>  share    存放字符集，语言等信息</p>
-<p>  my.ini    mysql软件正在使用的配置文件</p>
-<p>   my-huge.ini    当mysql软件为超大型数据库时使用的配置文件</p>
-<p>  my-small.ini     当mysql软件为小型数据库时使用的配置文件</p>
-<p>  my-template.ini   配置文件模板</p>
-<h2 id="2-my-ini配置文件中的内容可实现修改数据库实例的参数（linux中为my-cnf）"><a href="#2-my-ini配置文件中的内容可实现修改数据库实例的参数（linux中为my-cnf）" class="headerlink" title="2.my.ini配置文件中的内容可实现修改数据库实例的参数（linux中为my.cnf）"></a>2.my.ini配置文件中的内容可实现修改数据库实例的参数（linux中为my.cnf）</h2><p>   客户端</p>
-<p> [mysql]</p>
-<p>客户端的端口号</p>
-<p>prot=3306</p>
-<p>客户端默认字符集</p>
-<p>default-character-set=utf8</p>
-<p>[mysqld]</p>
-<p>服务端</p>
-<p>   prot=3306</p>
-<p> 数据库服务器的安装目录</p>
-<p> basedir=？？？？</p>
-<p> mysql数据库数据文件的目录</p>
-<p>datadir=？？？</p>
-<p>mysql软件端的字符集</p>
-<p>character-set-server=utf8</p>
-<p>mysql软件的存储引擎</p>
-<p>default-storage-engine=INNODB</p>
-<p>mysql最大连接数</p>
-<p>max-connections=100</p>
-<p>mysql软件缓存</p>
-<p>query_cache_size=0</p>
-<p>mysql中可以打开表的总数</p>
-<p>table_cache=256</p>
-<p>mysql软件内存中可以存储临时表的最大值</p>
-<p>tem_table_size=9m</p>
-<p>mysql软件可以保留的客户端链接线程数</p>
-<p>thread_cache_size=8</p>
-<p>mysql软件重建索引时允许的最大临时文件的大小</p>
-<p>myisam_max_sort_file_size=10G</p>
-<p>mysql软件重建索引时允许的最大缓存的大小</p>
-<p>myisam_sort_buffer_size=17m</p>
-<p>mysql软件中最大关键字缓存的大小</p>
-<p>key_buffer_size=10m</p>
-<p>mysql软件全扫描myisam表时的缓存大小</p>
-<p>read_buffer_size=6k</p>
-<p>mysql软件可以插入排序好的数据的缓存的小</p>
-<p>read_rnd_buffer_size=256k</p>
-<p>mysql软件用户排序时缓存的大小</p>
-<p>sort_buffer_size=256k</p>
-<h2 id="关于INNODB存储引擎参数设置"><a href="#关于INNODB存储引擎参数设置" class="headerlink" title="关于INNODB存储引擎参数设置"></a>关于INNODB存储引擎参数设置</h2><p>附加内存池大小</p>
-<p>innodb_additional_mem_pool_size=2m</p>
-<p>关于提交日志的时机</p>
-<p>innodb_flush_log_at_trx_commit=1</p>
-<p>存储日志数据的缓存区的大小</p>
-<p>innodb_log_buffer_size=1m</p>
-<p>缓存池中缓存区的大小</p>
-<p>innodb_buffer_pool_size=17m</p>
-<p>日记文件的大小</p>
-<p>innodb_log_file_size=10m</p>
-<p>允许线程的最大数</p>
-<p>innodb_thread_concurrency=8</p>
-
-          
+          踩过的坑  防止再掉
+1.mysql文件和文件夹(linux 配置文件文件后缀为cnf)  bin  放可执行性文件
+  include   存放头文件
+  lib   存放库文件
+  share    存放字符集，语言等信息
+  my.ini    mysql软件正在使用的配置文件
+   my-h
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/27/mysql配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1161,26 +1117,15 @@
       
         
           
-            <p><strong>三者不同点 </strong><br>1，string 类是不可变的，一旦创建了String对象，那她就无法改变<br>2，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。<br><strong> 线程安全</strong><br>StringBuffer是线程安全的，而StringBuilder是非线程安全的。<br><strong> 运行速度</strong><br>1.StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
-<p>2.StringBuffer 和 StringBuilder 长度可变</p>
-<p><strong>StringBuffer &amp;&amp; StringBuilder  &amp;&amp;  String</strong></p>
-<p>StringBuffer：一个线程安全的，可变的字符序列。字符串缓冲区就像一个String，但可以修改。在任何时候它都包含一些特定的字符序列，但是序列的长度和内容可以通过某些方法调用来改变。字符串缓冲区对于多线程来说是安全的。这些方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生，这与每个涉及的单个线程所进行的方法调用的顺序一致。</p>
-<p>上的主要操作StringBuffer是 append和insert方法，其被重载，以便接受任何类型的数据。每个函数都有效地将给定的数据转换为字符串，然后将该字符串的字符附加或插入到字符串缓冲区中。该 append方法总是将这些字符添加到缓冲区的末尾; 该insert方法在指定的点添加字符。</p>
-<p>如果sb指的是a的一个实例StringBuffer，那么sb.append(x)效果与之相同 sb.insert(sb.length(), x)。</p>
-<p>每个字符串缓冲区都有一个容量 只要包含在字符串缓冲区中的字符序列的长度不超过容量，就不需要分配新的内部缓冲区数组。如果内部缓冲区溢出，它会自动变大。从版本JDK 5开始，这个类已经补充了一个为单个线程设计的等价类StringBuilder。由于StringBuilder类支持所有相同的操作，所以通常会优先使用StringBuilder类，但速度更快，因为它不执行同步操作。</p>
-<p>StringBuilder：一个可变的字符序列。这个类提供了一个兼容的API StringBuffer，但不保证同步。这个类被设计成在StringBuffer单个线程正在使用字符串缓冲区的地方（如通常情况下）用作嵌入式替换 。在可能的情况下，建议优先使用此类， StringBuffer因为在大多数实现中它会更快。</p>
-<p>上的主要操作StringBuilder是 append和insert方法，其被重载，以便接受任何类型的数据。每个有效地将给定的数据转换为一个字符串，然后将该字符串的字符追加或插入到字符串生成器。该 append方法总是在构建器的最后添加这些字符; 该insert方法在指定的点添加字符。</p>
-<p>StringBuilder多线程使用的实例不安全。如果需要这种同步，则建议StringBuffer使用。</p>
-<p>String：String类代表字符串。Java程序中的所有字符串文字，例如”abc”，都被实现为这个类的实例。<br>字符串是不变的; 他们的价值创造后不能改变。字符串缓冲区支持可变字符串。因为String对象是不可变的，所以它们可以共享。</p>
-<p><strong>StringBuffer源码</strong><br>1.StringBuffer一个线程安全的，可变的字符序列。<br>2.StringBuffer就像一个String，但可以修改。在任何时间点，它都包含一些特定的字符列，但是序列的长度和内容可以通过某些方法调用来改变<br>3.字符串缓冲区对于多线程使用是安全的。 方法在必要时进行同步，以便任何特定实例上的所有操作的行为就好像它们以某种连续顺序发生一样，这与每个涉及的各个线程所进行的方法调用的顺序一致。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public final class StringBuffer</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence&#123;</span><br><span class="line">      /**</span><br><span class="line">     * 构造一个没有字符的字符串缓冲区，并且字符的初始容量为16个字符。</span><br><span class="line">     */</span><br><span class="line">    public StringBuffer() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个没有字符的字符串缓冲区，并且指定的初始容量</span><br><span class="line">    */</span><br><span class="line">    public StringBuffer(int capacity) &#123;</span><br><span class="line">        super(capacity);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *构造一个字符串缓冲区，初始化为*指定字符串的内容。, 字符串缓冲区的初始容量是16加上字符串参数      *的长度。</span><br><span class="line">    */</span><br><span class="line">     public StringBuffer(String str) &#123;</span><br><span class="line">        super(str.length() + 16);</span><br><span class="line">        append(str);</span><br><span class="line">    &#125;</span><br><span class="line">     /**</span><br><span class="line">     * 构造一个字符串缓冲区，其中包含与指定CharSequence相同的字符字符串缓冲区的初始      *容量是 16加上CharSequence参数的长度。</span><br><span class="line">     * @param seq</span><br><span class="line">     */</span><br><span class="line">     public StringBuffer(CharSequence seq) &#123;</span><br><span class="line">        this(seq.length() + 16);</span><br><span class="line">        append(seq);</span><br><span class="line">    &#125;</span><br><span class="line">    //最常用的append 将sb加到该序列  synchronized修饰线程安全的</span><br><span class="line">     public synchronized StringBuffer append(StringBuffer sb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">     @Override</span><br><span class="line">    public synchronized StringBuffer append(CharSequence s) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(s);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    synchronized StringBuffer append(AbstractStringBuilder asb) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(asb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>####StringBufer类final修饰说明这个类是“终态的”,不能被继承。类中的方法默认是final所以不能被覆盖。final方法 方法将不能被覆盖</p>
-<p>#####StringBuilder</p>
-<p>一个可变的字符序列，该类提供一个api与stringCuffer兼容，但不是同步的。这个类被设计在单个线程使用字符串缓存的地方用作（StringBuffer）的嵌入替代品，在大多数实现中它更快。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*StringBuilder和stringBuffer 继承和实现的接口相同</span><br><span class="line">*/</span><br><span class="line">public final class StringBuilder</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence</span><br><span class="line">&#123;</span><br><span class="line">/*</span><br><span class="line">*构造方法和StringBuffer相同</span><br><span class="line">*/</span><br><span class="line">  public StringBuilder() &#123;</span><br><span class="line">        super(16);</span><br><span class="line">    &#125;</span><br><span class="line">    /*</span><br><span class="line">    *不同就是append方法  StringBuffer的append方法被synchronized修饰所以是线程安     *全的</span><br><span class="line">    */</span><br><span class="line">     public StringBuilder append(StringBuffer sb) &#123;</span><br><span class="line">        super.append(sb);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>#####String是不可变的，他们的值创建后无法改变</p>
-
-          
+          三者不同点 1，string 类是不可变的，一旦创建了String对象，那她就无法改变2，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。 线程安全StringBuffer是线程安全的，而StringBuilder是非线程安全的。 运行速
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1320,32 +1265,15 @@
       
         
           
-            <h1 id="java反射"><a href="#java反射" class="headerlink" title="java反射"></a>java反射</h1><h2 id="一-概念"><a href="#一-概念" class="headerlink" title="一 概念"></a>一 概念</h2><h3 id="1-JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。通过class类调用自身的方法属性等"><a href="#1-JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。通过class类调用自身的方法属性等" class="headerlink" title="1.JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。通过class类调用自身的方法属性等"></a>1.JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。通过class类调用自身的方法属性等</h3><h2 id="二-class对象获得"><a href="#二-class对象获得" class="headerlink" title="二 class对象获得"></a>二 class对象获得</h2><p>Class对象的由来是将class文件读入内存，并为之创建一个Class对象。通过这个对象可以获取类的相关信息</p>
-<p>获取Class对象的三种方式<br>1.1 Object ——&gt; getClass();<br>1.2 任何数据类型（包括基本数据类型）都有一个“静态”的class属性<br>1.3 通过Class类的静态方法：forName（String ?className）(常用)</p>
-<pre><code>public static void main(String[] args) {
-    T515 t515=new T515();
-    /**
-     * 1.返回此的运行时类
-     */
-    Class aClass=t515.getClass();
-    /**
-     * 2.获取class对象
-     */
-    Class aClass1=T515.class;
-    try {
-        /**
-         * 3.用给定的字符串名返回与类或接口关联的Class对象
-         */
-        Class aClass2 = Class.forName(&quot;T515.T515&quot;);
-        System.out.println(aClass2==aClass);
-    }catch (Exception e){
-        e.printStackTrace();
-    }
-    System.out.println(aClass==aClass1);
-}
-结果为  两个true
-</code></pre><h3 id="三-可以通过class对象获取类的相关类信息"><a href="#三-可以通过class对象获取类的相关类信息" class="headerlink" title="三 可以通过class对象获取类的相关类信息"></a>三 可以通过class对象获取类的相关类信息</h3>
-          
+          java反射一 概念1.JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。通过class类调用自身的方法属性等二 class对象获得Class对象的由
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/27/java反射/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1485,57 +1413,21 @@
       
         
           
-            <p>一：一对一   用association</p>
-<p>一   建表</p>
-<p>   course 课程与score 课程成绩表是一对一关系</p>
-<p> course课程表<br> <img src="https://i.loli.net/2018/05/27/5b0aaea7dab99.png" alt="mybatis2.png"></p>
-<p>score课程成绩表<br><img src="https://i.loli.net/2018/05/27/5b0aaea7dabee.png" alt="1mybatis.png"></p>
-<p>连接数据库dbconf.xml<br><img src="https://i.loli.net/2018/05/27/5b0aaea7da9f0.png" alt="mybatis3.png"></p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE configuration PUBLIC “-//mybatis.org//DTD Config 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</a></p>
-<p><configuration><br>   <properties resource="db.properties"></properties><br>    <environments default="development"><br>        <environment id="development"><br>            <transactionmanager type="JDBC"><br>            <!-- 配置数据库连接信息 --><br>            <datasource type="POOLED"><br>                <property name="driver" value="${jdbc.driver}"><br>                <property name="url" value="${jdbc.url}"><br>                <property name="username" value="${jdbc.username}"><br>                <property name="password" value="${jdbc.password}"><br>            </property></property></property></property></datasource><br>        </transactionmanager></environment><br>    </environments></configuration></p>
-<p><mappers><br>    <!--<mapper resource="StfMapper.xml"/>--><br>    <!--<mapper resource="KcMapper.xml"/>--><br>    <mapper resource="StudMapper.xml"><br>    <mapper resource="ScoreMapper.xml"><br>    <mapper resource="CourseMapper.xml"><br></mapper></mapper></mapper></mappers><br><br>写一个db.properties文件<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://localhost:3306/myba<br>jdbc.username=root<br>jdbc.password=×××</p>
-<p> 二 使用mybatis插件自动生成相对应表的配置文件</p>
-<p>   CourseMapper.xml</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
-<mapper namespace="com.ygy.mapper.CourseMapper"><br>  <resultmap id="course" type="com.ygy.model.Course"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Fri Oct 27 12:25:54 CST 2017.
-    --><br>    <id column="coid" property="coid" jdbctype="INTEGER"><br>    <result column="coname" property="coname" jdbctype="VARCHAR"><br>  </result></id></resultmap><br> <select id="selectcou" resultmap="course" parametertype="int"><br>   SELECT myba.course.* from myba.course WHERE coid=#{coid}<br> </select><br></mapper>
-
-<p>CourseMapper接口<br>*CourseMapper.xml是对接口的实现 所以 select 的id与接口中方法名相同<br>package com.ygy.mapper;</p>
-<p>import com.ygy.model.Course;<br>import com.ygy.model.CourseExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
-<p>public interface CourseMapper {<br>    public Course selectcou(int id);<br>}</p>
-<p>ScoreMapper.xml<br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;</p>
-<mapper namespace="com.ygy.mapper.ScoreMapper"><br>  <resultmap id="score" type="com.ygy.model.Score"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Fri Oct 27 12:25:54 CST 2017.
-    --><br>    <id column="scid" property="scid" jdbctype="INTEGER"><br>    <result column="scsid" property="scsid" jdbctype="INTEGER"><br>    <result column="sckcid" property="sckcid" jdbctype="INTEGER"><br>    <result column="mark" property="mark" jdbctype="VARCHAR"><br>    <association property="course" column="sckcid" select="com.ygy.mapper.CourseMapper.selectcou"><br>  </association></result></result></result></id></resultmap><br>  <select id="selectscore" parametertype="int" resultmap="score"><br>    select myba.score.<em> from myba.score WHERE myba.score.scsid=#{id}<br>  </em></select><br></mapper><br>ScoreMapper接口<br>package com.ygy.mapper;<br><br>import com.ygy.model.Score;<br>import com.ygy.model.ScoreExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;<br><br>public interface ScoreMapper {<br>  public Score selectscore(int id);<br>}<br>在score的model中加上<br>private Course course;<br>//get set方法<br><br>三 测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;<br><br>      try {<br>          inputStream= Resources.getResourceAsStream(“dbconf.xml”);<br>          sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);<br>          sqlSession=sqlSessionFactory.openSession()；<br>          //SCORC和course一对一<br>            ScoreMapper scoreMapper=sqlSession.getMapper(ScoreMapper.class);<br>            Score score=scoreMapper.selectscore(1);<br>          System.out.println(score.getCourse().getConame());<br><br>      } catch (IOException e) {<br>          e.printStackTrace();<br>      }finally {<br>          sqlSession.close();<br>      }<br>二：一对多   collection<br>加入学生表<br>stud<br><br>插件生成对应的接口什么的<br><br>&lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;<br>&lt;!DOCTYPE mapper PUBLIC “-//mybatis.org//DTD Mapper 3.0//EN” “<a href="http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;" target="_blank" rel="noopener">http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</a> &gt;<br><mapper namespace="com.ygy.mapper.StudMapper"><br>  <resultmap id="stud" type="com.ygy.model.Stud"><br>    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Thu Oct 26 15:09:44 CST 2017.
-    --><br>    <id column="sid" property="sid" jdbctype="INTEGER"><br>    <result column="sname" property="sname" jdbctype="VARCHAR"><br>    <!--<association property="kc" column="sid" select="com.ygy.mapper.KcMapper.select"/>--><br>    <collection property="scoreList" column="sid" select="com.ygy.mapper.ScoreMapper.selectscore"><br>   <!--collection 将column的数据传到select对应的接口   property映射到列结果的字段或属性--><br>  </collection></result></id></resultmap><br><select id="selectsud" parametertype="int" resultmap="stud"><br>  SELECT myba.stud. FROM  myba.stud WHERE myba.stud.sid=#{id}<br></select><br></mapper>
-
-<p>接口<br>package com.ygy.mapper;</p>
-<p>import com.ygy.model.Stud;<br>import com.ygy.model.StudExample;<br>import java.util.List;<br>import org.apache.ibatis.annotations.Param;</p>
-<p>public interface StudMapper {<br>   public Stud selectsud(int id);<br>}</p>
-<p>测试<br>@Test<br>  public void main(){<br>       SqlSessionFactory sqlSessionFactory;<br>       InputStream inputStream;</p>
-<pre><code>try {
-    inputStream= Resources.getResourceAsStream(&quot;dbconf.xml&quot;);
-    sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
-    sqlSession=sqlSessionFactory.openSession();
-   　　　　 StudMapper studMapper=sqlSession.getMapper(StudMapper.class);
-   　　　　 Stud stud=studMapper.selectsud(1);
-    　　　　System.out.println(stud.getScoreList().get(1).getMark());
-　　　　  } catch (IOException e) {
-  　　　　  e.printStackTrace();
- 　　　　 }finally {
-   　　　　 sqlSession.close();
- 　　　　 }
-</code></pre><p>结果：<br><img src="https://i.loli.net/2018/05/27/5b0aaea7e92f8.png" alt="mybatis4.png"></p>
-
-          
+          一：一对一   用association
+一   建表
+   course 课程与score 课程成绩表是一对一关系
+ course课程表 
+score课程成绩表
+连接数据库dbconf.xml
+&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;&lt;!DOC
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/27/mybats级联/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1675,15 +1567,15 @@
       
         
           
-            <h2 id="一-generatorconfig-xml文件"><a href="#一-generatorconfig-xml文件" class="headerlink" title="一.generatorconfig.xml文件"></a>一.generatorconfig.xml文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;context id=&quot;mysqlgenerator&quot; targetRuntime=&quot;MyBatis3&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;com.mysql.jdbc.Driver&quot;</span><br><span class="line">                        connectionURL=&quot;jdbc:mysql://localhost:3306/ygy&quot;</span><br><span class="line">                        userId=&quot;root&quot;</span><br><span class="line">                        password=&quot;***&quot; /&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--targetProject 后面跟的是model放的位置 targetPackage放的包名--&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.nomico271.model&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;com.nomico271.mapper&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.nomico271.mapper&quot; targetProject=&quot;src&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;table tableName=&quot;ygy1&quot;/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;/context&gt;</span><br><span class="line"></span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
-<p>##二.pox.xml文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">  &lt;groupId&gt;generator&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;generator&lt;/artifactId&gt;</span><br><span class="line">  &lt;packaging&gt;war&lt;/packaging&gt;</span><br><span class="line">  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">  &lt;name&gt;generator Maven Webapp&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.8.1&lt;/version&gt;</span><br><span class="line">      &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.3.0&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.34&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">//××引包</span><br><span class="line">  &lt;/dependencies&gt;</span><br><span class="line">  &lt;build&gt;</span><br><span class="line">    &lt;finalName&gt;generator&lt;/finalName&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">      &lt;plugin&gt;</span><br><span class="line">        &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.3.2&lt;/version&gt;</span><br><span class="line">        &lt;dependencies&gt;</span><br><span class="line">          &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.34&lt;/version&gt;</span><br><span class="line">          &lt;/dependency&gt;</span><br><span class="line">        &lt;/dependencies&gt;</span><br><span class="line">        &lt;configuration&gt;</span><br><span class="line">          &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">        &lt;/configuration&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">  &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">完成上面的配置  然后打开maven--&gt;plugins---&gt;mybatis-generator---&gt;mybatis-generator:generate</span><br><span class="line">运行mybatis-generator:generate完成自动生成所需要的文件</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##  三.添加数据到数据库中</span><br><span class="line">import com.nomico271.model.Ygy1;</span><br><span class="line">import org.apache.ibatis.io.Resources;</span><br><span class="line">import org.apache.ibatis.session.SqlSession;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.Reader;</span><br><span class="line"></span><br><span class="line">public class main &#123;</span><br><span class="line">    static  Reader reader;</span><br><span class="line">    static SqlSession session;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            reader= Resources.getResourceAsReader(&quot;ygy.xml&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        finally &#123;</span><br><span class="line">            SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">              session=sqlSessionFactory.openSession();</span><br><span class="line">            Ygy1 ygy1=new Ygy1();</span><br><span class="line">            ygy1.setId(3);</span><br><span class="line">            ygy1.setName(&quot;sdhuaik&quot;);</span><br><span class="line">            session.insert(&quot;insert&quot;,ygy1);</span><br><span class="line">            session.commit();</span><br><span class="line">            session.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">运行程序显示 说明添加成功（其他删，改，查相似）</span><br></pre></td></tr></table></figure>
-          
+          一.generatorconfig.xml文件12345678910111213&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration        PUB
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/23/mybatis自动生成代码插件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1801,8 +1693,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/05/23/test/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -362,15 +362,17 @@
       
         
           
-            <h2 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h2><p>给定一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？找出所有满足条件且不重复的三元组。</p>
-<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，</span><br><span class="line"></span><br><span class="line">满足要求的三元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>先将数组排序，然后从头遍历数组，在除了当前数的其他数组中设置left=i+1，right=nums.length-1，让这俩指针向中间运动，如果三数之和为0，则保存。</p>
-<p>这题不跳过重复的显示超时。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">       List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">       <span class="keyword">if</span> (nums == <span class="keyword">null</span>||nums.length&lt;<span class="number">3</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> list;</span><br><span class="line">       &#125;</span><br><span class="line">       Arrays.sort(nums);</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length-<span class="number">2</span>; i++) &#123;</span><br><span class="line">           <span class="keyword">int</span> left = i + <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">           <span class="keyword">if</span>(i&gt;<span class="number">0</span>&amp;&amp;nums[i]==nums[i-<span class="number">1</span>])&#123;<span class="keyword">continue</span>;&#125;;</span><br><span class="line">           <span class="keyword">if</span> (nums[i]+nums[i+<span class="number">1</span>]+nums[i+<span class="number">2</span>]&gt;<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">if</span> (nums[right]+nums[right-<span class="number">1</span>]+nums[i]&lt;<span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">               List&lt;Integer&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">               <span class="keyword">int</span> sum = nums[i] + nums[left] + nums[right];</span><br><span class="line">               <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                   list1.add(nums[i]);</span><br><span class="line">                   list1.add(nums[left]);</span><br><span class="line">                   list1.add(nums[right]);</span><br><span class="line">                   <span class="keyword">if</span> (!list.contains(list1)) &#123;</span><br><span class="line">                       list.add(list1);</span><br><span class="line">                   &#125;</span><br><span class="line">                   left++;</span><br><span class="line">                   right--;</span><br><span class="line">               &#125;<span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                   left++;</span><br><span class="line">                   <span class="comment">//跳过重复的</span></span><br><span class="line">                   <span class="keyword">while</span>(left&lt;right&amp;&amp;nums[left]==nums[left-<span class="number">1</span>])&#123;left++;&#125;</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                   right--;</span><br><span class="line">                  <span class="comment">//跳过重复的 while(left&lt;right&amp;&amp;nums[right]==nums[right+1])&#123;right--;&#125;</span></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> list;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          三数之和给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
+注意：答案中不可以包含重复的三元组。
+1234567例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/08/09/三数之和/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -510,30 +512,16 @@
       
         
           
-            <h2 id="罗马数字转整数"><a href="#罗马数字转整数" class="headerlink" title="罗马数字转整数"></a>罗马数字转整数</h2><p>罗马数字包含以下七种字符：<code>I</code>， <code>V</code>， <code>X</code>， <code>L</code>，<code>C</code>，<code>D</code> 和 <code>M</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">字符          数值</span><br><span class="line">I             1</span><br><span class="line">V             5</span><br><span class="line">X             10</span><br><span class="line">L             50</span><br><span class="line">C             100</span><br><span class="line">D             500</span><br><span class="line">M             1000</span><br></pre></td></tr></table></figure>
-<p>例如， 罗马数字 2 写做 <code>II</code> ，即为两个并列的 1。12 写做 <code>XII</code> ，即为 <code>X</code> + <code>II</code> 。 27 写做  <code>XXVII</code>, 即为 <code>XX</code> + <code>V</code> + <code>II</code> 。</p>
-<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 <code>IIII</code>，而是 <code>IV</code>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <code>IX</code>。这个特殊的规则只适用于以下六种情况：</p>
-<ul>
-<li><code>I</code> 可以放在 <code>V</code> (5) 和 <code>X</code> (10) 的左边，来表示 4 和 9。</li>
-<li><code>X</code> 可以放在 <code>L</code> (50) 和 <code>C</code> (100) 的左边，来表示 40 和 90。 </li>
-<li><code>C</code> 可以放在 <code>D</code> (500) 和 <code>M</code> (1000) 的左边，来表示 400 和 900。</li>
-</ul>
-<p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;III&quot;</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IV&quot;</span><br><span class="line">输出: 4</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;IX&quot;</span><br><span class="line">输出: 9</span><br></pre></td></tr></table></figure>
-<p><strong>示例 4:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;LVIII&quot;</span><br><span class="line">输出: 58</span><br><span class="line">解释: C = 100, L = 50, XXX = 30, III = 3.</span><br></pre></td></tr></table></figure>
-<p><strong>示例 5:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;MCMXCIV&quot;</span><br><span class="line">输出: 1994</span><br><span class="line">解释: M = 1000, CM = 900, XC = 90, IV = 4.</span><br></pre></td></tr></table></figure>
-<p><strong>解法</strong></p>
-<p>当前位置的数大于后面的数则相加，当前位置的数小于后面的数则相见。可用map或数组将字母和数一一对应。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">int</span> tagVal[]=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">256</span>];</span><br><span class="line">    tagVal[<span class="string">'I'</span>] = <span class="number">1</span>;</span><br><span class="line">    tagVal[<span class="string">'V'</span>] = <span class="number">5</span>;</span><br><span class="line">    tagVal[<span class="string">'X'</span>] = <span class="number">10</span>;</span><br><span class="line">    tagVal[<span class="string">'C'</span>] = <span class="number">100</span>;</span><br><span class="line">    tagVal[<span class="string">'M'</span>] = <span class="number">1000</span>;</span><br><span class="line">    tagVal[<span class="string">'L'</span>] = <span class="number">50</span>;</span><br><span class="line">    tagVal[<span class="string">'D'</span>] = <span class="number">500</span>;</span><br><span class="line">    <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i+<span class="number">1</span> &gt;= s.length() || tagVal[s.charAt(i+<span class="number">1</span>)] &lt;= tagVal[s.charAt(i)]) &#123;</span><br><span class="line">            val += tagVal[s.charAt(i)];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            val -= tagVal[s.charAt(i)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          罗马数字转整数罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。
+12345678字符          数值I             1V             5X             10L             50C             100D        
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/08/07/罗马数字转整数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -673,55 +661,17 @@
       
         
           
-            <h2 id="一致性hash算法"><a href="#一致性hash算法" class="headerlink" title="一致性hash算法"></a>一致性hash算法</h2><p>原文：<a href="http://afghl.github.io/2016/07/04/consistent-hashing.html" target="_blank" rel="noopener">http://afghl.github.io/2016/07/04/consistent-hashing.html</a></p>
-<p>一致性哈希（Consistent Hashing）原理</p>
-<p>看一些分布式相关的技术文章或书籍时，经常看到一个词，一致性哈希。对于这个技术一直似懂非懂。今天花了半天的时间好好研究了它的原理和实现，发现一点都不复杂。于是写篇文章分享一下。</p>
-<p>下面，我们就从基本的Hash算法说起。</p>
-<h3 id="负载均衡与Hash算法"><a href="#负载均衡与Hash算法" class="headerlink" title="负载均衡与Hash算法"></a>负载均衡与Hash算法</h3><p>分布式系统中（如：web存储），当服务增长到一定规模时，惯常的做法是集群化，引入负载均衡，这样做的好处是：1. 高可用。2. 解耦。从外部看，透明化了集群的内部细节（外部都通过负载均衡服务器通信，然后由负载均衡服务器分发请求）。</p>
-<p>假设一个简单的场景：有4个cache服务器（后简称cache）组成的集群，当一个对象object传入集群时，这个对象应该存储在哪一个cache里呢？一种简单的方法是使用映射公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hash(object) % 4</span><br></pre></td></tr></table></figure>
-<p>这个算法就可以保证任何object都会尽可能随机落在其中一个cache中。一切运行正常。</p>
-<p>然后考虑以下情况：</p>
-<ul>
-<li>由于流量增大，需要增加一台cache，共5个cache。这时，映射公式就变成<code>Hash(object) % 5</code>。</li>
-<li>有一个cache服务器down掉，变成3个cache。这时，映射公式就变成<code>Hash(object) % 3</code>。</li>
-</ul>
-<p><strong>可见，无论新增还是减少节点，都会改变映射公式，而由于映射公式改变，几乎所有的object都会被映射到新的cache中，这意味着一时间所有的缓存全部失效。</strong> 大量的数据请求落在app层甚至是db层上，这对服务器的影响当然是灾难性的。</p>
-<p>这时，我们就需要新的算法。</p>
-<h3 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h3><p>一致性hash的出现就是为了解决这个问题：<strong>当节点数量改变时，能够使失效的缓存数量尽可能少。</strong></p>
-<p>一致性Hash的基本思想就是分两步走：</p>
-<ol>
-<li>把object求hash（这一步和之前相同）；</li>
-<li><strong>把cache也求hash，然后把object和cache的hash值放入一个hash空间，通过一定的规则决定每个object落在哪一个cache中。</strong></li>
-</ol>
-<p>下面，会逐步说明它的实现。</p>
-<h4 id="成环"><a href="#成环" class="headerlink" title="成环"></a>成环</h4><p>考虑通常的Hash算法都是将value映射到一个32位的key值，也即是0 ~ 2 ^ 32 - 1次方的数值空间；我们可以将这个空间想象成一个首（0）尾（2 ^ 32 - 1）相接的圆环，如下图所示。</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(1" alt="Alt">.jpg)</p>
-<h4 id="将object映射到环上"><a href="#将object映射到环上" class="headerlink" title="将object映射到环上"></a>将object映射到环上</h4><p>比如有4个需要存储的object，先求出它们的hash值，根据hash值映射到环上。如图：</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(2" alt="Alt">.JPG)</p>
-<h4 id="将cache映射到环上"><a href="#将cache映射到环上" class="headerlink" title="将cache映射到环上"></a>将cache映射到环上</h4><p>假设有三台cache服务器：cache A，cache B，cache C。用同样的方法求出hash值（可根据机器的IP或名字作为key求hash，只要保证hash值足够分散），映射到同一个环上。如图：</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(3" alt="Alt">.jpeg)</p>
-<h4 id="将object按照规则配对cache"><a href="#将object按照规则配对cache" class="headerlink" title="将object按照规则配对cache"></a>将object按照规则配对cache</h4><p>这里的规则很简单：<strong>让object在环上顺时针转动，遇到的第一个cache即为对应的cache服务器。</strong></p>
-<p>根据上面的方法，对object1将被存储到cache A上；object2和object3对应到cache C；object4对应到cache B。</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>新的一致性hash算法成功解决了cache服务器增减时key的失效问题。现在，无论增减cache，<strong>只有部分key失效</strong>。</p>
-<p>考虑增加新的缓存服务器的情况：</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(4" alt="alt">.svg)</p>
-<p>如图，新增了cache D节点，假设cache D在环上落在C和A之间，那么失效的只有部分落在cache A的key（现在落在cache D了）；也就是部分的红色圆弧，变成橙色圆弧（D）。</p>
-<p>而cache B和cache C的key都没有失效。</p>
-<p>可见，在新增节点时，这已经是最少失效了。</p>
-<p>在移除节点时，情况也是和新增节点类似的。</p>
-<h3 id="虚拟节点"><a href="#虚拟节点" class="headerlink" title="虚拟节点"></a>虚拟节点</h3><p>hash算法的一个考量指标是平衡性。在本例中，我们希望每一个object落在任意一个cache的机会都尽可能接近。</p>
-<p>从图上很容易直观的看到，对于一个object来说，它落在环上的任何位置的概率都是一样的，<strong>那么落在一个cache的概率就和圆弧的长度成正比</strong>。于是，我们希望每个cache所占的圆弧长度更接近。</p>
-<p>其实，理论上，<strong>只要cache足够多，每个cache在圆环上就会足够分散</strong>。但是在真实场景里，cache服务器只会有很少，所以，引入了“虚拟节点”（virtual node）的概念：</p>
-<p>以仅部署cache A和cache C的情况为例，引入虚拟节点，cache A1, cache A2代表了cache A；cache C1，cache C2代表了cache C。</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(4" alt="alt">.jpg)</p>
-<p>此时，对象到“虚拟节点”的映射关系为：</p>
-<p>objec1-&gt;cache A2；objec2-&gt;cache A1；objec3-&gt;cache C1；objec4-&gt;cache C2；</p>
-<p>因此对象object1和object2都被映射到了cache A上，而object3和object4映射到了cache C上；平衡性有了很大提高。</p>
-<p>虚拟节点技术实则是做了两次matching，如图：</p>
-<p><img src="http://afghl.github.io/images/consistent-hash(5" alt="alt">.jpg)</p>
-
-          
+          一致性hash算法原文：http://afghl.github.io/2016/07/04/consistent-hashing.html
+一致性哈希（Consistent Hashing）原理
+看一些分布式相关的技术文章或书籍时，经常看到一个词，一致性哈希。对于这个技术一直似懂非懂。今天花了半天的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/08/04/一致性hash算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -861,23 +811,17 @@
       
         
           
-            <h2 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>redis也支持事务，和关系型数据库不同的是，简单的redis事务：在redis中以特殊命令MULTI开始，然后传入多个命令，最后以EXEC作为结束，在EXEC之前命令不会执行。</p>
-<p><strong>流水线：</strong></p>
-<p>概念：因为直到客户端发送EXEC命令时，redis的命令才会执行，所以右的客户端才会一次性将MULTI+命令+EXEC全部发送给redis，然后等待直到接收所有命令的回复为止，这种一次性发送多个命令，然后再等待所有回复出现，的做法通常被称为“流水线”。</p>
-<p>延迟执行事务有助于提升性能。</p>
-<h3 id="用到的命令"><a href="#用到的命令" class="headerlink" title="用到的命令"></a>用到的命令</h3><p><strong>MULTI:</strong>发送命令开始的命令。</p>
-<p><strong>EXEC:</strong>命令结束的特殊命令。</p>
-<p><strong>WATCH:</strong>  监视一个或多个键，发现数据是否改变。</p>
-<p><strong>UNWATCH:</strong>取消 <a href="http://redisdoc.com/transaction/watch.html#watch" target="_blank" rel="noopener">WATCH</a> 命令对所有 key 的监视。</p>
-<p>如果在执行 <a href="http://redisdoc.com/transaction/watch.html#watch" target="_blank" rel="noopener">WATCH</a> 命令之后， <a href="http://redisdoc.com/transaction/exec.html#exec" target="_blank" rel="noopener">EXEC</a> 命令或 <a href="http://redisdoc.com/transaction/discard.html#discard" target="_blank" rel="noopener">DISCARD</a> 命令先被执行了        的话，那么就不需要再执行 <a href="http://redisdoc.com/transaction/unwatch.html#unwatch" target="_blank" rel="noopener">UNWATCH</a> 了。</p>
-<p>因为 <a href="http://redisdoc.com/transaction/exec.html#exec" target="_blank" rel="noopener">EXEC</a> 命令会执行事务，因此 <a href="http://redisdoc.com/transaction/watch.html#watch" target="_blank" rel="noopener">WATCH</a> 命令的效果已经产生了；而 <a href="http://redisdoc.com/transaction/discard.html#discard" target="_blank" rel="noopener">DISCARD</a> 命令在取消事务的同时也会取消所有对 key 的监视，因此这两个命令执行之后，就没有必要执行 <a href="http://redisdoc.com/transaction/unwatch.html#unwatch" target="_blank" rel="noopener">UNWATCH</a> 了。</p>
-<p><strong>DISCARD:</strong>  可用在MULTI命令执行之前对连接进行重置，还可以在MULTI 开始一个新的事务，将多个命令放在事务队列中，仍可以调用DISCARD命令来取消WATCH命令并清除所有的已入队的命令。           </p>
-<h3 id="redis的加锁"><a href="#redis的加锁" class="headerlink" title="redis的加锁"></a>redis的加锁</h3><p>redis没有实现典型的加锁功能，在访问以写入为目的的数据的时候，关系型数据库会对被访问的数据进行加锁，直到事务被提交或回滚为止。如果其他客户端对加锁的数据进行写入，那么就会被阻塞，直到第一个事务执行完成，这种称为悲观锁。  </p>
-<p>在关系数据库管理系统里，悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。 悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。 </p>
-<p>而redis为了减少客户端的等待时间，并不会在执行WATCH命令时对数据进行加锁，相反的，redis只有在数据已经被其他客户端更改的情况下，通知执行了WATCH命令的客户端，这种称为乐观锁。</p>
-<p>在关系数据库管理系统里，乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。乐观事务控制最早是由孔祥重（H.T.Kung）教授提出。 </p>
-
-          
+          redis事务概述redis也支持事务，和关系型数据库不同的是，简单的redis事务：在redis中以特殊命令MULTI开始，然后传入多个命令，最后以EXEC作为结束，在EXEC之前命令不会执行。
+流水线：
+概念：因为直到客户端发送EXEC命令时，redis的命令才会执行，所以右的客户端才会一次性将
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/31/redis事务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1017,17 +961,20 @@
       
         
           
-            <p>汉明距离</p>
-<p>两个整数之间的<a href="https://baike.baidu.com/item/%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB" target="_blank" rel="noopener">汉明距离</a>指的是这两个数字对应二进制位不同的位置的数目。</p>
-<p>给出两个整数 <code>x</code> 和 <code>y</code>，计算它们之间的汉明距离。</p>
-<p><strong>注意：</strong><br>0 ≤ <code>x</code>, <code>y</code> &lt; 231.</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: x = 1, y = 4</span><br><span class="line"></span><br><span class="line">输出: 2</span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">1   (0 0 0 1)</span><br><span class="line">4   (0 1 0 0)</span><br><span class="line">       ↑   ↑</span><br><span class="line"></span><br><span class="line">上面的箭头指出了对应二进制位不同的位置。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>先求两个数的异或运算得到的值的一的个数就是韩明距离。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (x==<span class="number">0</span>&amp;&amp;y==<span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//x与y进行异或</span></span><br><span class="line">       <span class="keyword">int</span> a=x^y;</span><br><span class="line">       <span class="keyword">int</span> re=<span class="number">0</span>;</span><br><span class="line">       <span class="keyword">while</span>(a!=<span class="number">0</span>)&#123;</span><br><span class="line">           a=a&amp;(a-<span class="number">1</span>);</span><br><span class="line">           re++;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> re;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          汉明距离
+两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
+给出两个整数 x 和 y，计算它们之间的汉明距离。
+注意：0 ≤ x, y &lt; 231.
+示例:
+12345678910输入: x = 1, y = 4输出: 2解释:1   (0 0 0 1)4   (0 1 0
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/30/汉明距离/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1167,19 +1114,19 @@
       
         
           
-            <h2 id="位1的个数"><a href="#位1的个数" class="headerlink" title="位1的个数"></a>位1的个数</h2><p>编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为<a href="https://baike.baidu.com/item/%E6%B1%89%E6%98%8E%E9%87%8D%E9%87%8F" target="_blank" rel="noopener">汉明重量</a>）。</p>
-<p><strong>示例 :</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 11</span><br><span class="line">输出: 3</span><br><span class="line">解释: 整数 11 的二进制表示为 00000000000000000000000000001011</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 128</span><br><span class="line">输出: 1</span><br><span class="line">解释: 整数 128 的二进制表示为 00000000000000000000000010000000</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>看别人大神的解法</p>
-<p>当n与n-1相与时，正数从右开始非零的第一个1变为零，因为负数在电脑中用补码表示，所以大致相同。</p>
-<p><strong>如果一个整数不为0，那么这个整数至少有一位是1。如果我们把这个整数减1，那么原来处在整数最右边的1就会变为0，原来在1后面的所有的0都会变成1(如果最右边的1后面还有0的话)。其余所有位将不会受到影响。</strong>    </p>
-<p>​        <strong>举个例子：一个二进制数1100，从右边数起第三位是处于最右边的一个1。减去1后，第三位变成0，它后面的两位0变成了1，而前面的1保持不变，因此得到的结果是1011.我们发现减1的结果是把最右边的一个1开始的所有位都取反了。这个时候如果我们再把原来的整数和减去1之后的结果做与运算，从原来整数最右边一个1那一位开始所有位都会变成0。如1100&amp;1011=1000.也就是说，把一个整数减去1，再和原整数做与运算，会把该整数最右边一个1变成0.那么一个整数的二进制有多少个1，就可以进行多少次这样的操作。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> re = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">            n = n &amp; (n - <span class="number">1</span>);</span><br><span class="line">            re++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          位1的个数编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。
+示例 :
+123输入: 11输出: 3解释: 整数 11 的二进制表示为 00000000000000000000000000001011
+示例 2:
+123输入: 128输出: 1解
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/30/位1的个数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1319,50 +1266,17 @@
       
         
           
-            <h2 id="redis持久化"><a href="#redis持久化" class="headerlink" title="redis持久化"></a>redis持久化</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>​    持久化是指将redis中存储的数据写入到硬盘中。redis中可以使用快照和只追加文件将redis中的数据写入到硬盘中，可以单独使用或者同时使用。</p>
-<h4 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h4><p><strong>概述</strong></p>
-<p>​    redis可以通过快照获取在某个时间点，redis存储的所有数据的副本。在创建快照之后，用户可以对快照进行备份，以备后用。</p>
-<p>将某一时刻的所有数据都写入硬盘里面。</p>
-<p><strong>创建快照</strong></p>
-<p>创建快照的5种方法：</p>
-<ul>
-<li><p>客户端通过redis发送BGSAVE命令创建一个快照。除了windows平台不支持，其他平台都支持BGSAVE命令，执行时redis会调用fork创建一个子进程，由子进程负责将快照写入硬盘，父进程继续处理命令请求。</p>
-</li>
-<li><p>客户端还可以向redis发送SAVE命令创建快照，与BGSAVE的区别是，redis服务器在收到SAVE命令时，服务器在没有创建完快照之前不在响应任何其他命令。</p>
-</li>
-<li><p>可以通过设置save配置选项实现创建快照，如：save 60 1000 “当60秒之内有1000次写入”redis会触发BGSAVE选项创建快照。</p>
-</li>
-<li><p>当redis通过SHUTDOWN命令接收到关闭服务器的请求时，或者接收到标准的TERM信号时，会执行一个SAVE命令，阻塞所有的客户端，不在执行客户端发送的任何命令，并在执行完后关闭服务器。</p>
-</li>
-<li><p>当一个redis服务器连接另一个redis服务器的，并向对方发送SYNC命令来开始一次复制操作的时候，如果主服务器没有执行BGSAVE操作，或者主服务器并非刚刚执行完BGSAVE操作，那么主服务器就会执行BGSAVE命令。</p>
-</li>
-</ul>
-<hr>
-<p><strong>注意事项</strong></p>
-<p>在只是用快照持久化来保存数据时，如果系统发生崩溃，用户将丢失最近一次生成快照之后更改的所有数据。所以快照持久化适用于即使丢失一部分数据也不会造成问题的应用程序。</p>
-<h4 id="只追加文件（AOF）"><a href="#只追加文件（AOF）" class="headerlink" title="只追加文件（AOF）"></a>只追加文件（AOF）</h4><p><strong>概述</strong></p>
-<p>AOF持久化会将被执行的写命令写到AOF文件的末尾，来记录数据发生的变化，所以redis从头执行一次aof文件就可以还原出来数据集。</p>
-<p>它会在执行命令时，将被执行的写命令复制到硬盘里面。</p>
-<p><strong>创建aop</strong></p>
-<p>配置appendonly  选项</p>
-<ul>
-<li>always    每个redis写命令都要同步写入硬盘。严重降低redis的速度，会降低固态硬盘的使用寿命</li>
-<li>everysec   每秒执行一次同步 ，显式地将多个写命令同步到硬盘</li>
-<li>no      让操作系统来决定应该何时进行同步，系统崩溃会丢失不定数量的数据。2.如果用户的硬盘处理写入操作的速度不够快，当缓存区满了的话，redis的写入操作将被阻塞，会严重的影响redis处理命令的速度。不推荐使用。</li>
-</ul>
-<p><strong>重写和压缩AOF文件</strong></p>
-<p>aof文件存在的问题：</p>
-<p>1.随着redis的执行，AOF文件的体积也来越大。</p>
-<p>2.redis在启动的时候会重新执行Aof文件来恢复数据，如果AOF文件的体积太大所需的开启时间也就越大。</p>
-<p><strong>解决AOF文件体积太大的问题：</strong></p>
-<p>1.用户向redis发送BGREWRITEAOF命令，这个命令会移除Aof文件种冗余的命令来重写AOF文件，减少AOF文件的体积。</p>
-<p>BGREWRITEAOF和BGSAVE差不多，都是创建一个子进程来对AOF文件进行重写。</p>
-<p>2.通过设置auto-aof-rewrite-percentage选项，auto-aof-rewrite-min-size选项来自动执行BGREWRITEAOF命令。</p>
-<p>auto-aof-rewrite-percentage：100</p>
-<p>auto-aof-rewrite-min-size：64mb</p>
-<p>当aof文件的体积大于64mb并且体积比上一次aof文件体积大了100%。</p>
-
-          
+          redis持久化简介​    持久化是指将redis中存储的数据写入到硬盘中。redis中可以使用快照和只追加文件将redis中的数据写入到硬盘中，可以单独使用或者同时使用。
+快照概述
+​    redis可以通过快照获取在某个时间点，redis存储的所有数据的副本。在创建快照之后，用户可以对快照进
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/30/redis持久化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1502,17 +1416,15 @@
       
         
           
-            <h2 id="spring-mvc启动流程"><a href="#spring-mvc启动流程" class="headerlink" title="spring mvc启动流程"></a>spring mvc启动流程</h2><h4 id="spring-mvc项目中的web-xml文件"><a href="#spring-mvc项目中的web-xml文件" class="headerlink" title="spring mvc项目中的web.xml文件"></a>spring mvc项目中的web.xml文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE web-app PUBLIC</span></span><br><span class="line"><span class="meta"> "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"</span></span><br><span class="line"><span class="meta"> "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>Archetype Created Web Application<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--上下文参数--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--上下文配置位置，将此位置定义的bean放在容器中--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB-INF/dispatcher-servlet.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="ContextLoaderListener类"><a href="#ContextLoaderListener类" class="headerlink" title="ContextLoaderListener类"></a>ContextLoaderListener类</h4><p>ContextLoaderListener类继承ContextLoader 类和实现了 ServletContextListener接口。ContextLoader 类执行根应用程序上下文的实际初始化工作。ServletContextListener接口此接口的实现接收有关<em>它们所属的Web应用程序的servlet上下文的</em>更改的通知。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextLoaderListener</span> <span class="keyword">extends</span> <span class="title">ContextLoader</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    *两个构造函数</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ContextLoaderListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ContextLoaderListener</span><span class="params">(WebApplicationContext context)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    *初始化根Web应用程序上下文。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent event)</span> </span>&#123;</span><br><span class="line">		initWebApplicationContext(event.getServletContext());</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    *关闭根Web应用程序上下文。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent event)</span> </span>&#123;</span><br><span class="line">		closeWebApplicationContext(event.getServletContext());</span><br><span class="line">		ContextCleanupListener.cleanupAttributes(event.getServletContext());</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>初始化web根应用程序上下文，调用ContextLoader类的initWebApplicationContext()方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化web上下文</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> servletContext servlet上下文</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WebApplicationContext <span class="title">initWebApplicationContext</span><span class="params">(ServletContext servletContext)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *判断是否已有根应用上下文</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</span><br><span class="line">                    <span class="string">"Cannot initialize context because there is already a root application context present - "</span> +</span><br><span class="line">                            <span class="string">"check whether you have multiple ContextLoader* definitions in your web.xml!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Log logger = LogFactory.getLog(ContextLoader.class);</span><br><span class="line">        servletContext.log(<span class="string">"Initializing Spring root WebApplicationContext"</span>);</span><br><span class="line">        <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">            logger.info(<span class="string">"Root WebApplicationContext: initialization started"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 将上下文存储在本地实例变量中，以保证这一点</span></span><br><span class="line">            <span class="comment">// 它在ServletContext关闭时可用。</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.context == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">//根据当前的servlet上下文创建web应用上下文</span></span><br><span class="line">                <span class="keyword">this</span>.context = createWebApplicationContext(servletContext);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//判断创建的web应用上下文是否式ConfigurableWebApplicationContext类的一个实例</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.context <span class="keyword">instanceof</span> ConfigurableWebApplicationContext) &#123;</span><br><span class="line">                ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) <span class="keyword">this</span>.context;</span><br><span class="line">                <span class="comment">//如果上下文不是活动状态</span></span><br><span class="line">                <span class="keyword">if</span> (!cwac.isActive()) &#123;</span><br><span class="line">                    <span class="comment">// 上下文尚未刷新 - &gt;提供诸如此类的服务</span></span><br><span class="line">                    <span class="comment">// 设置父上下文，设置应用程序上下文ID等</span></span><br><span class="line">                    <span class="keyword">if</span> (cwac.getParent() == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 注入上下文实例时没有显式父 - &gt;</span></span><br><span class="line">                        <span class="comment">// 确定根Web应用程序上下文的父级（如果有）</span></span><br><span class="line">                        ApplicationContext parent = loadParentContext(servletContext);</span><br><span class="line">                        cwac.setParent(parent);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//配置和刷新web应用上下文</span></span><br><span class="line">                    configureAndRefreshWebApplicationContext(cwac, servletContext);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//将对象绑定到此servlet上下文中的给定属性名称。</span></span><br><span class="line">            servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, <span class="keyword">this</span>.context);</span><br><span class="line">            <span class="comment">//获取当前线程的上下文类加载器</span></span><br><span class="line">            ClassLoader ccl = Thread.currentThread().getContextClassLoader();</span><br><span class="line">            <span class="keyword">if</span> (ccl == ContextLoader.class.getClassLoader()) &#123;</span><br><span class="line">                currentContext = <span class="keyword">this</span>.context;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ccl != <span class="keyword">null</span>) &#123;</span><br><span class="line">                currentContextPerThread.put(ccl, <span class="keyword">this</span>.context);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                logger.debug(<span class="string">"Published root WebApplicationContext as ServletContext attribute with name ["</span> +</span><br><span class="line">                        WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE + <span class="string">"]"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (logger.isInfoEnabled()) &#123;</span><br><span class="line">                <span class="keyword">long</span> elapsedTime = System.currentTimeMillis() - startTime;</span><br><span class="line">                logger.info(<span class="string">"Root WebApplicationContext: initialization completed in "</span> + elapsedTime + <span class="string">" ms"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.context;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException ex) &#123;</span><br><span class="line">            logger.error(<span class="string">"Context initialization failed"</span>, ex);</span><br><span class="line">            servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, ex);</span><br><span class="line">            <span class="keyword">throw</span> ex;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Error err) &#123;</span><br><span class="line">            logger.error(<span class="string">"Context initialization failed"</span>, err);</span><br><span class="line">            servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, err);</span><br><span class="line">            <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><code>initWebApplicationContext()</code>方法如上注解讲述，主要目的就是创建<code>root WebApplicationContext对象</code>即<code>根IoC容器</code>，其中比较重要的就是，整个<code>Web应用</code>如果存在<code>根IoC容器</code>则有且只能有一个，<code>根IoC容器</code>作为全局变量存储在<code>ServletContext</code>即<code>application对象</code>中。将<code>根IoC容器</code>放入到<code>application对象</code>之前进行了<code>IoC容器</code>的配置和刷新操作，调用了<code>configureAndRefreshWebApplicationContext()</code>方法，该方法源码如下:</p>
-<hr>
-<h4 id="配置web应用程序上下文"><a href="#配置web应用程序上下文" class="headerlink" title="配置web应用程序上下文"></a>配置web应用程序上下文</h4><p>configureAndRefreshWebApplicationContext类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 配置和刷新web应用上下文</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> wac</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sc</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configureAndRefreshWebApplicationContext</span><span class="params">(ConfigurableWebApplicationContext wac, ServletContext sc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ObjectUtils.identityToString(wac).equals(wac.getId())) &#123;</span><br><span class="line">        <span class="comment">//应用程序上下文ID仍设置为其原始默认值</span></span><br><span class="line">        <span class="comment">// -&gt; 根据可用信息分配更有用的ID</span></span><br><span class="line">        <span class="comment">//返回参数值的string</span></span><br><span class="line">        String idParam = sc.getInitParameter(CONTEXT_ID_PARAM);</span><br><span class="line">        <span class="keyword">if</span> (idParam != <span class="keyword">null</span>) &#123;</span><br><span class="line">            wac.setId(idParam);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Generate default id...</span></span><br><span class="line">            wac.setId(ConfigurableWebApplicationContext.APPLICATION_CONTEXT_ID_PREFIX +</span><br><span class="line">                    ObjectUtils.getDisplayString(sc.getContextPath()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wac.setServletContext(sc);</span><br><span class="line">    String configLocationParam = sc.getInitParameter(CONFIG_LOCATION_PARAM);</span><br><span class="line">    <span class="keyword">if</span> (configLocationParam != <span class="keyword">null</span>) &#123;</span><br><span class="line">        wac.setConfigLocation(configLocationParam);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The wac environment's #initPropertySources will be called in any case when the context</span></span><br><span class="line">    <span class="comment">// is refreshed; do it eagerly here to ensure servlet property sources are in place for</span></span><br><span class="line">    <span class="comment">// use in any post-processing or initialization that occurs below prior to #refresh</span></span><br><span class="line">    ConfigurableEnvironment env = wac.getEnvironment();</span><br><span class="line">    <span class="keyword">if</span> (env <span class="keyword">instanceof</span> ConfigurableWebEnvironment) &#123;</span><br><span class="line">        ((ConfigurableWebEnvironment) env).initPropertySources(sc, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    customizeContext(sc, wac);</span><br><span class="line">    <span class="comment">//加载或刷新配置的持久表示，</span></span><br><span class="line">    wac.refresh();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="refresh-方法在AbstractApplicationContext类的重写方法"><a href="#refresh-方法在AbstractApplicationContext类的重写方法" class="headerlink" title="refresh()方法在AbstractApplicationContext类的重写方法"></a>refresh()方法在AbstractApplicationContext类的重写方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">        <span class="comment">// 准备此上下文以进行刷新。</span></span><br><span class="line">        prepareRefresh();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 告诉子类刷新内部bean工厂。</span></span><br><span class="line">        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 准备bean工厂以在此上下文中使用。</span></span><br><span class="line">        prepareBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//允许在上下文子类中对bean工厂进行后处理。</span></span><br><span class="line">            postProcessBeanFactory(beanFactory);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//在上下文中调用注册为bean的工厂处理器。</span></span><br><span class="line">            invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 注册拦截bean创建的bean处理器。</span></span><br><span class="line">            registerBeanPostProcessors(beanFactory);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 初始化此上下文的消息源。</span></span><br><span class="line">            initMessageSource();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 初始化此上下文的事件多播器。</span></span><br><span class="line">            initApplicationEventMulticaster();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 在特定上下文子类中初始化其他特殊bean。</span></span><br><span class="line">            onRefresh();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 检查监听器bean并注册它们。</span></span><br><span class="line">            registerListeners();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 实例化所有剩余（非延迟初始化）单例。</span></span><br><span class="line">            finishBeanFactoryInitialization(beanFactory);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//最后一步：发布相应的事件。</span></span><br><span class="line">            finishRefresh();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">catch</span> (BeansException ex) &#123;</span><br><span class="line">            <span class="keyword">if</span> (logger.isWarnEnabled()) &#123;</span><br><span class="line">                logger.warn(<span class="string">"Exception encountered during context initialization - "</span> +</span><br><span class="line">                        <span class="string">"cancelling refresh attempt: "</span> + ex);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 摧毁已经创建的单身人士以避免悬空资源。</span></span><br><span class="line">            destroyBeans();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重置'有效'标志。</span></span><br><span class="line">            cancelRefresh(ex);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//向调用者传播异常。</span></span><br><span class="line">            <span class="keyword">throw</span> ex;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 从我们开始，重置Spring核心中的常见内省缓存</span></span><br><span class="line">            <span class="comment">// 也许再也不需要单例bean的元数据......</span></span><br><span class="line">            resetCommonCaches();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+          spring mvc启动流程spring mvc项目中的web.xml文件1234567891011121314151617181920212223242526&lt;!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Applic
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/28/spring mvc启动流程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1652,15 +1564,20 @@
       
         
           
-            <h2 id="计数质数"><a href="#计数质数" class="headerlink" title="计数质数"></a>计数质数</h2><p>统计所有小于非负整数 <em>n</em> 的质数的数量。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: 10</span><br><span class="line">输出: 4</span><br><span class="line">解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。</span><br></pre></td></tr></table></figure>
-<p><strong>解法</strong></p>
-<p>解法：埃拉托斯特尼筛法 Sieve of Eratosthenes</p>
-<p>如果一个数是另一个数的倍数，那这个数肯定不是质数。利用这个性质，可以建立一个质数数组，从2开始将素数的倍数都标注为不是质数。第一轮将4、6、8等表为非质数，然后遍历到3，发现3没有被标记为非质数，则将6、9、12等标记为非质数，一直到N为止，再数一遍质数数组中有多少质数。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n&lt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">boolean</span> [] b=<span class="keyword">new</span> <span class="keyword">boolean</span>[n];</span><br><span class="line">        Arrays.fill(b,<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">int</span> re=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i]) &#123;</span><br><span class="line">                <span class="comment">//i的2到n倍</span></span><br><span class="line">               <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">2</span>*i;j&lt;n;j=j+i)&#123;</span><br><span class="line">                   b[j]=<span class="keyword">false</span>;</span><br><span class="line">               &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (b[i])&#123;</span><br><span class="line">                    re++;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          计数质数统计所有小于非负整数 n 的质数的数量。
+示例:
+123输入: 10输出: 4解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+解法
+解法：埃拉托斯特尼筛法 Sieve of Eratosthenes
+如果一个数是另一个数的倍数，那这个数肯定不是质数。利用这个性质
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/26/计数质数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1800,38 +1717,15 @@
       
         
           
-            <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h1 id="BeanFactory-和-ApplicationContext-有什么区别？"><a href="#BeanFactory-和-ApplicationContext-有什么区别？" class="headerlink" title="BeanFactory 和 ApplicationContext 有什么区别？"></a>BeanFactory 和 ApplicationContext 有什么区别？</h1><p>1.<strong>BeanFactory</strong> 是Spring IoC容器的具体实现，用来包装和管理前面提到的各种bean。BeanFactory接口是Spring IoC 容器的核心接口。 BeanFactory 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。 </p>
-<p>2.applicationcontext接口对beanfactory进行了扩展，在BeanFactory的基础上添加了其他功能，比如与Spring的AOP更容易集成 </p>
-<p><strong>springbean的生命周期？</strong></p>
-<p>实例化bean -增加属性-aware接口实现-beanpostprocessor预初始化方法–initializingBean接口的afterPropertiesSet 初始化bean—调用自定义的初始化方法–Beanpostprocess接口的postprocessAfterInitalization（）初始化后方法–bean可使用—容器关闭—dispostableBean接口的destroy（）销毁</p>
-<p><strong>sPRING IOC如何实现的？</strong></p>
-<p>1.ioc控制反转：将对象创建的权力交给容器，通过容器创建对象。</p>
-<p>2.在spring的工作方式中，所有的类都注册在spring容器中，告诉spring这是什么东西需要什么，然后spring会在系统运行到适当的时候把你要的东西主动给你。</p>
-<p>3.依赖注入的思想通过反射机制实现的，在实例化一个类时，他通过反射调用类的set方法将事先保存在hashmap中的类的属性注入到类中。</p>
-<p>注入的方式：构造器注入，set注入，接口注入</p>
-<p><strong>spring  aop实现？</strong></p>
-<p>1.aop面向切面编程技术。aop是基于ioc实现的，<strong>这种在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想就是面向切面的编程。</strong> 用于处理系统中分布于各个模块的横切关注点，比如事务管理、日志、缓存等等。AOP实现的关键在于AOP框架自动创建的AOP代理，AOP代理主要分为静态代理和动态代理，静态代理的代表为AspectJ；而动态代理则以Spring AOP为代表。本文会分别对AspectJ和Spring AOP的实现进行分析和介绍。 </p>
-<p>spring aop是动态代理，表示spring aop不会去修改字节码，而是在内存中临时生成一个aop对象，这个对象包含了目标对象的所有方法，并且在特定的切点做了增强处理，并回调原对象的方法。 </p>
-<p>2.spring aop的实现方法：</p>
-<p>2.1。jdk动态代理：jdk动态代理类通过反射来来接收被代理的类，其代理对象必须是某个接口的实现，它是通过在运行期间创建一个接口的实现类来完成对目标对象的代理，核心是invocationhandel和proxy</p>
-<p>如果目标类没有实现接口，使用cglib代理</p>
-<p>2.2.  CGLIB代理：cglib是通过继承实现代理的，cglib是一个代码生成的类库，可以在运行时动态的生成某个类的子类。</p>
-<p><strong>spring 事务实现方式？</strong></p>
-<p>一个数据库事务通常包含了一个序列的对数据库的读/写操作 </p>
-<p>编程式事务允许用户在代码中精确定义事务的边界，而声明式事务（基于AOP）有助于用户将操作与事务规则进行解耦。  </p>
-<p>编程式事务侵入到了业务代码里面，但是提供了更加详细的事务管理；而声明式事务由于基于AOP，所以既能起到事务管理的作用，又可以不影响业务代码的具体实现 </p>
-<p>Spring事务管理器的接口是org.springframework.transaction.PlatformTransactionManager，通过这个接口，Spring为各个平台如JDBC、Hibernate等都提供了对应的事务管理器，但是具体的实现就是各个平台自己的事情了 </p>
-<p>编程式事务管理：使用TransactionTemplate和直接使用PlatformTransactionManager。 </p>
-<p>声明式事务管理：</p>
-<p>1）每个Bean都有一个代理 </p>
-<p>（2）所有Bean共享一个代理基类 </p>
-<p>3）使用拦截器 </p>
-<p>（4）使用tx标签配置的拦截器 </p>
-<p>（5）全注解 </p>
-<p><strong>spring事务原理？</strong></p>
-<p>本质是对数据库事务的封装支持。spring事务通过aop动态代理实现，使用上通常要先要在配置文件中开启事务，然后</p>
-
-          
+          总结BeanFactory 和 ApplicationContext 有什么区别？1.BeanFactory 是Spring IoC容器的具体实现，用来包装和管理前面提到的各种bean。BeanFactory接口是Spring IoC 容器的核心接口。 BeanFactory 包含了种bean的定义
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/25/BeanFactory 和 ApplicationContext 有什么区别？/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

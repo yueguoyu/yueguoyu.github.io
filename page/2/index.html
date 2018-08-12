@@ -362,37 +362,19 @@
       
         
           
-            <h2 id="Java注解教程及自定义注解"><a href="#Java注解教程及自定义注解" class="headerlink" title="Java注解教程及自定义注解"></a>Java注解教程及自定义注解</h2><p><strong>创建Java自定义注解</strong></p>
-<p>创建自定义注解和创建一个接口相似，但是注解的interface关键字需要以@符号开头。我们可以为注解声明方法。我们先来看看注解的例子，然后我们将讨论他的一些特性。</p>
-<ul>
-<li>注解方法不能带有参数；</li>
-<li>注解方法返回值类型限定为：基本类型、String、Enums、Annotation或者是这些类型的数组；</li>
-<li>注解方法可以有默认值；</li>
-<li>注解本身能够包含元注解，元注解被用来注解其它注解。</li>
-</ul>
-<p>这里有四种类型的元注解：</p>
-<ol>
-<li><p><strong>@Documented</strong> —— 指明拥有这个注解的元素可以被javadoc此类的工具文档化。这种类型应该用于注解那些影响客户使用带注释的元素声明的类型。如果一种声明使用<strong>Documented</strong>进行注解，这种类型的注解被作为被标注的程序成员的公共API。</p>
-</li>
-<li><p><strong>@Target</strong>——指明该类型的注解可以注解的程序元素的范围。该元注解的取值可以为TYPE,METHOD,CONSTRUCTOR,FIELD等。如果<strong>Target</strong>元注解没有出现，那么定义的注解可以应用于程序的任何元素。</p>
-</li>
-<li><p><strong>@Inherited</strong>——指明该注解类型被自动继承。如果用户在当前类中查询这个元注解类型并且当前类的声明中不包含这个元注解类型，那么也将自动查询当前类的父类是否存在<strong>Inherited</strong>元注解，这个动作将被重复执行知道这个标注类型被找到，或者是查询到顶层的父类。</p>
-</li>
-</ol>
-<p>4.<strong>@Retention</strong>——指明了该Annotation被保留的时间长短。RetentionPolicy取值为SOURCE,CLASS,RUNTIME。</p>
-<p><strong>Java内建注解</strong></p>
-<p>Java提供了三种内建注解。</p>
-<ol>
-<li><p><strong>@Override</strong>——当我们想要复写父类中的方法时，我们需要使用该注解去告知编译器我们想要复写这个方法。这样一来当父类中的方法移除或者发生更改时编译器将提示错误信息。</p>
-</li>
-<li><p><strong>@Deprecated</strong>——当我们希望编译器知道某一方法不建议使用时，我们应该使用这个注解。Java在javadoc 中推荐使用该注解，我们应该提供为什么该方法不推荐使用以及替代的方法。</p>
-</li>
-<li><p><strong>@SuppressWarnings</strong>——这个仅仅是告诉编译器忽略特定的警告信息，例如在泛型中使用原生数据类型。它的保留策略是SOURCE（译者注：在源文件中有效）并且被编译器丢弃。</p>
-</li>
-</ol>
-<p>转载自<a href="http://ifeve.com/" target="_blank" rel="noopener">并发编程网 – ifeve.com</a><strong>本文链接地址:</strong> <a href="http://ifeve.com/java-annotations/" target="_blank" rel="noopener">Java注解教程及自定义注解</a> </p>
+          Java注解教程及自定义注解创建Java自定义注解
+创建自定义注解和创建一个接口相似，但是注解的interface关键字需要以@符号开头。我们可以为注解声明方法。我们先来看看注解的例子，然后我们将讨论他的一些特性。
 
-          
+注解方法不能带有参数；
+注解方法返回值类型限定为：基本类型、String、Enum
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/24/Java注解教程及自定义注解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -532,12 +514,19 @@
       
         
           
-            <h2 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h2><p><strong>结构图：</strong></p>
-<p><img src="https://i.loli.net/2018/07/06/5b3f3ea1a3861.jpg" alt="20171108141306521.jpg"></p>
-<h3 id="线程安全问题"><a href="#线程安全问题" class="headerlink" title="线程安全问题"></a>线程安全问题</h3><p>线程安全：<a href="http://www.jasongj.com/java/thread_safe/" target="_blank" rel="noopener">http://www.jasongj.com/java/thread_safe/</a></p>
-<p>Java并发编程：volatile关键字解析 ：<a href="https://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
+          线程生命周期结构图：
+
+线程安全问题线程安全：http://www.jasongj.com/java/thread_safe/
+Java并发编程：volatile关键字解析 ：https://www.cnblogs.com/dolphin0520/p/3920373.html
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/18/线程生命周期/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -677,20 +666,20 @@
       
         
           
-            <h2 id="数据库的范式"><a href="#数据库的范式" class="headerlink" title="数据库的范式"></a>数据库的范式</h2><p><strong>概述：</strong></p>
-<p>关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式。</p>
-<p><strong>第一范式（1NF）：</strong></p>
-<p>确保每一列的原子性.</p>
-<p>第一范式是为了要排除 <em>重复组</em> 的出现，所采用的方法是要求数据库的每个列的值域都是由原子值组成；每个字段的值都只能是单一值。1971年<a href="https://zh.wikipedia.org/wiki/%E5%9F%83%E5%BE%B7%E5%8A%A0%C2%B7%E7%A7%91%E5%BE%B7" target="_blank" rel="noopener">埃德加·科德</a>提出了第一范式。 </p>
-<p>说明：在任何一个<a href="http://baike.baidu.com/view/68348.htm" target="_blank" rel="noopener">关系数据库</a>中，第一范式（1NF）是对<a href="http://baike.baidu.com/view/68347.htm" target="_blank" rel="noopener">关系模式</a>的设计基本要求，一般设计中都必须满足第一范式（1NF）。不过有些<a href="http://baike.baidu.com/view/176484.htm" target="_blank" rel="noopener">关系模型</a>中突破了1NF的限制，这种称为非1NF的关系模型。换句话说，是否必须满足1NF的最低要求，主要依赖于所使用的<a href="http://baike.baidu.com/view/176484.htm" target="_blank" rel="noopener">关系模型</a>。 </p>
-<p><strong>第二范式（2NF）：</strong></p>
-<p>第二范式（2NF）是在第一范式（1NF）的基础上建立起来的，即满足第二范式（2NF）必须先满足第一范式（1NF）。第二范式（2NF）要求数据库表中的每个实例或行必须可以被惟一地区分。为实现区分通常需要为表加上一个列，以存储各个实例的惟一标识。例如员工信息表中加上了员工编号（emp_id）列，因为每个员工的员工编号是惟一的，因此每个员工可以被惟一区分。这个惟一属性列被称为主关键字或主键、主码。  </p>
-<p>它的规则是要求数据表里的所有数据都要和该数据表的<a href="https://zh.wikipedia.org/wiki/%E5%85%B3%E7%B3%BB%E9%94%AE" target="_blank" rel="noopener">键</a>（主键与候选键）有<a href="https://zh.wikipedia.org/w/index.php?title=%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">完全依赖关系</a>：每个非键属性必须独立于任意一个候选键的任意一部分属性。如果有哪些数据只和一个键的一部分有关的话，就得把它们独立出来变成另一个数据表。如果一个数据表的键只有单个字段的话，它就一定匹配第二范式。 </p>
-<p>非键字段必须依赖于主键字段。</p>
-<p><strong>第三范式（3NF）：</strong></p>
-<p>在1NF基础上，除了主键以外的其他列都不传递依赖于主键列。（任何非主属性不依赖于其他非主属性）</p>
-
-          
+          数据库的范式概述：
+关系数据库中的关系是要满足一定要求的，满足不同程度要求的为不同范式。
+第一范式（1NF）：
+确保每一列的原子性.
+第一范式是为了要排除 重复组 的出现，所采用的方法是要求数据库的每个列的值域都是由原子值组成；每个字段的值都只能是单一值。1971年埃德加·科德提出了第一范式。 
+说
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/18/数据库的范式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -830,18 +819,19 @@
       
         
           
-            <h2 id="买卖股票的最佳时机"><a href="#买卖股票的最佳时机" class="headerlink" title="买卖股票的最佳时机"></a>买卖股票的最佳时机</h2><p>给定一个数组，它的第 <em>i</em> 个元素是一支给定股票第 <em>i</em> 天的价格。</p>
-<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。</p>
-<p>注意你不能在买入股票前卖出股票。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。</span><br><span class="line">     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：动态规划</strong></p>
-<p>因为只允许交易一次，要想获利最大需要在最小时候买入，最高卖出。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (prices==<span class="keyword">null</span>||prices.length==<span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">int</span> min=prices[<span class="number">0</span>];</span><br><span class="line">       <span class="keyword">int</span> re=<span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;prices.length;i++)&#123;</span><br><span class="line">           <span class="comment">//最小时买入</span></span><br><span class="line">           min=Math.min(min,prices[i]);</span><br><span class="line">           <span class="comment">//最大时卖出</span></span><br><span class="line">           re=Math.max(re,prices[i]-min);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          买卖股票的最佳时机给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+注意你不能在买入股票前卖出股票。
+示例 1:
+1234输入: [7,1,5,3,6,4]输出: 5解释: 在第 2 天（
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/14/买卖股票的最佳时机/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -981,29 +971,21 @@
       
         
           
-            <h2 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h2><p>假设你正在爬楼梯。需要 <em>n</em> 步你才能到达楼顶。</p>
-<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p><strong>注意：</strong>给定 <em>n</em> 是一个正整数。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入： 2</span><br><span class="line">输出： 2</span><br><span class="line">解释： 有两种方法可以爬到楼顶。</span><br><span class="line">1.  1 步 + 1 步</span><br><span class="line">2.  2 步</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入： 3</span><br><span class="line">输出： 3</span><br><span class="line">解释： 有三种方法可以爬到楼顶。</span><br><span class="line">1.  1 步 + 1 步 + 1 步</span><br><span class="line">2.  1 步 + 2 步</span><br><span class="line">3.  2 步 + 1 步</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>当爬一节台阶时有一种方法，爬两阶台阶时有两种方法，f（n）表示爬n阶台阶的方法。</p>
-<p>f(1)=1</p>
-<p>f(2)=2</p>
-<p>f(3)=f(2)+f(1)=3</p>
-<p>f(4)=f(3)+f(2)</p>
-<p>找规律可得f（n）=f（n-1）+f（n-2）</p>
-<p><strong>方法一：动态规划</strong></p>
-<p>因为每次都要使用前面两个数的值，所以使用数组将前面的值保存起来，已备后用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n==<span class="number">0</span>||n==<span class="number">1</span>||n==<span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> [] a=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">            a[<span class="number">1</span>]= <span class="number">1</span>;</span><br><span class="line">            a[<span class="number">2</span>]=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            a[i]=a[i-<span class="number">1</span>]+a[i-<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法二：递归</strong></p>
-<p>优点：代码简单</p>
-<p>缺点：时间太长</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (n==<span class="number">0</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (n==<span class="number">1</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (n==<span class="number">2</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span>  <span class="number">2</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (n&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">           <span class="keyword">return</span> climbStairs(n-<span class="number">1</span>)+climbStairs(n-<span class="number">2</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          爬楼梯假设你正在爬楼梯。需要 n 步你才能到达楼顶。
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+注意：给定 n 是一个正整数。
+示例 1：
+12345输入： 2输出： 2解释： 有两种方法可以爬到楼顶。1.  1 步 + 1 步2.  2 步
+示例 2：
+123456输
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/14/爬楼梯/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1143,16 +1125,17 @@
       
         
           
-            <h2 id="第一个错误的版本"><a href="#第一个错误的版本" class="headerlink" title="第一个错误的版本"></a>第一个错误的版本</h2><p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
-<p>假设你有 <code>n</code> 个版本 <code>[1, 2, ..., n]</code>，你想找出导致之后所有版本出错的第一个错误的版本。</p>
-<p>你可以通过调用 <code>bool isBadVersion(version)</code> 接口来判断版本号 <code>version</code> 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">给定 n = 5，并且 version = 4 是第一个错误的版本。</span><br><span class="line"></span><br><span class="line">调用 isBadVersion(3) -&gt; false</span><br><span class="line">调用 isBadVersion(5) -&gt; true</span><br><span class="line">调用 isBadVersion(4) -&gt; true</span><br><span class="line"></span><br><span class="line">所以，4 是第一个错误的版本。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>二分查找</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Solution extends VersionControl &#123;</span><br><span class="line">    public int firstBadVersion(int n) &#123;</span><br><span class="line">         int pre = 1, last = n;</span><br><span class="line">        while(pre&lt;last)&#123;</span><br><span class="line">            int mid = pre + (last - pre) / 2;</span><br><span class="line">            if(isBadVersion(mid))&#123;</span><br><span class="line">                last = mid;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                pre = mid+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return pre;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          第一个错误的版本你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。
+假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。
+你可以通过
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/14/第一个错误的版本/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1292,19 +1275,19 @@
       
         
           
-            <h2 id="合并两个有序数组"><a href="#合并两个有序数组" class="headerlink" title="合并两个有序数组"></a>合并两个有序数组</h2><p>给定两个有序整数数组 <em>nums1</em> 和 <em>nums2</em>，将 <em>nums2</em> 合并到 <em>nums1</em> 中<em>，</em>使得 <em>num1</em> 成为一个有序数组。</p>
-<p><strong>说明:</strong></p>
-<ul>
-<li>初始化 <em>nums1</em> 和 <em>nums2</em> 的元素数量分别为 <em>m</em> 和 <em>n</em>。</li>
-<li>你可以假设 <em>nums1</em> 有足够的空间（空间大小大于或等于 <em>m + n</em>）来保存 <em>nums2</em> 中的元素。</li>
-</ul>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">nums1 = [1,2,3,0,0,0], m = 3</span><br><span class="line">nums2 = [2,5,6],       n = 3</span><br><span class="line"></span><br><span class="line">输出: [1,2,2,3,5,6]</span><br></pre></td></tr></table></figure>
-<p><strong>解法</strong></p>
-<p>归并排序差不多,题目将nums2合并到nums1中，从屁股插入数据移动的次数比较少。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void merge(int[] nums1, int m, int[] nums2, int n) &#123;</span><br><span class="line">       int end=m+n-1;</span><br><span class="line">      n--;</span><br><span class="line">      m--;</span><br><span class="line">       while(n&gt;=0&amp;&amp;m&gt;=0)&#123;</span><br><span class="line">           if (nums1[m]&lt;nums2[n])&#123;</span><br><span class="line">               nums1[end--]=nums2[n--];</span><br><span class="line">           &#125;else &#123;</span><br><span class="line">               nums1[end--]=nums1[m--];</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       while(n&gt;=0)&#123;</span><br><span class="line">           nums1[end--]=nums2[n--];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+          合并两个有序数组给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。
+说明:
 
-          
+初始化 nums1 和 nums2 的元素数量分别为 m 和 n。
+你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/13/合并两个有序数组/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1444,16 +1427,18 @@
       
         
           
-            <h2 id="将有序数组转换为二叉搜索树"><a href="#将有序数组转换为二叉搜索树" class="headerlink" title="将有序数组转换为二叉搜索树"></a>将有序数组转换为二叉搜索树</h2><p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树<em>每个节点</em> 的左右两个子树的高度差的绝对值不超过 1。</p>
-<p><strong>示例:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">给定有序数组: [-10,-3,0,5,9],</span><br><span class="line"></span><br><span class="line">一个可能的答案是：[0,-3,9,-10,null,5]，它可以表示下面这个高度平衡二叉搜索树：</span><br><span class="line"></span><br><span class="line">      0</span><br><span class="line">     / \</span><br><span class="line">   -3   9</span><br><span class="line">   /   /</span><br><span class="line"> -10  5</span><br></pre></td></tr></table></figure>
-<p><strong>解法</strong></p>
-<p>使用递归，因为题目所给的数组是有序的，则根节点的值是nums[nums.length/2],</p>
-<p>然后使用递归分别求他的左子树，右子树。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">sortedArrayToBST</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(nums==<span class="keyword">null</span>||nums.length&lt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> len=nums.length;</span><br><span class="line">       <span class="keyword">return</span> creatBST(nums,<span class="number">0</span>,len-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span>  TreeNode <span class="title">creatBST</span><span class="params">(<span class="keyword">int</span>[] nums,<span class="keyword">int</span> star,<span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        TreeNode root=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (star&lt;=end) &#123;</span><br><span class="line">            <span class="keyword">int</span> in = (star + end + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            root = <span class="keyword">new</span> TreeNode(nums[in]);</span><br><span class="line">            root.left = creatBST(nums, star, in - <span class="number">1</span>);</span><br><span class="line">            root.right = creatBST(nums, in + <span class="number">1</span>, end);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          将有序数组转换为二叉搜索树将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。
+本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。
+示例:
+123456789给定有序数组: [-10,-3,0,5,9],一个可能的答案是：[0,-3,9,-10,nu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/13/将有序数组转换为二叉搜索树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1593,21 +1578,19 @@
       
         
           
-            <h2 id="对称二叉树"><a href="#对称二叉树" class="headerlink" title="对称二叉树"></a>对称二叉树</h2><p>给定一个二叉树，检查它是否是镜像对称的。</p>
-<p>例如，二叉树 <code>[1,2,2,3,4,4,3]</code> 是对称的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   / \</span><br><span class="line">  2   2</span><br><span class="line"> / \ / \</span><br><span class="line">3  4 4  3</span><br></pre></td></tr></table></figure>
-<p>但是下面这个 <code>[1,2,2,null,3,null,3]</code> 则不是镜像对称的:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  1</span><br><span class="line"> / \</span><br><span class="line">2   2</span><br><span class="line"> \   \</span><br><span class="line"> 3    3</span><br></pre></td></tr></table></figure>
-<p><strong>说明:</strong></p>
-<p>如果你可以运用递归和迭代两种方法解决这个问题，会很加分。</p>
-<p><strong>解法一：</strong></p>
-<p>递归实现,只要判断左子树的左节点和右子树的右节点，左子树的右节点和右子树的左节点相同。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean isSymmetric(TreeNode root) &#123;</span><br><span class="line">       if (root==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       return zhongxu(root.left,root.right);</span><br><span class="line">   &#125;</span><br><span class="line">   public boolean zhongxu(TreeNode p,TreeNode q)&#123;</span><br><span class="line">       if (p==null&amp;&amp;q==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       if (p==null||q==null)&#123;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">       return p.val==q.val&amp;&amp;zhongxu(p.left,q.right)&amp;&amp;zhongxu(p.right,q.left);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>解法二：</strong></p>
-<p>迭代实现，使用一个栈，将左节点和右节点压入，最重要的是空节点也要压入。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public boolean isSymmetric1(TreeNode root) &#123;</span><br><span class="line">       if (root==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       TreeNode l=root.left,r=root.right;</span><br><span class="line">       Stack&lt;TreeNode&gt; s=new Stack&lt;&gt;();</span><br><span class="line">       //空节点也压入栈中</span><br><span class="line">       s.push(l);</span><br><span class="line">       s.push(r);</span><br><span class="line">       while(!s.empty())&#123;</span><br><span class="line">           l=s.peek();</span><br><span class="line">           s.pop();</span><br><span class="line">           r=s.peek();</span><br><span class="line">           s.pop();</span><br><span class="line">           //循环结束条件</span><br><span class="line">           if (l==null&amp;&amp;r==null)&#123;</span><br><span class="line">               continue;</span><br><span class="line">           &#125;</span><br><span class="line">           if (l==null||r==null)&#123;</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line">           if (l.val!=r.val)&#123;</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line">           s.push(l.left);</span><br><span class="line">           s.push(r.right);</span><br><span class="line">           s.push(l.right);</span><br><span class="line">           s.push(r.left);</span><br><span class="line">       &#125;</span><br><span class="line">       return true;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          对称二叉树给定一个二叉树，检查它是否是镜像对称的。
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+12345    1   / \  2   2 / \ / \3  4 4  3
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+12345  1 / \2  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/12/对称二叉树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1747,17 +1730,20 @@
       
         
           
-            <h2 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h2><p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p><strong>说明:</strong> 叶子节点是指没有子节点的节点。</p>
-<p><strong>示例：</strong><br>给定二叉树 <code>[3,9,20,null,null,15,7]</code>，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> / \</span><br><span class="line">9  20</span><br><span class="line">  /  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
-<p>返回它的最大深度 3 。</p>
-<p><strong>解法：</strong></p>
-<p>使用递归，和递归遍历差不多。先遍历左子树，再遍历右子树，最后返回最大数加一。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public int maxDepth(TreeNode root) &#123;</span><br><span class="line">       if (root == null) &#123;</span><br><span class="line">          return 0;</span><br><span class="line">      &#125;</span><br><span class="line">      int left = maxDepth(root.left);</span><br><span class="line">      int right = maxDepth(root.right);</span><br><span class="line">      return Math.max(left, right) + 1;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          二叉树的最大深度给定一个二叉树，找出其最大深度。
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+说明: 叶子节点是指没有子节点的节点。
+示例：给定二叉树 [3,9,20,null,null,15,7]，
+12345  3 / \9  20  /  \ 15   7
+返回它的最大深度 3 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/11/二叉树的最大深度/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

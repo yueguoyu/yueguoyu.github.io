@@ -362,32 +362,18 @@
       
         
           
-            <h2 id="排他锁（写锁），共享锁（读锁）死锁-和-活锁"><a href="#排他锁（写锁），共享锁（读锁）死锁-和-活锁" class="headerlink" title="排他锁（写锁），共享锁（读锁）死锁 和 活锁"></a>排他锁（写锁），共享锁（读锁）死锁 和 活锁</h2><p><strong>排他锁（写锁，X锁）：</strong></p>
-<p>事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。</p>
-<p><strong>共享锁（读锁，S锁）：</strong></p>
-<p>若事务t对数据a加上s锁，则事务t可以读a但不能修改a，其他事务可以对a加s锁，而在t没有释放a的锁时不能加x锁，表示其他事务可以读取a的数据，但在t释放a</p>
-<p>的s锁之前不能对a进行修改。</p>
-<p><strong>分所类型的相容矩阵</strong></p>
-<p><img src="https://i.loli.net/2018/07/11/5b45d90889c7e.png" alt="下载 (1).png"></p>
-<p><strong>概述：</strong></p>
-<p>在数据库系统中，封锁的方法可能引起活锁和死锁</p>
-<h4 id="活锁："><a href="#活锁：" class="headerlink" title="活锁："></a>活锁：</h4><p>如果事务t1封锁了数据r，事务t2又请求封锁r，于是t2等待；T3也请求封锁r，当t1释放r上的锁之后系统首先批准t3的请求，t2接着等，t4也请求封锁r，t3释放r系统又批准t4，就不给r2，r2一直等啊等，永远的等下去，这就是活锁的情景。</p>
-<p><strong>避免活锁：</strong></p>
-<p>系统采用先来先服务的策略。（先到先得）</p>
-<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后r1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
-<p><strong>死锁的预防（不适用）：</strong></p>
-<p>1.一次封锁法</p>
-<p>一次封锁法要求每个事务必须一次将所有使用的数据全部加锁，否则就不能继续执行。如上面的例子中，如果t1将r1和r2都加锁，当t1释放锁后t2在加锁，这样就不会发生死锁。</p>
-<p>2.顺序封锁法</p>
-<p>顺序封锁法是加锁前先对数据对象指定一个封锁顺序，所有事务都按照这个顺序执行。</p>
-<p>缺点：太复杂，成本高，</p>
-<p><strong>死锁的诊断与解除</strong></p>
-<h5 id="超时法："><a href="#超时法：" class="headerlink" title="超时法："></a>超时法：</h5><p>当一个事务的等待时间超过了规定的时间，就认为发生了死锁。</p>
-<p>缺点：时间设置太短，发生误判，时间太长，不能及时发现</p>
-<h5 id="等待图法："><a href="#等待图法：" class="headerlink" title="等待图法："></a>等待图法：</h5><p>事务等待图是一个有向图G=(T,U)，t为节点的集合，每个节点表示一个事务；u为边的集合，每个边表示事务等待的情况；t1等待t2，t1指向t2一条线。<br><img src="https://i.loli.net/2018/07/11/5b45d492ce632.jpg" alt="IMG_20180711_175547.jpg"></p>
-<p>同常采用的方法是选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有所有的锁，使其他事务得以继续运行下去。</p>
-
-          
+          排他锁（写锁），共享锁（读锁）死锁 和 活锁排他锁（写锁，X锁）：
+事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。
+共享锁（读锁，S锁）：
+若事务t对数据a加上s锁
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/11/死锁 和 活锁/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -527,32 +513,18 @@
       
         
           
-            <h2 id="排他锁（写锁），共享锁（读锁）死锁-和-活锁"><a href="#排他锁（写锁），共享锁（读锁）死锁-和-活锁" class="headerlink" title="排他锁（写锁），共享锁（读锁）死锁 和 活锁"></a>排他锁（写锁），共享锁（读锁）死锁 和 活锁</h2><p><strong>排他锁（写锁，X锁）：</strong></p>
-<p>事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。</p>
-<p><strong>共享锁（读锁，S锁）：</strong></p>
-<p>若事务t对数据a加上s锁，则事务t可以读a但不能修改a，其他事务可以对a加s锁，而在t没有释放a的锁时不能加x锁，表示其他事务可以读取a的数据，但在t释放a</p>
-<p>的s锁之前不能对a进行修改。</p>
-<p><strong>分所类型的相容矩阵</strong></p>
-<p><img src="https://i.loli.net/2018/07/11/5b45d90889c7e.png" alt="下载 (1).png"></p>
-<p><strong>概述：</strong></p>
-<p>在数据库系统中，封锁的方法可能引起活锁和死锁</p>
-<h4 id="活锁："><a href="#活锁：" class="headerlink" title="活锁："></a>活锁：</h4><p>如果事务t1封锁了数据r，事务t2又请求封锁r，于是t2等待；T3也请求封锁r，当t1释放r上的锁之后系统首先批准t3的请求，t2接着等，t4也请求封锁r，t3释放r系统又批准t4，就不给r2，r2一直等啊等，永远的等下去，这就是活锁的情景。</p>
-<p><strong>避免活锁：</strong></p>
-<p>系统采用先来先服务的策略。（先到先得）</p>
-<h4 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h4><p>如果事务t1封锁r1，t2封锁了r2，然后t1又请求封锁r2，因为t2已经封锁r2，于是t1等待t2释放r2上的锁；接着t2又申请封锁r1，又因为t1已经封锁了r1，所以t2等待t1释放r1的锁，就这样t1等t2放锁，t2等t1放锁，所以这两个事务将永远不能结束。就形成了死锁。</p>
-<p><strong>死锁的预防（不适用）：</strong></p>
-<p>1.一次封锁法</p>
-<p>一次封锁法要求每个事务必须一次将所有使用的数据全部加锁，否则就不能继续执行。如上面的例子中，如果t1将r1和r2都加锁，当t1释放锁后t2在加锁，这样就不会发生死锁。</p>
-<p>2.顺序封锁法</p>
-<p>顺序封锁法是加锁前先对数据对象指定一个封锁顺序，所有事务都按照这个顺序执行。</p>
-<p>缺点：太复杂，成本高，</p>
-<p><strong>死锁的诊断与解除</strong></p>
-<h5 id="超时法："><a href="#超时法：" class="headerlink" title="超时法："></a>超时法：</h5><p>当一个事务的等待时间超过了规定的时间，就认为发生了死锁。</p>
-<p>缺点：时间设置太短，发生误判，时间太长，不能及时发现</p>
-<h5 id="等待图法："><a href="#等待图法：" class="headerlink" title="等待图法："></a>等待图法：</h5><p>事务等待图是一个有向图G=(T,U)，t为节点的集合，每个节点表示一个事务；u为边的集合，每个边表示事务等待的情况；t1等待t2，t1指向t2一条线。<br><img src="https://i.loli.net/2018/07/11/5b45d492ce632.jpg" alt="IMG_20180711_175547.jpg"></p>
-<p>同常采用的方法是选择一个处理死锁代价最小的事务，将其撤销，释放此事务持有所有的锁，使其他事务得以继续运行下去。</p>
-
-          
+          排他锁（写锁），共享锁（读锁）死锁 和 活锁排他锁（写锁，X锁）：
+事务t对数据a加上X锁，则只允许事务t对a进行读取，和修改，其他事务都不能对a加任何类型的锁，直到t释放a上的锁为止。就保证了其他事务在t事务在对a释放之前，不能对a进行修改和读取。
+共享锁（读锁，S锁）：
+若事务t对数据a加上s锁
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/11/排他锁（写锁），共享锁（读锁）死锁 和 活锁/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -692,13 +664,19 @@
       
         
           
-            <h2 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h2><p>给定一个链表，判断链表中是否有环。</p>
-<p><strong>进阶：</strong><br>你能否不使用额外空间解决此题？</p>
-<p><strong>解法：</strong></p>
-<p>使用快慢指针，慢指针一次走一步，快指针一次两步，如果快指针和慢指针相遇则链表有环。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (head==<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode fast=head;</span><br><span class="line">            ListNode slow=head;</span><br><span class="line">            <span class="keyword">while</span> (fast!=<span class="keyword">null</span>&amp;&amp;fast.next!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                        slow=slow.next;</span><br><span class="line">                        fast=fast.next.next;</span><br><span class="line">                <span class="keyword">if</span> (fast==slow)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          环形链表给定一个链表，判断链表中是否有环。
+进阶：你能否不使用额外空间解决此题？
+解法：
+使用快慢指针，慢指针一次走一步，快指针一次两步，如果快指针和慢指针相遇则链表有环。
+1234567891011121314151617public class Solution &#123;    public
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/11/环形链表/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -838,20 +816,22 @@
       
         
           
-            <h2 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a>回文链表</h2><p>请判断一个链表是否为回文链表。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;2-&gt;1</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p><strong>进阶：</strong><br>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
-<p><strong>方法一：</strong></p>
-<p>先遍历一遍链表，使用Arraylist存储各个节点的值，然后反转链表，在遍历反转后的链表，比较节点的值和Arraylist中的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//反转链表</span><br><span class="line">   public static ListNode fz(ListNode head)&#123;</span><br><span class="line">       if (head==null||head.next==null)&#123;</span><br><span class="line">           return head;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode p=fz(head.next);</span><br><span class="line">       head.next.next=head;</span><br><span class="line">       head.next=null;</span><br><span class="line">       return p;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   public boolean isPalindrome1(ListNode head) &#123;</span><br><span class="line">       if(head==null||head.next==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode h=head;</span><br><span class="line">      List&lt;Integer&gt; list=new ArrayList&lt;&gt;();</span><br><span class="line">       while(head!=null)&#123;</span><br><span class="line">           list.add(head.val);</span><br><span class="line">           head=head.next;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode p=fz(h);</span><br><span class="line">       int i=0;</span><br><span class="line">       while(p!=null&amp;&amp;i&lt;list.size())&#123;</span><br><span class="line">           if (list.get(i)!=p.val)&#123;</span><br><span class="line">               return false;</span><br><span class="line">           &#125;</span><br><span class="line">           p=p.next;</span><br><span class="line">           i++;</span><br><span class="line">       &#125;</span><br><span class="line">       return p==null;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法二</strong>：</p>
-<p>先通过快慢指针，找到链表的中点，然后反转中点后面的链表，遍历前面的链表和反转后的链表比较它们的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public boolean isPalindrome(ListNode head) &#123;</span><br><span class="line">       if(head==null||head.next==null)&#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">     ListNode p= findin(head);</span><br><span class="line">      p.next= fz(p.next);</span><br><span class="line">      ListNode re=p.next;</span><br><span class="line">      while(head!=null&amp;&amp;re!=null&amp;&amp;re.val==head.val)&#123;</span><br><span class="line">               head=head.next;</span><br><span class="line">               re=re.next;</span><br><span class="line">      &#125;</span><br><span class="line">      return re==null;</span><br><span class="line">   &#125;</span><br><span class="line">   //找链表的中点</span><br><span class="line">   public static ListNode findin(ListNode head)&#123;</span><br><span class="line">       if(head == null || head.next == null) &#123;</span><br><span class="line">           return head;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       ListNode p=head;</span><br><span class="line">      ListNode q=head;</span><br><span class="line">      //判断指针q的下一个是否为空，q的后两步是否为空</span><br><span class="line">      while(q.next!=null&amp;&amp;q.next.next!=null)&#123;</span><br><span class="line">          p=p.next;</span><br><span class="line">          q=q.next.next;</span><br><span class="line">      &#125;</span><br><span class="line">       return p;</span><br><span class="line">   &#125;</span><br><span class="line">   //反转链表</span><br><span class="line">   public static ListNode fz(ListNode head)&#123;</span><br><span class="line">       if (head==null||head.next==null)&#123;</span><br><span class="line">           return head;</span><br><span class="line">       &#125;</span><br><span class="line">       ListNode p=fz(head.next);</span><br><span class="line">       head.next.next=head;</span><br><span class="line">       head.next=null;</span><br><span class="line">       return p;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          回文链表请判断一个链表是否为回文链表。
+示例 1:
+12输入: 1-&gt;2输出: false
+示例 2:
+12输入: 1-&gt;2-&gt;2-&gt;1输出: true
+进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+方法一：
+先遍历一遍链表，使用Arraylist存
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/11/回文链表/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -991,18 +971,22 @@
       
         
           
-            <h2 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a>回文链表</h2><p>请判断一个链表是否为回文链表。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;2-&gt;1</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p><strong>进阶：</strong><br>你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？</p>
-<p><strong>解法一：</strong></p>
-<p>找到链表的中点，反转后面的链表，然后再遍历两个链表判断是否相等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public boolean isPalindrome(ListNode head) &#123;</span><br><span class="line">        if(head==null||head.next==null)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">      ListNode p= findin(head);</span><br><span class="line">       p.next= fz(p.next);</span><br><span class="line">       ListNode re=p.next;</span><br><span class="line">       while(head!=null&amp;&amp;re!=null&amp;&amp;re.val==head.val)&#123;</span><br><span class="line">                head=head.next;</span><br><span class="line">                re=re.next;</span><br><span class="line">       &#125;</span><br><span class="line">       return re==null;</span><br><span class="line">    &#125;</span><br><span class="line">    //找链表的中点</span><br><span class="line">    public static ListNode findin(ListNode head)&#123;</span><br><span class="line">        if(head == null || head.next == null) &#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode p=head;</span><br><span class="line">       ListNode q=head;</span><br><span class="line">       //判断指针q的下一个是否为空，q的后两步是否为空</span><br><span class="line">       while(q.next!=null&amp;&amp;q.next.next!=null)&#123;</span><br><span class="line">           p=p.next;</span><br><span class="line">           q=q.next.next;</span><br><span class="line">       &#125;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">    //反转链表</span><br><span class="line">    public static ListNode fz(ListNode head)&#123;</span><br><span class="line">        if (head==null||head.next==null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode p=fz(head.next);</span><br><span class="line">        head.next.next=head;</span><br><span class="line">        head.next=null;</span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>解法二：</strong></p>
-
-          
+          回文链表请判断一个链表是否为回文链表。
+示例 1:
+12输入: 1-&gt;2输出: false
+示例 2:
+12输入: 1-&gt;2-&gt;2-&gt;1输出: true
+进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+解法一：
+找到链表的中点，反转后面的链表，然后再遍
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/10/2018-06-28-有效的字母异位词/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1142,45 +1126,18 @@
       
         
           
-            <h2 id="数据库隔离级别"><a href="#数据库隔离级别" class="headerlink" title="数据库隔离级别"></a>数据库隔离级别</h2><p><a href="https://troywu0.gitbooks.io/spark/content/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.html" target="_blank" rel="noopener">原文</a></p>
-<p><img src="https://i.loli.net/2018/07/10/5b446124cdc92.png" alt="数据库隔离级别.png"></p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>数据库事务（Transaction）是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。一方面，当多个应用程序并发访问数据库时，事务可以在应用程序间提供一个隔离方法，防止互相干扰。另一方面，事务为数据库操作序列提供了一个从失败恢复正常的方法。</p>
-<h2 id="事务的四个特性"><a href="#事务的四个特性" class="headerlink" title="事务的四个特性"></a>事务的四个特性</h2><p>事务具有四个特性：原子性（Atomicity）、一致性（Consistency）、隔离型（Isolation）、持久性（Durability），简称ACID。</p>
-<ul>
-<li>原子性（Atomicity） 事务的原子性是指事务中的操作不可拆分，只允许全部执行或者全部不执行。</li>
-<li>一致性（Consistency） 事务的一致性是指事务的执行不能破坏数据库的一致性，一致性也称为完整性。一个事务在执行后，数据库必须从一个一致性状态转变为另一个一致性状态。</li>
-<li>隔离型（Isolation） 事务的隔离型是指并发的事务相互隔离，不能互相干扰。</li>
-<li>持久性（Durability） 事务的持久性是指事务一旦提交，对数据的状态变更应该被永久保存。</li>
-</ul>
-<h2 id="数据库隔离级别-1"><a href="#数据库隔离级别-1" class="headerlink" title="数据库隔离级别"></a>数据库隔离级别</h2><p>对于同时运行的多个事务,当这些事务访问数据库中相同的数据时,如果没有采取必要的隔离机制,就会导致各种并发问题:</p>
-<ul>
-<li>脏读：对于两个事务T1，T2，T1读取了已经被T2更新但还没有提交的字段，之后，若T2回滚，T1读取到的内容就是临时无效的内容。</li>
-<li>不可重复读：对于事务T1，T2，T1需要读取一个字段两次，在第一次和第二次读取之间，T2更新了该字段，导致T1第二次读取到的内容值不同。</li>
-<li>幻读： 事务A读取与搜索条件相匹配的若干行。事务B以插入或删除行等方式来修改事务A的结果集，然后再提交。 幻读与不可重复读之间的区别是幻读强调的是新增或删除,而不可重复读强调的是修改。比如Mary两次查工资，中间有人改过工资，则两次结果不一样，这就是不可重复读。Mary要查工资一千的人数，第一次查到了10个，中间有人增加了一条工资为一千的人，下次查的时候就变成了11个，好像第一次查询的是幻觉一样。</li>
-</ul>
-<p>事务的四个隔离级别 实际工作中事务几乎都是并发的，完全做到互相之间不干扰会严重牺牲性能，为了平衡隔离型和性能，SQL92规范定义了四个事务隔离级别：读未提交（Read Uncommitted）、读已提交（Read Committed）、可重复读（Repeatable Read）、串行化（Serializable）。四个级别逐渐增强，每个级别解决上个级别的一个问题。</p>
-<ul>
-<li>读未提交（Read Uncommitted） 另一个事务修改了数据，但尚未提交，而本事务中的SELECT会读到这些未被提交的数据（脏读）。 脏读是指另一个事务修改了数据，但尚未提交，而本事务中的SELECT会读到这些未被提交的数据。</li>
-<li>读已提交（Read Committed） 本事务读取到的是最新的数据（其他事务提交后的）。问题是，在同一个事务里，前后两次相同的SELECT会读到不同的结果（不可重复读）。</li>
-</ul>
-<p>不可重复读是指同一个事务执行过程中，另外一个事务提交了新数据，因此本事务先后两次读到的数据结果会不一致。</p>
-<ul>
-<li>可重复读（Repeatable Read） 在同一个事务里，SELECT的结果是事务开始时间点的状态，同样的SELECT操作读到的结果会是一致的。但是，会有幻读现象。</li>
-</ul>
-<p>可重复读保证了同一个事务里，查询的结果都是事务开始时的状态（一致性）。但是，如果另一个事务同时提交了新数据，本事务再更新时，就会发现了这些新数据，貌似之前读到的数据是幻觉，这就是幻读。</p>
-<ul>
-<li>串行化（Serializable） 所有事务只能一个接一个串行执行，不能并发。</li>
-</ul>
-<h2 id="隔离级别的选择"><a href="#隔离级别的选择" class="headerlink" title="隔离级别的选择"></a>隔离级别的选择</h2><ul>
-<li>事务隔离级别越高，越能保证数据的一致性，但对并发性能影响越大，一致性和高性能必须有所取舍或折中。</li>
-</ul>
-<p>一般情况下，多数应用程序可以选择将数据库的隔离级别设置为读已提交，这样可以避免脏读，也可以得到不错的并发性能。尽管这个隔离级别会导致不可重复度、幻读，但这种个别场合应用程序可以通过主动加锁进行并发控制。</p>
-<ul>
-<li>Oracle支持两种隔离级别，READ COMMITED和SERIALIZABLE默认的事务隔离级别是READ COMMITED</li>
-<li>MYSQL支持4中隔离界别，默认的是REPEATED READ</li>
-</ul>
+          数据库隔离级别原文
 
-          
+事务数据库事务（Transaction）是指作为单个逻辑工作单元执行的一系列操作，要么完全地执行，要么完全地不执行。一方面，当多个应用程序并发访问数据库时，事务可以在应用程序间提供一个隔离方法，防止互相干扰。另一方面，事务为数据库操作序列提供了一个从失败恢复正常的方法。
+事务的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/10/数据库隔离级别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1320,19 +1277,19 @@
       
         
           
-            <h2 id="最长公共前缀"><a href="#最长公共前缀" class="headerlink" title="最长公共前缀"></a>最长公共前缀</h2><p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
-<p>如果不存在公共前缀，返回空字符串 <code>&quot;&quot;</code>。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</span><br><span class="line">输出: &quot;fl&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]</span><br><span class="line">输出: &quot;&quot;</span><br><span class="line">解释: 输入不存在公共前缀。</span><br></pre></td></tr></table></figure>
-<p><strong>说明:</strong></p>
-<p>所有输入只包含小写字母 <code>a-z</code> 。</p>
-<p><strong>解法：</strong></p>
-<p>由于只是最长公共前缀，先将字符数组排序，只比较最小和最大的字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static String longestCommonPrefix1(String[] strs) &#123;</span><br><span class="line">       StringBuilder builder = new StringBuilder();</span><br><span class="line">       if (strs != null &amp;&amp; strs.length &gt; 0) &#123;</span><br><span class="line">           Arrays.sort(strs);</span><br><span class="line">           char[] a = strs[0].toCharArray();</span><br><span class="line">           char[] b = strs[strs.length - 1].toCharArray();</span><br><span class="line"></span><br><span class="line">           for (int i = 0; i &lt; a.length; i++) &#123;</span><br><span class="line">               if (b.length &gt; i  &amp;&amp; a[i] == b[i]) &#123;</span><br><span class="line">                   builder.append(a[i]);</span><br><span class="line">               &#125; else &#123;</span><br><span class="line">                   return builder.toString();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return builder.toString();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-          
+          最长公共前缀编写一个函数来查找字符串数组中的最长公共前缀。
+如果不存在公共前缀，返回空字符串 &quot;&quot;。
+示例 1:
+12输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]输出: &quot;fl&quot;
+示例
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/09/最长公共前缀/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1472,23 +1429,23 @@
       
         
           
-            <h2 id="验证二叉搜索树"><a href="#验证二叉搜索树" class="headerlink" title="验证二叉搜索树"></a>验证二叉搜索树</h2><p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
-<p>一个二叉搜索树具有如下特征：</p>
-<ul>
-<li>节点的左子树只包含<strong>小于</strong>当前节点的数。</li>
-<li>节点的右子树只包含<strong>大于</strong>当前节点的数。</li>
-<li>所有左子树和右子树自身必须也是二叉搜索树。</li>
-</ul>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">    2</span><br><span class="line">   / \</span><br><span class="line">  1   3</span><br><span class="line">输出: true</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">    5</span><br><span class="line">   / \</span><br><span class="line">  1   4</span><br><span class="line">     / \</span><br><span class="line">    3   6</span><br><span class="line">输出: false</span><br><span class="line">解释: 输入为: [5,1,4,null,null,3,6]。</span><br><span class="line">     根节点的值为 5 ，但是其右子节点值为 4 。</span><br></pre></td></tr></table></figure>
-<p><strong>解法：</strong></p>
-<p>1.根据定义判断，使用递归，设置一个min和max，当节点的值大于max时false，节点值小与min时false，遍历完返回true。</p>
-<p>2.先中序遍历，然后判断得到的链表是否是递增的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public boolean isValidBST(TreeNode root) &#123;</span><br><span class="line">       if (root == null) &#123;</span><br><span class="line">           return true;</span><br><span class="line">       &#125;</span><br><span class="line">       return dfs(root,Long.MIN_VALUE,Long.MAX_VALUE);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">   public boolean dfs(TreeNode root,long min,long max)&#123;</span><br><span class="line">      if (root==null)&#123;</span><br><span class="line">          return true;</span><br><span class="line">      &#125;</span><br><span class="line">      if (root.val&lt;=min||root.val&gt;=max)&#123;</span><br><span class="line">          return false;</span><br><span class="line">      &#125;</span><br><span class="line">      return dfs(root.left,min,root.val)&amp;&amp;dfs(root.right,root.val,max);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+          验证二叉搜索树给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+一个二叉搜索树具有如下特征：
 
-          
+节点的左子树只包含小于当前节点的数。
+节点的右子树只包含大于当前节点的数。
+所有左子树和右子树自身必须也是二叉搜索树。
+
+示例 1:
+12345输入:    2   / \  1   3输出: true
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/08/验证二叉搜索树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1628,141 +1585,21 @@
       
         
           
-            <h2 id="mysql语法随笔"><a href="#mysql语法随笔" class="headerlink" title="mysql语法随笔"></a>mysql语法随笔</h2><p><strong>创建数据库</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE 数据库名;</span><br></pre></td></tr></table></figure>
-<h2 id="drop-命令删除数据库"><a href="#drop-命令删除数据库" class="headerlink" title="drop 命令删除数据库"></a>drop 命令删除数据库</h2><p>drop 命令格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database &lt;数据库名&gt;;</span><br></pre></td></tr></table></figure>
-<p><strong>mysql创建表</strong></p>
-<p>以下为创建MySQL数据表的SQL通用语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table_name (column_name column_type);</span><br></pre></td></tr></table></figure>
-<p>以下例子中我们将在 RUNOOB 数据库中创建数据表runoob_tbl：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS `runoob_tbl`(</span><br><span class="line">   `runoob_id` INT UNSIGNED AUTO_INCREMENT,</span><br><span class="line">   `runoob_title` VARCHAR(100) NOT NULL,</span><br><span class="line">   `runoob_author` VARCHAR(40) NOT NULL,</span><br><span class="line">   `submission_date` DATE,</span><br><span class="line">   PRIMARY KEY ( `runoob_id` )</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
-<p>实例解析：</p>
-<ul>
-<li>如果你不想字段为 <strong>NULL</strong> 可以设置字段的属性为 <strong>NOT NULL</strong>， 在操作数据库时如果输入该字段的数据为<strong>NULL</strong> ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
-</ul>
-<p><strong>删除表</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE TABLE_NAME;</span><br></pre></td></tr></table></figure>
-<p><strong>插入数据</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO TABLE_NAME(f1,f2,f3) VALUES (v1,v2,v3);</span><br></pre></td></tr></table></figure>
-<p><strong>查询数据</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT COLUM_NAME,COLUM_NAME</span><br><span class="line">FROM TABLE_NAME</span><br><span class="line">[WHERE Clause]</span><br><span class="line">[LIMIT N][OFFSET M]</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</p>
-</li>
-<li><p>SELECT 命令可以读取一条或者多条记录。</p>
-</li>
-<li><p>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</p>
-</li>
-<li><p>你可以使用 WHERE 语句来包含任何条件。</p>
-</li>
-<li><p>你可以使用 LIMIT 属性来设定返回的记录数。</p>
-</li>
-<li><p>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。</p>
-</li>
-</ul>
-<p><strong>where子句</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field1, field2,...fieldN FROM table_name1, table_name2...</span><br><span class="line">[WHERE condition1 [AND [OR]] condition2.....</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查询语句中你可以使用一个或者多个表，表之间使用逗号, 分割，并使用WHERE语句来设定查询条件。</li>
-<li>你可以在 WHERE 子句中指定任何条件。</li>
-<li>你可以使用 AND 或者 OR 指定一个或多个条件。</li>
-<li>WHERE 子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令。</li>
-<li>WHERE 子句类似于程序语言中的 if 条件，根据 MySQL 表中的字段值来读取指定的数据。</li>
-</ul>
-<p><strong>UPDATE查询</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE TABLE_NAME SET f1=new-value,f2=new-value</span><br><span class="line">[WHERE Clause]</span><br></pre></td></tr></table></figure>
-<p><strong>DELETE语句</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM table_name [WHERE Clause]</span><br></pre></td></tr></table></figure>
-<p><strong>LIKE语句</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT f1,f2,f3 FROM table_name</span><br><span class="line">WHERE f1 LIKE condition1[AND[OR]] f2=&apos;somevalue&apos;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>你可以在 WHERE 子句中指定任何条件。</li>
-<li>你可以在 WHERE 子句中使用LIKE子句。</li>
-<li>你可以使用LIKE子句代替等号 =。</li>
-<li>LIKE 通常与 % 一同使用，类似于一个元字符的搜索。</li>
-<li>你可以使用 AND 或者 OR 指定一个或多个条件。</li>
-<li>你可以在 DELETE 或 UPDATE 命令中使用 WHERE…LIKE 子句来指定条件。</li>
-</ul>
-<p><strong>UNION操作符</strong></p>
-<p>Union可以将两个select语句的结果组合</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions]</span><br><span class="line">UNION [ALL | DISTINCT]</span><br><span class="line">SELECT expression1, expression2, ... expression_n</span><br><span class="line">FROM tables</span><br><span class="line">[WHERE conditions];</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>expression1, expression2, … expression_n</strong>: 要检索的列。</li>
-<li><strong>tables:</strong> 要检索的数据表。</li>
-<li><strong>WHERE conditions:</strong> 可选， 检索条件。</li>
-<li><strong>DISTINCT:</strong> 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。</li>
-<li><strong>ALL:</strong> 可选，返回所有结果集，包含重复数据。</li>
-</ul>
-<p><strong>排序</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT F1,F2 FROM TABLE_NAME ORDER BY F1[ASC[DECS]]</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>你可以使用任何字段来作为排序的条件，从而返回排序后的查询结果。</p>
-</li>
-<li><p>你可以设定多个字段来排序。</p>
-</li>
-<li><p>你可以使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列。</p>
-</li>
-<li><p>你可以添加 WHERE…LIKE 子句来设置条件。</p>
-<hr>
-</li>
-</ul>
-<p><strong>GROUP BY分组</strong></p>
-<p>GROUP BY 语句根据一个或多个列对结果集进行分组。</p>
-<p>在分组的列上我们可以使用 COUNT, SUM, AVG,等函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name,function(column_name)</span><br><span class="line">FROM table_name</span><br><span class="line">WHERE column_name operator value</span><br><span class="line">GROUP BY cOLUMN_NAME;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set names utf8;</span><br><span class="line">mysql&gt; SELECT * FROM employee_tbl;</span><br><span class="line">+----+--------+---------------------+--------+</span><br><span class="line">| id | name   | date                | singin |</span><br><span class="line">+----+--------+---------------------+--------+</span><br><span class="line">|  1 | 小明 | 2016-04-22 15:25:33 |      1 |</span><br><span class="line">|  2 | 小王 | 2016-04-20 15:25:47 |      3 |</span><br><span class="line">|  3 | 小丽 | 2016-04-19 15:26:02 |      2 |</span><br><span class="line">|  4 | 小王 | 2016-04-07 15:26:14 |      4 |</span><br><span class="line">|  5 | 小明 | 2016-04-11 15:26:40 |      4 |</span><br><span class="line">|  6 | 小明 | 2016-04-04 15:26:54 |      2 |</span><br><span class="line">+----+--------+---------------------+--------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>接下来我们使用 GROUP BY 语句 将数据表按名字进行分组，并统计每个人有多少条记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name, COUNT(*) FROM   employee_tbl GROUP BY name;</span><br><span class="line">+--------+----------+</span><br><span class="line">| name   | COUNT(*) |</span><br><span class="line">+--------+----------+</span><br><span class="line">| 小丽 |        1 |</span><br><span class="line">| 小明 |        3 |</span><br><span class="line">| 小王 |        2 |</span><br><span class="line">+--------+----------+</span><br><span class="line">3 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="使用-WITH-ROLLUP"><a href="#使用-WITH-ROLLUP" class="headerlink" title="使用 WITH ROLLUP"></a>使用 WITH ROLLUP</h3><p>WITH ROLLUP 可以实现在分组统计数据基础上再进行相同的统计（SUM,AVG,COUNT…）。</p>
-<p>例如我们将以上的数据表按名字进行分组，再统计每个人登录的次数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT name, SUM(singin) as singin_count FROM  employee_tbl GROUP BY name WITH ROLLUP;</span><br><span class="line">+--------+--------------+</span><br><span class="line">| name   | singin_count |</span><br><span class="line">+--------+--------------+</span><br><span class="line">| 小丽 |            2 |</span><br><span class="line">| 小明 |            7 |</span><br><span class="line">| 小王 |            7 |</span><br><span class="line">| NULL   |           16 |</span><br><span class="line">+--------+--------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>LIMIT m,n : 表示从第m+1条开始，取n条数据；</p>
-<p>LIMIT n ： 表示从第0条开始，取n条数据，是limit(0,n)的缩写。</p>
-<p>SQL JOIN 子句用于把来自两个或多个表的行结合起来，基于这些表之间的共同字段。</p>
-<p>最常见的 JOIN 类型：<strong>SQL INNER JOIN（简单的 JOIN）</strong>。 SQL INNER JOIN 从多个表中返回满足 JOIN 条件的所有行</p>
-<ul>
-<li><p><strong>INNER JOIN</strong>：如果表中有至少一个匹配，则返回行</p>
-</li>
-<li><p>SELECT <em>column_name(s)</em><br>FROM <em>table1</em><br>INNER JOIN <em>table2</em><br>ON <em>table1.column_name</em>=<em>table2.column_name</em>;</p>
-<p>或：</p>
-<p>SELECT <em>column_name(s)</em><br>FROM <em>table1</em><br>JOIN <em>table2</em><br>ON <em>table1.column_name</em>=<em>table2.column_name</em>;</p>
-</li>
-<li><p><strong>LEFT JOIN</strong>：即使右表中没有匹配，也从左表返回所有的行</p>
-</li>
-<li><p>SELECT <em>column_name(s)</em> FROM <em>table1</em> LEFT JOIN <em>table2</em> ON <em>table1.column_name</em>=<em>table2.column_name</em>; </p>
-</li>
-<li><p><strong>RIGHT JOIN</strong>：即使左表中没有匹配，也从右表返回所有的行</p>
-</li>
-<li><p>SELECT <em>column_name(s)</em> FROM <em>table1</em> RIGHT JOIN <em>table2</em> ON <em>table1.column_name</em>=<em>table2.column_name</em>; </p>
-</li>
-<li><p><strong>FULL JOIN</strong>：只要其中一个表中存在匹配，则返回行</p>
-</li>
-</ul>
-<h2 id="IN-操作符"><a href="#IN-操作符" class="headerlink" title="IN 操作符"></a>IN 操作符</h2><p>IN 操作符允许您在 WHERE 子句中规定多个值。</p>
-<h3 id="SQL-IN-语法"><a href="#SQL-IN-语法" class="headerlink" title="SQL IN 语法"></a>SQL IN 语法</h3><p>SELECT <em>column_name(s)</em><br>FROM <em>table_name</em><br>WHERE <em>column_name</em> IN (<em>value1</em>,<em>value2</em>,…);</p>
-<h2 id="SQL-BETWEEN-操作符"><a href="#SQL-BETWEEN-操作符" class="headerlink" title="SQL BETWEEN 操作符"></a>SQL BETWEEN 操作符</h2><p>BETWEEN 操作符选取介于两个值之间的数据范围内的值。这些值可以是数值、文本或者日期。</p>
-<h3 id="SQL-BETWEEN-语法"><a href="#SQL-BETWEEN-语法" class="headerlink" title="SQL BETWEEN 语法"></a>SQL BETWEEN 语法</h3><p>SELECT <em>column_name(s)</em><br>FROM <em>table_name</em><br>WHERE <em>column_name</em> BETWEEN <em>value1</em> AND <em>value2;</em></p>
-<h2 id="SQL-别名"><a href="#SQL-别名" class="headerlink" title="SQL 别名"></a>SQL 别名</h2><p>通过使用 SQL，可以为表名称或列名称指定别名。</p>
-<p>基本上，创建别名是为了让列名称的可读性更强。</p>
-<h3 id="列的-SQL-别名语法"><a href="#列的-SQL-别名语法" class="headerlink" title="列的 SQL 别名语法"></a>列的 SQL 别名语法</h3><p>SELECT <em>column_name</em> AS <em>alias_name</em><br>FROM <em>table_name;</em></p>
-<h3 id="表的-SQL-别名语法"><a href="#表的-SQL-别名语法" class="headerlink" title="表的 SQL 别名语法"></a>表的 SQL 别名语法</h3><p>SELECT <em>column_name(s)</em><br>FROM <em>table_name</em> AS <em>alias_name;</em></p>
-<h1 id="SQL-UNION-操作符"><a href="#SQL-UNION-操作符" class="headerlink" title="SQL UNION 操作符"></a>SQL UNION 操作符</h1><hr>
-<p>SQL UNION 操作符合并两个或多个 SELECT 语句的结果。</p>
-<hr>
-<h2 id="SQL-UNION-操作符-1"><a href="#SQL-UNION-操作符-1" class="headerlink" title="SQL UNION 操作符"></a>SQL UNION 操作符</h2><p>UNION 操作符用于合并两个或多个 SELECT 语句的结果集。</p>
-<p>请注意，UNION 内部的每个 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每个 SELECT 语句中的列的顺序必须相同。</p>
-<h3 id="SQL-UNION-语法"><a href="#SQL-UNION-语法" class="headerlink" title="SQL UNION 语法"></a>SQL UNION 语法</h3><p>SELECT <em>column_name(s)</em> FROM <em>table1</em><br>UNION<br>SELECT <em>column_name(s)</em> FROM <em>table2</em>;</p>
-<p><strong>注释：</strong>默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。</p>
-<h3 id="SQL-UNION-ALL-语法"><a href="#SQL-UNION-ALL-语法" class="headerlink" title="SQL UNION ALL 语法"></a>SQL UNION ALL 语法</h3><p>SELECT <em>column_name(s)</em> FROM <em>table1</em><br>UNION ALL<br>SELECT <em>column_name(s)</em> FROM <em>table2</em>;</p>
-<p><strong>注释：</strong>UNION 结果集中的列名总是等于 UNION 中第一个 SELECT 语句中的列名。</p>
-<p>MySQL 数据库不支持 SELECT … INTO 语句，但支持 <a href="http://www.runoob.com/sql/sql-insert-into-select.html" target="_blank" rel="noopener">INSERT INTO … SELECT</a> 。</p>
-<p>当然你可以使用以下语句来拷贝表结构及数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE 新表 SELECT * FROM 旧表</span><br></pre></td></tr></table></figure>
-          
+          mysql语法随笔创建数据库
+1CREATE DATABASE 数据库名;
+drop 命令删除数据库drop 命令格式：
+1drop database &lt;数据库名&gt;;
+mysql创建表
+以下为创建MySQL数据表的SQL通用语法：
+1CREATE TABLE table_name (co
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/08/mysql语法随笔/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1902,57 +1739,19 @@
       
         
           
-            <h2 id="InnoDB存储引擎索引"><a href="#InnoDB存储引擎索引" class="headerlink" title="InnoDB存储引擎索引"></a>InnoDB存储引擎索引</h2><p>InnoDB存储引擎支持以下几种索引</p>
-<p><strong>b+树索引</strong></p>
-<p>b+树索引是目前关系型数据库系统中查找最为常用和最为有效的索引。b+树索引不能找到给定的键值的具体行。只能找到被查找数据所在的页。然后数据库将这页读取到内存中，再在内存中进行查找，最后得到要查找的数据。</p>
-<p><strong>哈希索引</strong></p>
-<p>自适应哈希索引经哈希函数映射到一个哈希表中，因此对于字典类型的查找非常快速。但是对于范围查找就无能为力。通过命令SHOW ENGINE INNODB STZTUS可以看到当前自适应哈希索引的使用情况</p>
-<p><strong>全文索引</strong></p>
-<p>全文索引是将存储于数据库中的整本书或整篇文章中的任意内容信息查找出来的技术。它可以根据需要获得全文中有关章，节，段，句，词等信息，也可以进行各种统计和分析。</p>
-<h4 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h4><h5 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h5><p>聚集索引是根据每张表的主键构造一棵b+树，同时叶子节点中存放的即为表中的行记录数据，也将聚集索引的叶子节点称为数据页。即索引组织表中数据也是索引的一部分。每数据页之间通过一个双向链表进行链接。按照主键排序，页中的数据也是通过双向链表进行维护的，物理存储上可以同样不按照主键存储。</p>
-<p>优点：对于主键的排序查找和范围查找非常快。</p>
-<h5 id="辅助索引（非聚集索引）"><a href="#辅助索引（非聚集索引）" class="headerlink" title="辅助索引（非聚集索引）"></a>辅助索引（非聚集索引）</h5><p>辅助索引（非聚集索引）叶子节点不包括行记录的所有数据。</p>
-<p>叶子节点除了键值外还有一个书签，书签可以告诉InnoDB存储引擎哪里可以找到与索引相对应的行数据。由于InnoDB存储引擎表是索引组织表，所以InnoDB存储引擎的辅助索引的书签就是相应行数据的聚集索引键。</p>
-<p>每个表上可以有多个辅助索引。</p>
-<p><strong>聚集索引和辅助索引的不同</strong></p>
-<p>1.聚集索引叶子节点存整个表的行记录数据，而辅助索引没有存具体的数据而是存键值和一个指向具体数据的书签。</p>
-<p>2.一个表中只有一个聚集索引，而有多个辅助索引。</p>
-<p><strong>索引的创建，删除</strong></p>
-<h2 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h2><h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>这是最基本的索引，它没有任何限制。它有以下几种创建方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX indexName ON mytable(username(length));</span><br></pre></td></tr></table></figure>
-<p>如果是CHAR，VARCHAR类型，length可以小于字段实际长度；如果是BLOB和TEXT类型，必须指定 length。</p>
-<h3 id="修改表结构-添加索引"><a href="#修改表结构-添加索引" class="headerlink" title="修改表结构(添加索引)"></a>修改表结构(添加索引)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER table tableName ADD INDEX indexName(columnName)</span><br></pre></td></tr></table></figure>
-<h3 id="创建表的时候直接指定"><a href="#创建表的时候直接指定" class="headerlink" title="创建表的时候直接指定"></a>创建表的时候直接指定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE mytable(  </span><br><span class="line"> </span><br><span class="line">ID INT NOT NULL,   </span><br><span class="line"> </span><br><span class="line">username VARCHAR(16) NOT NULL,  </span><br><span class="line"> </span><br><span class="line">INDEX [indexName] (username(length))  </span><br><span class="line"> </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="删除索引的语法"><a href="#删除索引的语法" class="headerlink" title="删除索引的语法"></a>删除索引的语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX [indexName] ON mytable;</span><br></pre></td></tr></table></figure>
-<h3 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h3><p>它与前面的普通索引类似，不同的就是：索引列的值必须唯一，但允许有空值。如果是组合索引，则列值的组合必须唯一。它有以下几种创建方式：</p>
-<h3 id="创建索引-1"><a href="#创建索引-1" class="headerlink" title="创建索引"></a>创建索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE UNIQUE INDEX indexName ON mytable(username(length))</span><br></pre></td></tr></table></figure>
-<h3 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER table mytable ADD UNIQUE [indexName] (username(length))</span><br></pre></td></tr></table></figure>
-<h3 id="创建表的时候直接指定-1"><a href="#创建表的时候直接指定-1" class="headerlink" title="创建表的时候直接指定"></a>创建表的时候直接指定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE mytable(  </span><br><span class="line"> </span><br><span class="line">ID INT NOT NULL,   </span><br><span class="line"> </span><br><span class="line">username VARCHAR(16) NOT NULL,  </span><br><span class="line"> </span><br><span class="line">UNIQUE [indexName] (username(length))  </span><br><span class="line"> </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h4 id="使用ALTER-命令添加和删除索引"><a href="#使用ALTER-命令添加和删除索引" class="headerlink" title="使用ALTER 命令添加和删除索引"></a>使用ALTER 命令添加和删除索引</h4><p>有四种方式来添加数据表的索引： </p>
-<ul>
-<li><p><strong>ALTER TABLE tbl_name ADD PRIMARY KEY (column_list):</strong> 该语句添加一个主键，这意味着索引值必须是唯一的，且不能为NULL。 </p>
-</li>
-<li><p><strong>ALTER TABLE tbl_name ADD UNIQUE index_name (column_list):</strong> 这条语句创建索引的值必须是唯一的（除了NULL外，NULL可能会出现多次）。</p>
-</li>
-<li><p><strong>ALTER TABLE tbl_name ADD INDEX index_name (column_list):</strong> 添加普通索引，索引值可出现多次。</p>
-</li>
-<li><p><strong>ALTER TABLE tbl_name ADD FULLTEXT index_name (column_list):</strong>该语句指定了索引为 FULLTEXT ，用于全文索引。</p>
-</li>
-</ul>
-<h4 id="使用-ALTER-命令添加和删除主键"><a href="#使用-ALTER-命令添加和删除主键" class="headerlink" title="使用 ALTER 命令添加和删除主键"></a>使用 ALTER 命令添加和删除主键</h4><p>主键只能作用于一个列上，添加主键索引时，你需要确保该主键默认不为空（NOT NULL）。实例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl MODIFY i INT NOT NULL;</span><br><span class="line">mysql&gt; ALTER TABLE testalter_tbl ADD PRIMARY KEY (i);</span><br></pre></td></tr></table></figure>
-<p>你也可以使用 ALTER 命令删除主键：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER TABLE testalter_tbl DROP PRIMARY KEY;</span><br></pre></td></tr></table></figure>
-<p>删除主键时只需指定PRIMARY KEY，但在删除索引时，你必须知道索引名。</p>
-<h2 id="显示索引信息"><a href="#显示索引信息" class="headerlink" title="显示索引信息"></a>显示索引信息</h2><p>你可以使用 SHOW INDEX 命令来列出表中的相关的索引信息。可以通过添加 \G 来格式化输出信息。</p>
-<p>尝试以下实例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW INDEX FROM table_name; \G</span><br></pre></td></tr></table></figure>
-<h4 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h4><h5 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h5><p>全文索引通常使用倒排索引实现的。</p>
-<p>倒排索引在辅助表中存储了单词与单词自身在一个或多个文档中所在位置之间的映射。通常使用关联数组实现：</p>
-<p>1.inverted file   index，其表现形式为{单词，单词所在文档的ID}</p>
-<p>2.full  inverted  index，其表现形式为{单词，（单词所在的文档ID，在具体文档中的位置）}</p>
-
-          
+          InnoDB存储引擎索引InnoDB存储引擎支持以下几种索引
+b+树索引
+b+树索引是目前关系型数据库系统中查找最为常用和最为有效的索引。b+树索引不能找到给定的键值的具体行。只能找到被查找数据所在的页。然后数据库将这页读取到内存中，再在内存中进行查找，最后得到要查找的数据。
+哈希索引
+自适应哈希索
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/yueguoyu.github.io/2018/07/08/InnoDB存储引擎索引/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
