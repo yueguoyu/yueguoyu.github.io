@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="YgY">
-<meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/tags/java/index.html">
+<meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/tags/JAVA/index.html">
 <meta property="og:site_name" content="YgY">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -115,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/yueguoyu/yueguoyu.github.io/tags/java/"/>
+  <link rel="canonical" href="https://github.com/yueguoyu/yueguoyu.github.io/tags/JAVA/"/>
 
 
 
 
 
-  <title>标签: java | YgY</title>
+  <title>标签: JAVA | YgY</title>
   
 
 
@@ -295,7 +295,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>java<small>标签</small>
+        <h1>JAVA<small>标签</small>
         </h1>
       </div>
 
@@ -307,37 +307,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/yueguoyu.github.io/2018/06/09/HashMap/" itemprop="url">
+            <a class="post-title-link" href="/yueguoyu.github.io/2018/08/04/消息队列/" itemprop="url">
               
-                <span itemprop="name">HashMap</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-09T21:32:21+08:00"
-              content="2018-06-09" >
-          06-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/yueguoyu.github.io/2018/05/27/String 和 StringBuffer 和 StringBuilder/" itemprop="url">
-              
-                <span itemprop="name">String 和 StringBuffer 和 StringBuilder</span>
+                <span itemprop="name">消息队列</span>
               
             </a>
         
@@ -345,37 +317,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-27T20:54:43+08:00"
-              content="2018-05-27" >
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/yueguoyu.github.io/2018/05/27/java反射/" itemprop="url">
-              
-                <span itemprop="name">java反射</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-27T20:14:00+08:00"
-              content="2018-05-27" >
-          05-27
+              datetime="2018-08-04T17:45:26+08:00"
+              content="2018-08-04" >
+          08-04
         </time>
       </div>
 
@@ -439,7 +383,7 @@
               
                 <a href="/yueguoyu.github.io/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +394,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/yueguoyu.github.io/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -461,7 +405,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/yueguoyu.github.io/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -946,6 +890,76 @@
               resultItems.forEach(function (result) {
                 searchResultList += result.item;
               })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+  })
               searchResultList += "</ul>";
               resultContent.innerHTML = searchResultList;
             }
