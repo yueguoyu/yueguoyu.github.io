@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数据库关系型数据库：">
+<meta name="description" content="mysql数据库关系型数据库：关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码 非关系型数据库：非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加">
 <meta name="keywords" content="leetCode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库">
+<meta property="og:title" content="mysql数据库">
 <meta property="og:url" content="https://github.com/yueguoyu/yueguoyu.github.io/2020/04/15/数据库/index.html">
 <meta property="og:site_name" content="YgY">
-<meta property="og:description" content="数据库关系型数据库：">
+<meta property="og:description" content="mysql数据库关系型数据库：关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码 非关系型数据库：非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-15T02:54:46.771Z">
+<meta property="og:updated_time" content="2020-04-15T13:20:23.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库">
-<meta name="twitter:description" content="数据库关系型数据库：">
+<meta name="twitter:title" content="mysql数据库">
+<meta name="twitter:description" content="mysql数据库关系型数据库：关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码 非关系型数据库：非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>数据库 | YgY</title>
+  <title>mysql数据库 | YgY</title>
   
 
 
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库</h1>
+          <h1 class="post-title" itemprop="name headline">mysql数据库</h1>
         
 
         <div class="post-meta">
@@ -396,7 +396,103 @@
       
 
       
-        <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="关系型数据库："><a href="#关系型数据库：" class="headerlink" title="关系型数据库："></a>关系型数据库：</h2>
+        <h1 id="mysql数据库"><a href="#mysql数据库" class="headerlink" title="mysql数据库"></a>mysql数据库</h1><h2 id="关系型数据库："><a href="#关系型数据库：" class="headerlink" title="关系型数据库："></a>关系型数据库：</h2><p>关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码</p>
+<h2 id="非关系型数据库："><a href="#非关系型数据库：" class="headerlink" title="非关系型数据库："></a>非关系型数据库：</h2><p>非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加一些自己的键值对，这样就不会局限于固定的结构，可以减少一些时间和空间的开销。使用这种方式，用户可以根据需要去添加自己需要的字段，这样，为了获取用户的不同信息，不需要像关系型数据库中，要对多表进行关联查询。仅需要根据id取出相应的value就可以完成查询。但非关系型数据库由于很少的约束，他也不能够提供像SQL所提供的where这种对于字段属性值情况的查询。并且难以体现设计的完整性。他只适合存储一些较为简单的数据，对于需要进行较复杂查询的数据，SQL数据库显的更为合适。</p>
+<h2 id="关系数据库理论-ACID"><a href="#关系数据库理论-ACID" class="headerlink" title="关系数据库理论-ACID"></a>关系数据库理论-ACID</h2><p>ACID是指数据库在写入或更新数据的过程中，为保证事务是正确可靠的，所具备的4个特性，A–原子性（atomicity，或称不可分割性），C—一致性（consistency），I—隔离性（isolation，又称独立性），D—-持久性(durability)。</p>
+<h3 id="A–原子性"><a href="#A–原子性" class="headerlink" title="A–原子性"></a>A–原子性</h3><p>一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有被执行过一样。</p>
+<h3 id="C–一致性"><a href="#C–一致性" class="headerlink" title="C–一致性"></a>C–一致性</h3><p>在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
+<h3 id="I—隔离性（isolation，又称独立性）"><a href="#I—隔离性（isolation，又称独立性）" class="headerlink" title="I—隔离性（isolation，又称独立性）"></a>I—隔离性（isolation，又称独立性）</h3><p>数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</p>
+<h3 id="D—-持久性-durability"><a href="#D—-持久性-durability" class="headerlink" title="D—-持久性(durability)"></a>D—-持久性(durability)</h3><p>事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><h3 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h3><p>主键是关系表中记录的唯一标识。主键应该使用BIGINT自增或者GUID类型。</p>
+<h3 id="sql语句："><a href="#sql语句：" class="headerlink" title="sql语句："></a>sql语句：</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> 数据库名；</span><br><span class="line">//删除数据库</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> 数据库名；</span><br><span class="line">//创建数据表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tablename (column_name column_type);</span><br><span class="line">//删除数据表</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> table_name;</span><br><span class="line">//插入数据</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (field1, field2,...fieldN) <span class="keyword">VALUES</span> ( value1, value2,...valueN );</span><br><span class="line">//查询数据</span><br><span class="line"><span class="keyword">SELECT</span> colum_name <span class="keyword">FROM</span> table_name [<span class="keyword">WHERE</span> Cluse] [<span class="keyword">LIMIT</span> N][ <span class="keyword">OFFSET</span> M]</span><br><span class="line"><span class="comment">/*查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</span></span><br><span class="line"><span class="comment">SELECT 命令可以读取一条或者多条记录。</span></span><br><span class="line"><span class="comment">你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</span></span><br><span class="line"><span class="comment">你可以使用 WHERE 语句来包含任何条件。</span></span><br><span class="line"><span class="comment">你可以使用 LIMIT 属性来设定返回的记录数。</span></span><br><span class="line"><span class="comment">你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。*/</span></span><br><span class="line">//更改数据</span><br><span class="line"><span class="keyword">UPDATE</span> table_name <span class="keyword">SET</span> field1=value1,field2=value2 [<span class="keyword">WHERE</span> Clause]</span><br><span class="line">//删除数据</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name [<span class="keyword">WHERE</span> clause]</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如果没有指定 WHERE 子句，MySQL 表中的所有记录将被删除。</span></span><br><span class="line"><span class="comment">你可以在 WHERE 子句中指定任何条件</span></span><br><span class="line"><span class="comment">您可以在单个表中一次性删除记录。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">//<span class="keyword">like</span>子句</span><br><span class="line"><span class="keyword">SELECT</span> field1,field2...,fieldn <span class="keyword">FROM</span> table_name </span><br><span class="line"><span class="keyword">WHERE</span> field1 <span class="keyword">LIKE</span> condition1 [<span class="keyword">AND</span> [<span class="keyword">OR</span>]] filed2 = <span class="string">'somevalue'</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">你可以在 WHERE 子句中指定任何条件。</span></span><br><span class="line"><span class="comment">你可以在 WHERE 子句中使用LIKE子句。</span></span><br><span class="line"><span class="comment">你可以使用LIKE子句代替等号 =。</span></span><br><span class="line"><span class="comment">LIKE 通常与 % 一同使用，类似于一个元字符的搜索。</span></span><br><span class="line"><span class="comment">你可以使用 AND 或者 OR 指定一个或多个条件。</span></span><br><span class="line"><span class="comment">你可以在 DELETE 或 UPDATE 命令中使用 WHERE...LIKE 子句来指定条件。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">//<span class="keyword">UNION</span>操作符</span><br><span class="line">//MySQL <span class="keyword">UNION</span> 操作符用于连接两个以上的 <span class="keyword">SELECT</span> 语句的结果组合到一个结果集合中。多个 <span class="keyword">SELECT</span> 语句会删除重复的数据。</span><br><span class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n</span><br><span class="line"><span class="keyword">FROM</span> table_name1</span><br><span class="line">[<span class="keyword">WHERE</span> conditions]</span><br><span class="line"><span class="keyword">UNION</span> [ALL|<span class="keyword">DISTINCT</span>]</span><br><span class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n</span><br><span class="line"><span class="keyword">FROM</span> table_name2</span><br><span class="line">[<span class="keyword">WHERE</span> conditions]</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">expression1, expression2, ... expression_n: 要检索的列。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">tables: 要检索的数据表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">WHERE conditions: 可选， 检索条件。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">DISTINCT: 可选，删除结果集中重复的数据。默认情况下 UNION 操作符已经删除了重复数据，所以 DISTINCT 修饰符对结果没啥影响。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">ALL: 可选，返回所有结果集，包含重复数据。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">//排序<span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"><span class="keyword">SELECT</span> field1,field2,...fieldn <span class="keyword">FROM</span> table_name1, table_name2</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> field1 [<span class="keyword">ASC</span>|<span class="keyword">DESC</span>][默认<span class="keyword">asc</span>] ,[field2...] [<span class="keyword">ASC</span> [<span class="keyword">DESC</span>][默认 <span class="keyword">ASC</span>]]</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">你可以使用任何字段来作为排序的条件，从而返回排序后的查询结果。</span></span><br><span class="line"><span class="comment">你可以设定多个字段来排序。</span></span><br><span class="line"><span class="comment">你可以使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列。</span></span><br><span class="line"><span class="comment">你可以添加 WHERE...LIKE 子句来设置条件。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">//分组<span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line"><span class="keyword">SELECT</span> field1,field2 <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</span><br><span class="line">//连接的使用</span><br><span class="line">INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。</span><br><span class="line">LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录。</span><br><span class="line">RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。</span><br><span class="line">//使用INNER JOIN</span><br><span class="line"><span class="keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="keyword">FROM</span> runoob_tbl a <span class="keyword">INNER</span> <span class="keyword">JOIN</span> tcount_tbl b <span class="keyword">ON</span> a.runoob_author = b.runoob_author;</span><br><span class="line">//等价于where</span><br><span class="line"><span class="keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="keyword">FROM</span> runoob_tbl a, tcount_tbl b <span class="keyword">WHERE</span> a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
+<h3 id="使用LEFT-JOIN"><a href="#使用LEFT-JOIN" class="headerlink" title="使用LEFT JOIN"></a>使用LEFT JOIN</h3><p>使用了 LEFT JOIN，该语句会读取左边的数据表 runoob_tbl 的所有选取的字段数据，即便在右侧表 tcount_tbl中 没有对应的 runoob_author 字段值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.runoob_id, a.runoob_author, b.runoob_count <span class="keyword">FROM</span> runoob_tbl a <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> tcount_tbl b <span class="keyword">ON</span> a.runoob_author = b.runoob_author;</span><br></pre></td></tr></table></figure>
+<h3 id="使用RIGHT-JOIN"><a href="#使用RIGHT-JOIN" class="headerlink" title="使用RIGHT JOIN"></a>使用RIGHT JOIN</h3><p>MySQL RIGHT JOIN 会读取右边数据表的全部数据，即便左边边表无对应数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.id,b.id <span class="keyword">FROM</span> A a <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> B b <span class="keyword">ON</span> a.id=b.id;</span><br></pre></td></tr></table></figure>
+<h3 id="mysql判断null"><a href="#mysql判断null" class="headerlink" title="mysql判断null"></a>mysql判断null</h3><p>mysql中使用一般的SELECT 语句 使用where不能判断null，为了处理这种情况，MySQL提供了三大运算符:</p>
+<ul>
+<li><strong>IS NULL:</strong> 当列的值是 NULL,此运算符返回 true。</li>
+<li><strong>IS NOT NULL:</strong> 当列的值不为 NULL, 运算符返回 true。</li>
+<li><strong>&lt;=&gt;:</strong> 比较操作符（不同于 = 运算符），当比较的的两个值相等或者都为 NULL 时返回 true。</li>
+</ul>
+<p>关于 NULL 的条件比较运算是比较特殊的。你不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。</p>
+<p>在 MySQL 中，NULL 值与任何其它值的比较（即使是 NULL）永远返回 NULL，即 NULL = NULL 返回 NULL 。</p>
+<p>MySQL 中处理 NULL 使用 IS NULL 和 IS NOT NULL 运算符。</p>
+<h3 id="mysql正则表达式"><a href="#mysql正则表达式" class="headerlink" title="mysql正则表达式"></a>mysql正则表达式</h3><p>MySQL 同样也支持其他正则表达式的匹配， MySQL中使用 REGEXP 操作符来进行正则表达式匹配。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用象 ‘[.\n]’ 的模式。</td>
+</tr>
+<tr>
+<td>[…]</td>
+<td>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</td>
+</tr>
+<tr>
+<td>[^…]</td>
+<td>负值字符集合。匹配未包含的任意字符。例如， ‘[^abc]’ 可以匹配 “plain” 中的’p’。</td>
+</tr>
+<tr>
+<td>p1\</td>
+<td>p2\</td>
+<td>p3</td>
+<td>匹配 p1 或 p2 或 p3。例如，’z\</td>
+<td>food’ 能匹配 “z” 或 “food”。’(z\</td>
+<td>f)ood’ 则匹配 “zood” 或 “food”。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h3><p>事务控制语句</p>
+<h3 id="MYSQL-事务处理主要有两种方法："><a href="#MYSQL-事务处理主要有两种方法：" class="headerlink" title="MYSQL 事务处理主要有两种方法："></a>MYSQL 事务处理主要有两种方法：</h3><p>1、用 BEGIN, ROLLBACK, COMMIT来实现</p>
+<ul>
+<li><strong>BEGIN</strong> 开始一个事务</li>
+<li><strong>ROLLBACK</strong> 事务回滚</li>
+<li><strong>COMMIT</strong> 事务确认</li>
+</ul>
+<p>2、直接用 SET 来改变 MySQL 的自动提交模式:</p>
+<ul>
+<li><strong>SET AUTOCOMMIT=0</strong> 禁止自动提交</li>
+<li><strong>SET AUTOCOMMIT=1</strong> 开启自动提交</li>
+</ul>
+<p>###mysql ALTER命令</p>
+<p>当我们需要修改数据表名或者修改数据表字段时，就需要使用到MySQL ALTER命令。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">DROP</span> i;</span><br><span class="line">//<span class="keyword">ALTER</span> 命令及 <span class="keyword">DROP</span> 子句来删除以上创建表的 i 字段</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> i <span class="built_in">INT</span>; </span><br><span class="line">//使用<span class="keyword">ALTER</span>  <span class="keyword">ADD</span>子句来添加表i 为<span class="built_in">int</span>字段。</span><br></pre></td></tr></table></figure>
+<h4 id="修改字段类型及名称"><a href="#修改字段类型及名称" class="headerlink" title="修改字段类型及名称"></a>修改字段类型及名称</h4><p>在ALTER命令中使用 MODIFY 或 CHANGE 子句 。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">MODIFY</span> c <span class="built_in">char</span>(<span class="number">10</span>);</span><br><span class="line">//把字段 c 的类型从 CHAR(1) 改为 CHAR(10)，</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CHANGE</span> i j <span class="built_in">INT</span>;</span><br><span class="line">//在 <span class="keyword">CHANGE</span> 关键字之后，紧跟着的是你要修改的字段名，然后指定新字段名及类型。</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">MODIFY</span> j <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">100</span>;</span><br><span class="line">//指定字段 j 为 NOT NULL 且默认值为100 。</span><br></pre></td></tr></table></figure>
+<h2 id="MYSQL索引"><a href="#MYSQL索引" class="headerlink" title="MYSQL索引"></a>MYSQL索引</h2><h4 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//创建索引</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> indexname <span class="keyword">ON</span> mytable(username(<span class="keyword">length</span>)) ；</span><br><span class="line">//添加一个主键，这意味着索引值必须是唯一的，且不能为<span class="literal">NULL</span>。</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span>(column_list);</span><br><span class="line">//添加唯一索引</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span>  index_name(column_list);</span><br><span class="line">//添加普通索引</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> <span class="keyword">INDEX</span>  indx_name (column_list);</span><br><span class="line">//添加全文索引</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> FULLTEXT indx_name (column_list);</span><br></pre></td></tr></table></figure>
+<h4 id="添加主键"><a href="#添加主键" class="headerlink" title="添加主键"></a>添加主键</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//添加主键先确定不为空</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">MODIFY</span> i <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span> i;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -584,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库："><span class="nav-number">1.1.</span> <span class="nav-text">关系型数据库：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql数据库"><span class="nav-number">1.</span> <span class="nav-text">mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库："><span class="nav-number">1.1.</span> <span class="nav-text">关系型数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非关系型数据库："><span class="nav-number">1.2.</span> <span class="nav-text">非关系型数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系数据库理论-ACID"><span class="nav-number">1.3.</span> <span class="nav-text">关系数据库理论-ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A–原子性"><span class="nav-number">1.3.1.</span> <span class="nav-text">A–原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C–一致性"><span class="nav-number">1.3.2.</span> <span class="nav-text">C–一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I—隔离性（isolation，又称独立性）"><span class="nav-number">1.3.3.</span> <span class="nav-text">I—隔离性（isolation，又称独立性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D—-持久性-durability"><span class="nav-number">1.3.4.</span> <span class="nav-text">D—-持久性(durability)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库"><span class="nav-number">1.4.</span> <span class="nav-text">关系型数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键"><span class="nav-number">1.4.1.</span> <span class="nav-text">主键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql语句："><span class="nav-number">1.4.2.</span> <span class="nav-text">sql语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用LEFT-JOIN"><span class="nav-number">1.4.3.</span> <span class="nav-text">使用LEFT JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用RIGHT-JOIN"><span class="nav-number">1.4.4.</span> <span class="nav-text">使用RIGHT JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql判断null"><span class="nav-number">1.4.5.</span> <span class="nav-text">mysql判断null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql正则表达式"><span class="nav-number">1.4.6.</span> <span class="nav-text">mysql正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql事务"><span class="nav-number">1.4.7.</span> <span class="nav-text">mysql事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL-事务处理主要有两种方法："><span class="nav-number">1.4.8.</span> <span class="nav-text">MYSQL 事务处理主要有两种方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改字段类型及名称"><span class="nav-number">1.4.8.1.</span> <span class="nav-text">修改字段类型及名称</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL索引"><span class="nav-number">1.5.</span> <span class="nav-text">MYSQL索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建索引"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加主键"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">添加主键</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
