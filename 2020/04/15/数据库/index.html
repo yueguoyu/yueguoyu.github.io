@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="YgY">
 <meta property="og:description" content="mysql数据库关系型数据库：关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码 非关系型数据库：非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-15T13:20:23.130Z">
+<meta property="og:updated_time" content="2020-04-28T02:19:20.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql数据库">
 <meta name="twitter:description" content="mysql数据库关系型数据库：关系型数据库，是指采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解，关系型数据库这一系列的行和列被称为表，一组表组成了数据库。 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码 非关系型数据库：非关系型数据库提出另一种理念，例如，以键值对存储，且结构不固定，每一个元组可以有不一样的字段，每个元组可以根据需要增加">
@@ -422,33 +422,33 @@
 <table>
 <thead>
 <tr>
-<th>模式</th>
+<th style="text-align:center">模式</th>
 <th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>^</td>
+<td style="text-align:center">^</td>
 <td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。</td>
 </tr>
 <tr>
-<td>$</td>
+<td style="text-align:center">$</td>
 <td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。</td>
 </tr>
 <tr>
-<td>.</td>
+<td style="text-align:center">.</td>
 <td>匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用象 ‘[.\n]’ 的模式。</td>
 </tr>
 <tr>
-<td>[…]</td>
+<td style="text-align:center">[…]</td>
 <td>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</td>
 </tr>
 <tr>
-<td>[^…]</td>
+<td style="text-align:center">[^…]</td>
 <td>负值字符集合。匹配未包含的任意字符。例如， ‘[^abc]’ 可以匹配 “plain” 中的’p’。</td>
 </tr>
 <tr>
-<td>p1\</td>
+<td style="text-align:center">p1\</td>
 <td>p2\</td>
 <td>p3</td>
 <td>匹配 p1 或 p2 或 p3。例如，’z\</td>
@@ -456,20 +456,16 @@
 <td>f)ood’ 则匹配 “zood” 或 “food”。</td>
 </tr>
 <tr>
-<td>*</td>
+<td style="text-align:center">*</td>
 <td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
 </tr>
 <tr>
-<td>+</td>
+<td style="text-align:center">+</td>
 <td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
 </tr>
 <tr>
-<td>{n}</td>
+<td style="text-align:center">{n}</td>
 <td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。</td>
 </tr>
 </tbody>
 </table>
